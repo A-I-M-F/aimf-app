@@ -7,7 +7,7 @@
     "android": "npx react-native run-android",
     "ios": "npx react-native run-ios",
     "postinstall": "jetifier -r",
-    "refresh:env": "rm -rf node_modules && rm -rf android/.gradle && rm -rf android/app/build && yarn install && npx jetify",
+    "refresh:env": " rm -rf android/.gradle && rm -rf android/app/build &&  npx jetify",
     "test": "jest",
     "lint": "eslint --cache --fix -c .eslintrc.json src"
   },
@@ -49,8 +49,8 @@
     "react-native-linear-gradient": "^2.5.6",
     "react-native-material-menu": "^1.1.0",
     "react-native-modal-datetime-picker": "^8.9.3",
-    "react-native-push-notification": "^5.1.0",
     "react-native-permissions": "^2.2.2",
+    "react-native-push-notification": "^8.1.1",
     "react-native-qrcode-scanner": "^1.4.1",
     "react-native-qrcode-svg": "^6.0.6",
     "react-native-reanimated": "^1.8.0",
