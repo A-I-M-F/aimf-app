@@ -198,7 +198,7 @@ export default class AccountForm extends Component {
     const maritalStatusOptions = [
       {
         value: SINGLE,
-        label: 'Célébataire(e)',
+        label: 'Célibataire',
       },
       {
         value: MARRIED,
