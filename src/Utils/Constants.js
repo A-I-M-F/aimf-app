@@ -218,3 +218,11 @@ export const LIBRARY_STR = {
   please_show_the_qrcode_at_the_library:
     'Veuillez présenter ce QrCode à la bibliothèque',
 };
+
+export const LIVE_VIDEO_STR = {
+  start_live_btn_message: 'Lancer le live',
+  end_live_btn_message: 'Clôturer le live',
+  starting_live_btn_message: 'Lancement de live',
+  close_live_delay_message:
+    "Une fois le live est terminé, merci d'attendre environ 15min avant de le clôturer",
+};

@@ -92,7 +92,7 @@ class ShowAccount extends Component {
         </TouchableOpacity>
         <InformationModal
           visible={this.state.deleteAccModalVisible}
-          setVisible={this.showDeleteConfirmation}
+          onHide={() => this.showDeleteConfirmation(false)}
           onConfirm={this.onConfirmDeleteAccount}
           title={DELETE_USER_ACCOUNT_CONFIRM_MESSAGE_TITLE}>
           <View>

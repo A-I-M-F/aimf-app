@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types';
 import styles from './css';
 
 const InformationModal = (props) => {
-  const {setVisible} = props;
+  const {onHide} = props;
 
   return (
     <Modal animationType="slide" transparent visible={props.visible}>
@@ -32,7 +32,7 @@ const InformationModal = (props) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             color: '#525252',
-            marginBottom: 30,
+            marginBottom: 5,
             borderTopStartRadius: 10,
             borderTopEndRadius: 10,
             borderWidth: 1,
@@ -41,7 +41,7 @@ const InformationModal = (props) => {
           <Text style={{marginLeft: 15, marginTop: 5, fontSize: 15}}>
             {props.title}
           </Text>
-          <TouchableHighlight onPress={() => setVisible(false)}>
+          <TouchableHighlight onPress={() => onHide()}>
             <Icon
               name="close"
               type="AntDesign"
@@ -49,7 +49,9 @@ const InformationModal = (props) => {
             />
           </TouchableHighlight>
         </View>
-        <View style={{paddingHorizontal: 10}}>{props.children}</View>
+        <View style={{paddingHorizontal: 10, paddingVertical: 20}}>
+          {props.children}
+        </View>
         {props.onConfirm && (
           <View
             style={{
@@ -62,7 +64,7 @@ const InformationModal = (props) => {
               danger
               style={styles.button}
               onPress={() => {
-                setVisible(false);
+                onHide();
                 props.onConfirm();
               }}>
               <Text style={styles.buttonText}>Confirmer</Text>
@@ -71,7 +73,7 @@ const InformationModal = (props) => {
               rounded
               danger
               style={{...styles.button, backgroundColor: '#757575'}}
-              onPress={() => setVisible(false)}>
+              onPress={() => onHide()}>
               <Text style={styles.buttonText}>Annuler</Text>
             </Button>
           </View>
@@ -84,7 +86,7 @@ const InformationModal = (props) => {
 InformationModal.propTypes = {
   visible: PropTypes.bool,
   title: PropTypes.string,
-  setVisible: PropTypes.func,
+  onHide: PropTypes.func,
   onConfirm: PropTypes.func,
   children: PropTypes.array,
 };

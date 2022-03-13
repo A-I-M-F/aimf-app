@@ -446,7 +446,7 @@ class ShowUser extends Component {
         <View style={{marginBottom: 30}} />
         <InformationModal
           visible={this.state.confirmUpdateVisible}
-          setVisible={(visible) => this.setConfirmModalVisible(visible)}
+          onHide={() => this.setConfirmModalVisible(false)}
           title="Confirmer la modification">
           <Text style={{color: '#3E3E3E', marginLeft: 5, marginBottom: 50}}>
             {' '}
