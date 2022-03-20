@@ -19,12 +19,10 @@ import {
   refreshLiveVideoInfo,
 } from '../store/reducers/liveVideoRedux';
 import Loader from '../Components/Loader';
-import HeartIcon from '../Components/icons/HeartIcon';
-import IconForms from '../Components/icons/IconForms';
 import {LIVE_VIDEO_STR} from '../Utils/Constants';
 import InformationModal from '../Components/InformationModal';
-import {black, white} from '../Utils/colors';
-import {isAdmin, isAssociationAdmin, isSuperAdmin} from '../Utils/Account';
+import {white} from '../Utils/colors';
+import {isSuperAdmin} from '../Utils/Account';
 
 class YouTubeScreen extends Component {
   static navigationOptions = {
@@ -104,7 +102,9 @@ class YouTubeScreen extends Component {
       <SafeAreaView style={styles.topHeader}>
         <Button
           onPress={() => {
-            this.props.refreshLiveVideoInfo();
+            if (!this.props.liveStarted) {
+              this.props.refreshLiveVideoInfo();
+            }
             this.setState({
               showInfoModal: true,
             });
@@ -152,20 +152,44 @@ class YouTubeScreen extends Component {
         this.props?.video?.isLive
           ? this.renderVideoContainer(logo)
           : this.renderNoLivePlaceholder(logo)}
-        <InformationModal
-          visible={this.state.showInfoModal}
-          onHide={() =>
-            this.setState({
-              showInfoModal: false,
-            })
-          }
-          title={LIVE_VIDEO_STR.starting_live_btn_message}>
-          <View>
-            <Text>{this.props.liveStartedMessage}</Text>
-            <Text>{`\n${LIVE_VIDEO_STR.close_live_delay_message}`}</Text>
-          </View>
-        </InformationModal>
+        {this.renderStartLiveModal()}
+        {this.renderCloseLiveModal()}
       </>
+    );
+  }
+
+  renderStartLiveModal() {
+    return (
+      <InformationModal
+        visible={!this.props.liveStarted && this.state.showInfoModal}
+        onHide={() =>
+          this.setState({
+            showInfoModal: false,
+          })
+        }
+        title={LIVE_VIDEO_STR.starting_live_btn_message}>
+        <View>
+          <Text>{this.props.liveStartedMessage}</Text>
+        </View>
+      </InformationModal>
+    );
+  }
+
+  renderCloseLiveModal() {
+    return (
+      <InformationModal
+        visible={this.props.liveStarted && this.state.showInfoModal}
+        onHide={() =>
+          this.setState({
+            showInfoModal: false,
+          })
+        }
+        onConfirm={() => this.props.refreshLiveVideoInfo()}
+        title={LIVE_VIDEO_STR.ending_live_btn_message}>
+        <View>
+          <Text>{LIVE_VIDEO_STR.close_live_confirmation_message}</Text>
+        </View>
+      </InformationModal>
     );
   }
 }

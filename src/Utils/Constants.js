@@ -223,6 +223,8 @@ export const LIVE_VIDEO_STR = {
   start_live_btn_message: 'Lancer le live',
   end_live_btn_message: 'Clôturer le live',
   starting_live_btn_message: 'Lancement de live',
+  ending_live_btn_message: 'Arrêt de live',
+  close_live_confirmation_message: 'Êtes-vous sûr de vouloir arrêter le live?',
   close_live_delay_message:
     "Une fois le live est terminé, merci d'attendre environ 15min avant de le clôturer",
 };
