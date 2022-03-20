@@ -13,13 +13,19 @@ import {View} from 'react-native';
 import * as PropTypes from 'prop-types';
 import {FEMALE_GENDER} from '../../Utils/Constants';
 import {getFullName} from '../../Utils/Functions';
-import {isAdmin, isAuthorized, isSuperAdmin} from '../../Utils/Account';
+import {
+  getUserAssociationRoleId,
+  isAdmin,
+  isAuthorized,
+  isSuperAdmin,
+} from '../../Utils/Account';
 
 const UserCard = (props) => {
   let logo = require('../../../assets/images/male_unselected.png');
   if (props.data.gender === FEMALE_GENDER) {
     logo = require('../../../assets/images/female_unselected.png');
   }
+  const roleAssociationId = getUserAssociationRoleId(props.data);
   return (
     <Card transparent>
       <CardItem>
@@ -52,6 +58,11 @@ const UserCard = (props) => {
                     />
                   </Text>
                 ))}
+              {roleAssociationId?.name && (
+                <Text style={{marginTop: 20, marginRight: 30}}>
+                  {roleAssociationId?.name}
+                </Text>
+              )}
             </View>
             <Text
               onPress={() => props.showUser(props.data, props.currentUserIndex)}
