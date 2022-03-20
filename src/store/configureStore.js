@@ -19,6 +19,7 @@ import NavigationService from '../Utils/NavigationService';
 import {articleReducer} from './reducers/articlesRedux';
 import {liveVideoReducer} from './reducers/liveVideoRedux';
 import {associationReducer} from './reducers/associationRedux';
+import {roleReducer} from './reducers/roleRedux';
 import {bookReducer} from './reducers/bookRedux';
 
 const persistConfig = {
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   articleStore: articleReducer,
   liveVideoStore: liveVideoReducer,
   associationStore: associationReducer,
+  roleStore: roleReducer,
 });
 
 const appReducer = (state, action) => {

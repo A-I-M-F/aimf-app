@@ -15,13 +15,20 @@ import {
   UPDATE_ADMIN_ROLE_CONFIRM_MESSAGE,
   UPDATE_USER_STATUS_CONFIRM_MESSAGE,
 } from '../../Utils/Constants';
-import {isAdmin, isAuthorized, isSuperAdmin} from '../../Utils/Account';
+import {
+  getUserAssociationRoleId,
+  isAdmin,
+  isAuthorized,
+  isSuperAdmin,
+} from '../../Utils/Account';
 import {isoDateToFr} from '../../Utils/Functions';
 import InformationModal from '../../Components/InformationModal';
+import {getAssociationRoleName} from '../../Utils/Role';
 
 class ShowUser extends Component {
   constructor(props) {
     super(props);
+    const roleAssociationId = getUserAssociationRoleId(this.props.data);
     this.state = {
       confirmUpdateVisible: false,
       isAuthorized: isAuthorized(props.data),
@@ -30,6 +37,7 @@ class ShowUser extends Component {
       confirmMessage: '',
       updateUserLoading: false,
       scrollViewOpacity: 1,
+      roleAssociationId: roleAssociationId?.id,
     };
   }
 
@@ -44,10 +52,12 @@ class ShowUser extends Component {
 
   setConfirmModalVisible = (visible) => {
     if (!visible) {
+      const roleAssociationId = getUserAssociationRoleId(this.props.data);
       this.setState({
         isAuthorized: isAuthorized(this.props.data),
         isSuperAdmin: isSuperAdmin(this.props.data),
         isAdmin: isAdmin(this.props.data),
+        roleAssociationId: roleAssociationId?.id,
       });
     }
     this.setState({
@@ -58,28 +68,6 @@ class ShowUser extends Component {
 
   cancelUpdateEnableAdminFields = () => {
     this.setConfirmModalVisible(false);
-  };
-
-  updateUserRole = () => {
-    const roles = [];
-    if (this.state.isSuperAdmin) {
-      roles.push(SUPER_ADMIN_ROLE);
-    }
-    if (!this.state.isSuperAdmin && this.state.isAdmin) {
-      roles.push(ADMIN_ROLE);
-    }
-    if (!this.state.isAdmin && this.state.isAuthorized) {
-      roles.push(MEMBER_ROLE);
-    }
-
-    if (roles.length === 0) {
-      roles.push(NEW_MEMBER_ROLE);
-    }
-    this.setState({
-      confirmUpdateVisible: false,
-      scrollViewOpacity: 1,
-    });
-    this.props.updateUserRole(this.props.data.id, roles);
   };
 
   renderSeparator = (key) => {
@@ -289,9 +277,45 @@ class ShowUser extends Component {
     );
   };
 
+  renderAssociationButtons = () => {
+    const {isSuperAdmin, isAdmin, roleList} = this.props;
+    const {isAuthorized, roleAssociationId} = this.state;
+
+    if ((!isSuperAdmin && !isAdmin) || !isAuthorized) {
+      return <></>;
+    }
+    const associationsButtons = [];
+
+    roleList.map((item) => {
+      associationsButtons.push(
+        <SettingsSwitch
+          key={item.id}
+          title={item.name.replace('_', ' ')}
+          titleStyle={{marginLeft: -5, color: '#3E3E3E', fontSize: 15}}
+          onValueChange={(value) => {
+            this.setState({
+              roleAssociationId: value ? item.id : null,
+              isSuperAdmin: false,
+              isAdmin: false,
+              confirmMessage: UPDATE_ADMIN_ROLE_CONFIRM_MESSAGE,
+            });
+            this.setConfirmModalVisible(true);
+          }}
+          value={roleAssociationId === item.id}
+          trackColor={{
+            true: '#c18b64',
+            false: '#efeff3',
+          }}
+        />,
+      );
+    });
+
+    return associationsButtons;
+  };
+
   renderUserStatus = () => {
     if (this.props.currentUserId !== this.props.data.id) {
-      const {isAdmin: userStatus} = this.state;
+      const {isAdmin, isSuperAdmin} = this.state;
       return (
         <>
           <SettingsSwitch
@@ -300,7 +324,9 @@ class ShowUser extends Component {
             onValueChange={(value) => {
               this.setState({
                 isAuthorized: value,
-                isAdmin: userStatus && value,
+                isAdmin: isAdmin && value,
+                isSuperAdmin: isAdmin && value,
+                roleAssociationId: null,
                 confirmMessage: UPDATE_USER_STATUS_CONFIRM_MESSAGE,
               });
               this.setConfirmModalVisible(true);
@@ -311,25 +337,6 @@ class ShowUser extends Component {
               false: '#efeff3',
             }}
           />
-          {this.state.isAuthorized && (
-            <SettingsSwitch
-              title="Admin"
-              titleStyle={{marginLeft: -5, color: '#3E3E3E', fontSize: 15}}
-              onValueChange={(value) => {
-                this.setState({
-                  isAdmin: value,
-                  confirmMessage: UPDATE_ADMIN_ROLE_CONFIRM_MESSAGE,
-                });
-                this.setConfirmModalVisible(true);
-              }}
-              value={this.state.isAdmin}
-              trackColor={{
-                true: '#c18b64',
-                false: '#efeff3',
-              }}
-            />
-          )}
-
           {this.props.isSuperAdmin && this.state.isAdmin && (
             <SettingsSwitch
               title="Super Admin"
@@ -337,6 +344,7 @@ class ShowUser extends Component {
               onValueChange={(value) => {
                 this.setState({
                   isSuperAdmin: value,
+                  roleAssociationId: null,
                   confirmMessage: UPDATE_ADMIN_ROLE_CONFIRM_MESSAGE,
                 });
                 this.setConfirmModalVisible(true);
@@ -348,10 +356,59 @@ class ShowUser extends Component {
               }}
             />
           )}
+          {this.state.isAuthorized && (
+            <SettingsSwitch
+              title="Admin"
+              titleStyle={{marginLeft: -5, color: '#3E3E3E', fontSize: 15}}
+              onValueChange={(value) => {
+                this.setState({
+                  isAdmin: value,
+                  isSuperAdmin: isSuperAdmin && value,
+                  roleAssociationId: null,
+                  confirmMessage: UPDATE_ADMIN_ROLE_CONFIRM_MESSAGE,
+                });
+                this.setConfirmModalVisible(true);
+              }}
+              value={this.state.isAdmin}
+              trackColor={{
+                true: '#c18b64',
+                false: '#efeff3',
+              }}
+            />
+          )}
+          {this.renderAssociationButtons()}
         </>
       );
     }
-    return null;
+    return <></>;
+  };
+
+  updateUserRole = () => {
+    const roles = [];
+    const {isSuperAdmin, isAdmin, isAuthorized, roleAssociationId} = this.state;
+    const {roleList} = this.props;
+    if (isSuperAdmin) {
+      roles.push(SUPER_ADMIN_ROLE);
+    }
+    if (!isSuperAdmin && isAdmin) {
+      roles.push(ADMIN_ROLE);
+    }
+    if (!isAdmin && isAuthorized) {
+      roles.push(MEMBER_ROLE);
+    }
+
+    if (roleAssociationId) {
+      roles.push(getAssociationRoleName(roleList, roleAssociationId));
+    }
+
+    if (roles.length === 0) {
+      roles.push(NEW_MEMBER_ROLE);
+    }
+    this.setState({
+      confirmUpdateVisible: false,
+      scrollViewOpacity: 1,
+    });
+    this.props.updateUserRole(this.props.data.id, roles);
   };
 
   render() {
@@ -441,6 +498,7 @@ ShowUser.propTypes = {
   updateAction: PropTypes.func,
   updateUserRole: PropTypes.func,
   isSuperAdmin: PropTypes.bool,
+  isAdmin: PropTypes.bool,
   currentUserId: PropTypes.number,
 };
 

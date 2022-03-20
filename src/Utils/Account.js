@@ -106,3 +106,15 @@ export const navigate = (
   }
   navigation.navigate(screen);
 };
+
+export const getUserAssociationRoleId = (user) => {
+  if (user && user.roles) {
+    const role = user.roles.find(
+      (role) => role.name.substring(0, 6) === ASSOCIATION_ADMIN_ROLE,
+    );
+    if (role) {
+      return role;
+    }
+  }
+  return null;
+};

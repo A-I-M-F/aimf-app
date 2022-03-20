@@ -12,8 +12,9 @@ import {
   updateUserRole,
 } from '../store/reducers/userRedux';
 import ErrorModal from '../Components/ErrorModal';
-import {isSuperAdmin} from '../Utils/Account';
+import {isAdmin, isSuperAdmin} from '../Utils/Account';
 import Loader from '../Components/Loader';
+import {receiveRoleData} from '../store/reducers/roleRedux';
 
 class UserScreen extends Component {
   static navigationOptions = {
@@ -22,6 +23,7 @@ class UserScreen extends Component {
 
   componentDidMount() {
     this.props.getUsers([], 1, true);
+    this.props.receiveRoleData();
   }
 
   handleRefresh = () => {
@@ -82,7 +84,9 @@ class UserScreen extends Component {
             updateState={(data) => this.setState(data)}
             updateUserRole={(id, roles) => this.props.updateUserRole(id, roles)}
             isSuperAdmin={isSuperAdmin(this.props.currentUser)}
+            isAdmin={isAdmin(this.props.currentUser)}
             currentUserId={this.props.currentUser.id}
+            roleList={this.props.roleList}
           />
         ) : (
           <SafeAreaView
@@ -114,7 +118,7 @@ const mapStateToProps = (state) => {
   const {errorMessage} = state.errorMessageStore;
   const {
     users,
-    loading,
+    loading: userStoreLoader,
     refreshing,
     handleMore,
     page,
@@ -122,9 +126,11 @@ const mapStateToProps = (state) => {
     userToShow,
     lastPage,
   } = state.userStore;
+
+  const {loading: roleListLoader, roleList} = state.roleStore;
   return {
     users,
-    loading,
+    loading: userStoreLoader || roleListLoader,
     refreshing,
     handleMore,
     page,
@@ -133,6 +139,7 @@ const mapStateToProps = (state) => {
     userToShow,
     lastPage,
     currentUser: state.accountStore.user,
+    roleList,
   };
 };
 
@@ -144,6 +151,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(showUser(data, currentUserIndex)),
     updateAction: (action) => dispatch(updateAction(action)),
     updateUserRole: (id, roles) => dispatch(updateUserRole(id, roles)),
+    receiveRoleData: () => dispatch(receiveRoleData(true)),
   };
 };
 
@@ -162,6 +170,9 @@ UserScreen.propTypes = {
   userToShow: PropTypes.object,
   errorMessage: PropTypes.string,
   lastPage: PropTypes.bool,
+  receiveRoleData: PropTypes.func,
+  roleList: PropTypes.array,
+  associationId: PropTypes.array,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserScreen);
