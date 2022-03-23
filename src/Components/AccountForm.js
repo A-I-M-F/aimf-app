@@ -11,7 +11,7 @@ import {
   isCorrectEmailAddress,
   isCorrectPassword,
   isCorrectZipCode,
-} from '../Utils/Functions';
+} from '../Utils/ValidatorFunctions';
 import styles from './AccountForm/css';
 
 import {

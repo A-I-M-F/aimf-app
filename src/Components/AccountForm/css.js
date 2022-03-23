@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 14,
     marginLeft: 30,
-    width: 300,
+    marginRight: 10,
   },
   input: {
     fontSize: 15,
