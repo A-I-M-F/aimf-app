@@ -4,7 +4,7 @@ import {
   isCorrectEmailAddress,
   isCorrectPassword,
   isCorrectZipCode,
-} from '../../Utils/Functions';
+} from '../../Utils/ValidatorFunctions';
 import {
   CREATE_ACCOUNT_ACTION,
   MARRIED,
@@ -58,9 +58,14 @@ const checkFormValues = (values) => {
     return 'Veuillez renseigner le nombre de vos enfants scolarisés';
   }
   const errorsPAssword =
-    values.action === CREATE_ACCOUNT_ACTION &&
-    (!isCorrectPassword(values.password) ||
-      !isCorrectPassword(values.confirmPassword));
+    (values.action === CREATE_ACCOUNT_ACTION &&
+      (!isCorrectPassword(values.password) ||
+        !isCorrectPassword(values.confirmPassword))) ||
+    (values.action !== CREATE_ACCOUNT_ACTION &&
+      values.password &&
+      values.confirmPassword &&
+      (!isCorrectPassword(values.password) ||
+        !isCorrectPassword(values.confirmPassword)));
 
   if (
     !isCorrectEmailAddress(values.email) ||

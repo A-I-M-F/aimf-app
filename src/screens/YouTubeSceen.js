@@ -96,7 +96,7 @@ class YouTubeScreen extends Component {
         }}>
         {!this.props.loading && (
           <>
-            <Text style={styles.noneLiveText}>Accun live en cours</Text>
+            <Text style={styles.noneLiveText}>Aucun live en cours</Text>
             <Thumbnail large style={styles.noneLiveLogo} source={logo} />
             <Text style={styles.noneLiveLogoText}>Tamejida 47</Text>
           </>
