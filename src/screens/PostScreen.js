@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TextInput, ScrollView} from 'react-native';
+import {Text, View, TextInput, ScrollView, Alert} from 'react-native';
 import {Icon, Item, Label} from 'native-base';
 import SpinnerButton from 'react-native-spinner-button';
 import {connect} from 'react-redux';
@@ -85,24 +85,67 @@ class PostScreen extends Component {
 
   savePost = (status) => {
     const {description, title, expiredAt} = this.state;
-
-    if (!title.trim() || !description.trim() || !expiredAt) {
+    // Vérifier la saisie du titre
+    const entredTitle = title ? title.trim() : null;
+    if (!entredTitle) {
       this.props.dispatchErrorMessage(
-        "Le titre, le message et la date d'expiration de l'annonce doivent êtres renseignés",
+        "Merci de bien vouloir saisir le titre de l'annonce",
       );
       return;
     }
+
+    // Vérifier la saisie de l'annonce
+    const entredDescription = description ? description.trim() : null;
+    if (!entredDescription) {
+      this.props.dispatchErrorMessage(
+        "Merci de bien vouloir saisir le corps l'annonce",
+      );
+      return;
+    }
+
+    // Vérifier la saisie de la date d'expiration de l'annonce
+    const entredExpiredAt = expiredAt ? expiredAt : null;
+    if (!entredExpiredAt) {
+      this.props.dispatchErrorMessage(
+        "Merci de bien vouloir saisir le date d'expiration de l'annonce",
+      );
+      return;
+    }
+
     const association =
       isSuperAdmin(this.props.user) || isAdmin(this.props.user)
         ? {associationId: this.state.associationId}
         : {};
-    this.props.savePost({
-      status,
-      description: description.trim(),
-      title: title.trim(),
-      expiredAt: expiredAt && moment(expiredAt).format('YYYY-MM-DD'),
-      ...association,
-    });
+
+    const action =
+      status === DRAFT_ARTICLE_STATUS ? "d'enregistrer" : 'de publier';
+
+    // Demander la confirmation du post/Enregistrement de l'annonce.
+    Alert.alert(
+      'Confirmation',
+      // body
+      `Vous êtes sur le point ${action} l'annonce ${title.trim()}`,
+      [
+        {
+          text: 'Confirmer',
+          onPress: () =>
+            this.props.savePost({
+              status,
+              description: description.trim(),
+              title: title.trim(),
+              expiredAt: expiredAt && moment(expiredAt).format('YYYY-MM-DD'),
+              ...association,
+            }),
+        },
+        {
+          text: 'Annuler',
+          onPress: () => {},
+          style: 'cancel',
+        },
+      ],
+      {cancelable: false},
+      // clicking out side of alert will not cancel
+    );
   };
 
   render() {
@@ -111,6 +154,7 @@ class PostScreen extends Component {
     return (
       <>
         <ScrollView
+          // eslint-disable-next-line react-native/no-inline-styles
           style={{
             ...styles.view,
             opacity: this.props.loading || this.props.errorMessage ? 0.6 : 1,
@@ -151,12 +195,14 @@ class PostScreen extends Component {
             />
           </Item>
           <View
+            // eslint-disable-next-line react-native/no-inline-styles
             style={{
               flexDirection: 'row',
               justifyContent: 'center',
               marginBottom: 70,
             }}>
             <SpinnerButton
+              // eslint-disable-next-line react-native/no-inline-styles
               buttonStyle={{
                 ...styles.spinnerButton,
                 marginRight: 20,
@@ -172,6 +218,7 @@ class PostScreen extends Component {
               </Text>
             </SpinnerButton>
             <SpinnerButton
+              // eslint-disable-next-line react-native/no-inline-styles
               buttonStyle={{
                 ...styles.spinnerButton,
                 backgroundColor: '#cb8347',
