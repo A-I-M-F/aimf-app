@@ -7,7 +7,7 @@
     "android": "npx react-native run-android",
     "ios": "npx react-native run-ios",
     "postinstall": "jetifier -r",
-    "refresh:env": " rm -rf android/.gradle && rm -rf android/app/build &&  npx jetify",
+    "refresh:env": "rm -rf node_modules && rm -rf android/.gradle && rm -rf android/app/build && yarn install && npx jetify",
     "test": "jest",
     "lint": "eslint --cache --fix -c .eslintrc.json src"
   },
@@ -74,7 +74,8 @@
     "regenerator": "^0.14.7",
     "regenerator-runtime": "^0.13.7",
     "reselect": "^4.0.0",
-    "rn-sliding-up-panel": "^2.4.3"
+    "rn-sliding-up-panel": "^2.4.3",
+    "tmpl": "^1.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

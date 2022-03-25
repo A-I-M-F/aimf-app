@@ -22,7 +22,6 @@ const RenderPassword = ({
 }) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [toolTipVisible, setToolTipVisible] = useState(false);
-  console.log('###############', toolTipVisible);
   return (
     <>
       {label && (
