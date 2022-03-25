@@ -6,7 +6,6 @@ export const CREATE_ACCOUNT_ACTION = 'create_account';
 export const SHOW_ACCOUNT_ACTION = 'show_account';
 export const UPDATE_ACCOUNT_ACTION = 'update_account';
 export const SHOW_CONDITION_ACTION = 'show_condition';
-export const LIST_BOOK_ACTION = 'list_book';
 export const APP_NAME = 'Tawat Connect';
 
 export const MARRIED = 'married';
@@ -61,6 +60,9 @@ export const UPDATE_ADMIN_ROLE_CONFIRM_MESSAGE =
 
 export const DELETE_USER_ACCOUNT_CONFIRM_MESSAGE_TITLE =
   'Voulez-vous vraiment supprimer votre compte?';
+
+export const ACCOUNT_NOT_VALIDATED_YET_MESSAGE =
+  'Compte en attente de validation par un administrateur';
 
 export const DELETE_USER_ACCOUNT_CONFIRM_MESSAGE_BODY =
   'En confirmant cette action, votre compte ainsi que vos informations personnelles seront supprimées définitivement.';

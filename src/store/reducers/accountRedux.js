@@ -18,6 +18,7 @@ export const PATCH_UPDATE_USER_SUCCESS = 'PATCH_UPDATE_USER_SUCCESS';
 export const PATCH_UPDATE_USER_ERROR = 'PATCH_UPDATE_USER_ERROR';
 export const PATCH_BATCH_UPDATE_USER_ERROR = 'PATCH_BATCH_UPDATE_USER_ERROR';
 export const CHANGE_ACTION = 'CHANGE_ACTION';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 
 export const POST_REGISTER_USER_REQUEST = 'POST_REGISTER_USER_REQUEST';
 export const POST_REGISTER_USER_SUCCESS = 'POST_REGISTER_USER_SUCCESS';
@@ -237,6 +238,9 @@ export const accountReducer = (state = initialState, data) => {
       return {...state, action: UPDATE_ACCOUNT_ACTION, ...data.payload};
     case CHANGE_ACTION: {
       return {...state, action: data.payload};
+    }
+    case DELETE_USER_ACCOUNT_SUCCESS: {
+      return {...initialState};
     }
     default: {
       return state;

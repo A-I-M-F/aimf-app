@@ -5,6 +5,7 @@ import * as PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import styles from './css';
 import {
+  ACCOUNT_NOT_VALIDATED_YET_MESSAGE,
   DELETE_USER_ACCOUNT_CONFIRM_MESSAGE_BODY,
   DELETE_USER_ACCOUNT_CONFIRM_MESSAGE_TITLE,
   FEMALE_GENDER,
@@ -65,7 +66,7 @@ class ShowAccount extends Component {
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           {!isAuthorized(this.props.user) && (
             <Text style={styles.accountValidationText}>
-              Compte en attente de validation par un administrateur
+              {ACCOUNT_NOT_VALIDATED_YET_MESSAGE}
             </Text>
           )}
         </View>
