@@ -6,7 +6,6 @@ export const CREATE_ACCOUNT_ACTION = 'create_account';
 export const SHOW_ACCOUNT_ACTION = 'show_account';
 export const UPDATE_ACCOUNT_ACTION = 'update_account';
 export const SHOW_CONDITION_ACTION = 'show_condition';
-export const LIST_BOOK_ACTION = 'list_book';
 export const APP_NAME = 'Tawat Connect';
 
 export const MARRIED = 'married';
@@ -58,6 +57,15 @@ export const UPDATE_USER_STATUS_CONFIRM_MESSAGE =
   'Etes vous sûr de vouloir activer/désactiver cet utilisateur ?';
 export const UPDATE_ADMIN_ROLE_CONFIRM_MESSAGE =
   "Etes vous sûr de vouloir changer les droits d'administration pour cet utilisateur ?";
+
+export const DELETE_USER_ACCOUNT_CONFIRM_MESSAGE_TITLE =
+  'Voulez-vous vraiment supprimer votre compte?';
+
+export const ACCOUNT_NOT_VALIDATED_YET_MESSAGE =
+  'Compte en attente de validation par un administrateur';
+
+export const DELETE_USER_ACCOUNT_CONFIRM_MESSAGE_BODY =
+  'En confirmant cette action, votre compte ainsi que vos informations personnelles seront supprimées définitivement.';
 
 export const SUPER_ADMIN_ROLE = 'superadmin';
 export const ADMIN_ROLE = 'admin';
@@ -207,8 +215,6 @@ export const LIBRARY_STR = {
   add_to_bookmarked: 'Ajouter aux favoris',
   remove_from_bookmarked: 'Supprimer des favoris',
   i_want_to_borrow: 'Je veux réserver',
-  please_show_the_qrcode_at_the_library: 'Veuillez présenter ce QrCode à la bibliothèque'
+  please_show_the_qrcode_at_the_library:
+    'Veuillez présenter ce QrCode à la bibliothèque',
 };
-
-
-

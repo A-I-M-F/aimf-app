@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {
@@ -19,7 +18,7 @@ import {
   receiveUserAssociationData,
   receiveAssociationData,
 } from '../store/reducers/associationRedux';
-import {white, black} from '../Utils/colors';
+import {white, black, backgroundColor} from '../Utils/colors';
 
 const styles = StyleSheet.create({
   activeAssociation: {
@@ -133,7 +132,7 @@ class AssociationMenu extends Component {
     const {screenerTitle, associationList, userAssociationList} = this.props;
     const {hideMenu} = this.state;
     return (
-      <View>
+      <View style={{backgroundColor}}>
         <View style={{flexDirection: 'row', paddingHorizontal: 14}}>
           <View>
             <Text style={{fontSize: 26, fontWeight: '700'}}>Bienvenue, </Text>
@@ -187,7 +186,7 @@ class AssociationMenu extends Component {
                     <Image
                       style={styles.selAllIconbg}
                       source={{
-                        uri: `${API_BASE_URL}/${item.logo}`,
+                        uri: `${API_BASE_URL}${item.logo}`,
                       }}
                     />
                     <Text

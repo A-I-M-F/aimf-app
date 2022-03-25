@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/no-unescaped-entities */
 import React, {Component} from 'react';
 import {
   ScrollView,
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
   },
   panelHandle: {
     height: 2,
-    width: width,
+    width,
     backgroundColor: orange2,
     borderRadius: 6,
     alignSelf: 'center',
@@ -98,6 +96,7 @@ class Khatma extends Component {
   static navigationOptions = {
     header: null,
   };
+
   constructor(props) {
     super(props);
 
@@ -247,7 +246,7 @@ class Khatma extends Component {
           navigation={this.props.navigation}
           validate={this.validateUserChoise}
           rightIcon="send"
-          renderLogo={true}
+          renderLogo
         />
         <ScrollView scrollEventThrottle={16}>
           {(isSuperAdmin(user) ||
@@ -312,11 +311,12 @@ class Khatma extends Component {
                 {!numberOfToRead && (
                   <View>
                     <Text style={styles.textDetails}>
-                      Vous n'avez encore choisi aucune Takheroubt dans cette
-                      Khatma.
+                      Vous n&apos;avez encore choisi aucune Takheroubt dans
+                      cette Khatma.
                     </Text>
                     <Text style={styles.textDetails}>
-                      Privilégier une Takheroubte qui n'a pas encore été prise.
+                      Privilégier une Takheroubte qui n&apos;a pas encore été
+                      prise.
                     </Text>
                   </View>
                 )}
@@ -413,6 +413,7 @@ Khatma.propTypes = {
   navigation: PropTypes.object,
   dispatch: PropTypes.func,
   user: PropTypes.object,
+  errorMessage: PropTypes.string,
 };
 
 export default connect(mapStateToProps)(Khatma);

@@ -10,7 +10,6 @@ import getAxiosInstance from '../../Utils/axios';
 import {dispatchError} from './errorMessageRedux';
 import {storeAccount} from './accountRedux';
 import getRandomQuestionIndex from '../../Components/AccountForm/Functions';
-import {getLiveVideo} from './liveVideoRedux';
 
 const POST_REQUEST = 'POST_REQUEST';
 const POST_LOGIN_SUCCESS = 'POST_LOGIN_SUCCESS';
@@ -95,7 +94,7 @@ const getTermsOfUseError = () => {
   };
 };
 
-export const login = (email, password) => {
+export const login = (email, password, fcmToken) => {
   return (dispatch) => {
     dispatch(postRequest());
 
@@ -103,8 +102,9 @@ export const login = (email, password) => {
       .post(POST_LOGIN_URI, {
         email,
         password,
+        fcmToken,
       })
-      .then(function (response) {
+      .then((response) => {
         dispatch(
           batchActions(
             [storeAccount(response.data), postLoginSuccess()],
@@ -112,9 +112,8 @@ export const login = (email, password) => {
           ),
         );
         axios.defaults.headers.Authorization = `Bearer ${response.data.access_token}`;
-        dispatch(getLiveVideo());
       })
-      .catch(function (error) {
+      .catch((error) => {
         dispatch(
           batchActions(
             [dispatchError(error), postLoginError()],
@@ -130,10 +129,10 @@ export const getQuestions = () => {
     dispatch(postRequest());
     getAxiosInstance()
       .get(GET_SECURITY_QUESTIONS_URI)
-      .then(function (response) {
+      .then((response) => {
         dispatch(getQuestionsSuccess(response.data));
       })
-      .catch(function (error) {
+      .catch((error) => {
         dispatch(
           batchActions(
             [dispatchError(error), getQuestionsError()],
@@ -149,10 +148,10 @@ export const getTermsOfUse = () => {
     dispatch(postRequest());
     getAxiosInstance()
       .get(TERMS_OF_USE_URI)
-      .then(function (response) {
+      .then((response) => {
         dispatch(getTermsOfUseSuccess(response.data.data));
       })
-      .catch(function (error) {
+      .catch((error) => {
         dispatch(
           batchActions(
             [dispatchError(error), getTermsOfUseError()],
@@ -168,10 +167,10 @@ export const logout = () => {
     dispatch(postRequest());
     getAxiosInstance()
       .post(POST_LOGOUT_URI, {})
-      .then(function () {
+      .then(() => {
         dispatch(postLogoutSuccess());
       })
-      .catch(function (error) {
+      .catch((error) => {
         dispatch(
           batchActions(
             [dispatchError(error), postLoginError()],

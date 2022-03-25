@@ -11,7 +11,7 @@ import {
   isCorrectEmailAddress,
   isCorrectPassword,
   isCorrectZipCode,
-} from '../Utils/Functions';
+} from '../Utils/ValidatorFunctions';
 import styles from './AccountForm/css';
 
 import {
@@ -198,7 +198,7 @@ export default class AccountForm extends Component {
     const maritalStatusOptions = [
       {
         value: SINGLE,
-        label: 'Célébataire(e)',
+        label: 'Célibataire',
       },
       {
         value: MARRIED,
@@ -225,7 +225,7 @@ export default class AccountForm extends Component {
                   });
                   this.props.updateAction(SHOW_ACCOUNT_ACTION);
                 } else {
-                  this.props.navigation.navigate('Login');
+                  this.props.navigation.navigate('LoginScreen');
                 }
               }}
               style={{borderRadius: 30, width: 50}}>
@@ -317,8 +317,9 @@ export default class AccountForm extends Component {
           />
           <RenderInput
             checkFunction={
-              this.props.action === CREATE_ACCOUNT_ACTION &&
-              isCorrectEmailAddress
+              this.props.action === CREATE_ACCOUNT_ACTION
+                ? isCorrectEmailAddress
+                : undefined
             }
             label="Email"
             keyboardType="email-address"
@@ -350,6 +351,7 @@ export default class AccountForm extends Component {
               onChange={(value) => this.props.updateState({oldPassword: value})}
               required={this.props.action === CREATE_ACCOUNT_ACTION}
               value={oldPassword}
+              checkPassword={false}
             />
           ) : null}
 

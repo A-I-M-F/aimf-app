@@ -5,6 +5,7 @@ import {
   MEMBER_ROLE,
   SUPER_ADMIN_ROLE,
   ASSOCIATION_ADMIN_ROLE,
+  NEW_MEMBER_ROLE,
 } from './Constants';
 
 export const isSuperAdmin = (user) => {
@@ -17,7 +18,9 @@ export const isSuperAdmin = (user) => {
 export const isAdmin = (user) => {
   if (user && user.roles) {
     return !!user.roles.find(
-      (role) => role.name.substring(0, 6) === ADMIN_ROLE,
+      (role) =>
+        role.name.substring(0, 6) === ADMIN_ROLE ||
+        role.name === SUPER_ADMIN_ROLE,
     );
   }
   return false;
@@ -44,9 +47,23 @@ export const isSpecifiedAssociationAdmin = (user, associationName) => {
   return false;
 };
 
+const isLibrarian = (user) => {
+  if (user && user.roles) {
+    return !!user.roles.find((role) => role.name === LIBRARIAN_ROLE);
+  }
+  return false;
+};
+
 export const isMember = (user) => {
   if (user && user.roles) {
     return !!user.roles.find((role) => role.name === MEMBER_ROLE);
+  }
+  return false;
+};
+
+export const isNewMember = (user) => {
+  if (user && user.roles) {
+    return !!user.roles.find((role) => role.name === NEW_MEMBER_ROLE);
   }
   return false;
 };
@@ -61,39 +78,43 @@ export const isAuthorized = (user) => {
   );
 };
 
-export const isLibrarian = (user) => {
-  if (user && user.roles) {
-    return !!user.roles.find((role) => role.name === LIBRARIAN_ROLE);
-  }
-  return false;
-};
-
 export const canReserveBook = (user) => {
   return isSuperAdmin(user) || isAdmin(user) || isLibrarian(user);
 };
 export const navigate = (
   account,
   navigation,
-  defaultNavigation = 'Login',
-  youtube = false,
+  defaultNavigation = 'LoginScreen',
 ) => {
+  // console.log('[Account] navigate : ', account);
   let screen = defaultNavigation;
-  let live = !!youtube;
   if (account.user && account.access_token) {
     axios.defaults.headers.Authorization = `Bearer ${account.access_token}`;
-
-    if (isAdmin(account.user) || isSuperAdmin(account.user)) {
-      screen = 'adminUser';
-    } else if (isAssociationAdmin(account.user)) {
-      screen = 'adminAssociation';
-    } else if (isMember(account.user) || isLibrarian(account.user)) {
-      screen = 'activeUser';
-    } else {
-      screen = 'unActiveUser';
-      live = false;
-      navigation.navigate('unActiveUserTabNavigator');
+    switch (true) {
+      case isAdmin(account.user) || isSuperAdmin(account.user):
+        screen = 'adminUserTabNavigator';
+        break;
+      case isAssociationAdmin(account.user):
+        screen = 'adminAssociationTabNavigator';
+        break;
+      case isMember(account.user) || isLibrarian(account.user):
+        screen = 'activeUserTabNavigator';
+        break;
+      default:
+        screen = 'unActiveUserTabNavigator';
     }
-    screen = screen + (live ? 'WithYoutubeLive' : '') + 'TabNavigator';
   }
   navigation.navigate(screen);
+};
+
+export const getUserAssociationRoleId = (user) => {
+  if (user && user.roles) {
+    const role = user.roles.find(
+      (role) => role.name.substring(0, 6) === ASSOCIATION_ADMIN_ROLE,
+    );
+    if (role) {
+      return role;
+    }
+  }
+  return null;
 };

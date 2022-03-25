@@ -1,5 +1,5 @@
 {
-  "name": "AIMFAPP",
+  "name": "aimf_app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,7 +9,12 @@
     "postinstall": "jetifier -r",
     "refresh:env": "rm -rf node_modules && rm -rf android/.gradle && rm -rf android/app/build && yarn install && npx jetify",
     "test": "jest",
-    "lint:eslint": "eslint -c .eslintrc.json src/api src/Components/AccountForm"
+    "lint": "eslint --cache --fix -c .eslintrc.json src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && git add ."
+    }
   },
   "rnpm": {
     "assets": [
@@ -18,12 +23,15 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
-    "@react-native-community/datetimepicker": "^2.4.3",
-    "@react-native-community/toolbar-android": "^0.1.0-rc.2",
+    "@react-native-community/datetimepicker": "^3.0.3",
+    "@react-native-community/push-notification-ios": "^1.5.0",
+    "@react-native-community/toolbar-android": "react-native-community/toolbar-android",
+    "@react-native-firebase/app": "^8.4.2",
+    "@react-native-firebase/messaging": "^7.8.6",
     "appcenter": "3.0.0",
     "appcenter-analytics": "3.0.0",
     "appcenter-crashes": "3.0.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "crypto-js": "3.3.0",
     "jetifier": "^1.6.5",
     "moment": "^2.27.0",
@@ -35,7 +43,7 @@
     "react-native-datepicker": "^1.7.2",
     "react-native-dropdownalert": "^3.11.0",
     "react-native-elements": "^1.2.7",
-    "react-native-firebase": "^5.6.0",
+    "react-native-fix-image": "^2.0.1",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-image-zoom-viewer": "^3.0.1",
     "react-native-linear-gradient": "^2.5.6",
@@ -43,15 +51,19 @@
     "react-native-modal-datetime-picker": "^8.9.3",
     "react-native-parsed-text": "0.0.22",
     "react-native-permissions": "^2.2.2",
+    "react-native-push-notification": "^8.1.1",
     "react-native-qrcode-scanner": "^1.4.1",
     "react-native-qrcode-svg": "^6.0.6",
     "react-native-reanimated": "^1.8.0",
     "react-native-safe-area-view": "^1.1.1",
     "react-native-screens": "^2.7.0",
+    "react-native-simple-toast": "^1.1.3",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-spinner-button": "^1.0.3",
     "react-native-svg": "^12.1.0",
+    "react-native-swipe-list-view": "^3.2.5",
     "react-native-vector-icons": "^6.6.0",
+    "react-native-walkthrough-tooltip": "^1.3.1",
     "react-native-wheel-pick": "^1.1.0",
     "react-native-youtube": "^2.0.1",
     "react-navigation": "^3.9.1",
@@ -60,8 +72,11 @@
     "redux-batched-actions": "^0.5.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
+    "regenerator": "^0.14.7",
+    "regenerator-runtime": "^0.13.7",
     "reselect": "^4.0.0",
-    "rn-sliding-up-panel": "^2.4.3"
+    "rn-sliding-up-panel": "^2.4.3",
+    "tmpl": "^1.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
@@ -78,6 +93,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.3.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.58.0",
     "prettier": "^2.0.5",

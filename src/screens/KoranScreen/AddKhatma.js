@@ -11,7 +11,7 @@ import Loader from '../../Components/Loader';
 import SelectAssociation from '../../Components/SelectAssociation';
 import {isSuperAdmin, isAdmin} from '../../Utils/Account';
 import {AIMF_ASSOCIATION_ID} from '../../Utils/Constants';
-import {black, backgroundColor} from "../../Utils/colors";
+import {black, backgroundColor} from '../../Utils/colors';
 
 const styles = StyleSheet.compose({
   container: {
@@ -35,10 +35,6 @@ class AddKhatma extends Component {
   constructor(props) {
     super(props);
     this.state = {chosenDate: new Date(), associationId: AIMF_ASSOCIATION_ID};
-  }
-
-  setDate(newDate) {
-    this.setState({chosenDate: newDate});
   }
 
   addKhatma = () => {
@@ -73,8 +69,7 @@ class AddKhatma extends Component {
           {cancelable: false},
           // clicking out side of alert will not cancel
         )
-      : // eslint-disable-next-line no-alert
-        Alert.alert('Merci de bien vouloir sélection une date');
+      : Alert.alert('Merci de bien vouloir sélection une date');
   };
 
   render() {
@@ -99,7 +94,9 @@ class AddKhatma extends Component {
           {(isSuperAdmin(this.props.user) || isAdmin(this.props.user)) &&
             associationId && (
               <View style={{marginLeft: 0, marginBottom: 50}}>
-                <Text style={styles.title}>Sélectionner l'association</Text>
+                <Text style={styles.title}>
+                  Sélectionner l&apos;association
+                </Text>
                 <SelectAssociation
                   selectedAssociationId={associationId}
                   onChangeItem={(item) => {
@@ -131,8 +128,11 @@ const mapStateToProps = (state) => {
 };
 
 AddKhatma.propTypes = {
-  navigation: PropTypes.object,
-  dispatch: PropTypes.func,
+  navigation: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  errorMessage: PropTypes.string,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(AddKhatma);

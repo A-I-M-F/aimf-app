@@ -8,7 +8,7 @@ const GET_LIVE_VIDEO_ERROR = 'GET_LIVE_VIDEO_ERROR';
 const getLiveVideoRequest = () => {
   return {
     type: GET_LIVE_VIDEO_REQUEST,
-    payload: {
+    data: {
       loading: true,
     },
   };
@@ -17,14 +17,14 @@ const getLiveVideoRequest = () => {
 const getLiveVideoSuccess = (data) => {
   return {
     type: GET_LIVE_VIDEO_SUCCESS,
-    payload: {video: data, loading: false},
+    data: {video: data, loading: false},
   };
 };
 
 const getLiveVideoError = () => {
   return {
     type: GET_LIVE_VIDEO_ERROR,
-    payload: {loading: false},
+    loading: false,
   };
 };
 
@@ -33,10 +33,10 @@ export const getLiveVideo = () => {
     dispatch(getLiveVideoRequest());
     getAxiosInstance()
       .get(GET_LIVE_VIDEO_URI)
-      .then(function (response) {
+      .then((response) => {
         dispatch(getLiveVideoSuccess(response.data.data));
       })
-      .catch(function (error) {
+      .catch(() => {
         dispatch(getLiveVideoError());
       });
   };
@@ -49,7 +49,7 @@ export const liveVideoReducer = (state = initialState, action) => {
     case GET_LIVE_VIDEO_REQUEST:
     case GET_LIVE_VIDEO_SUCCESS:
     case GET_LIVE_VIDEO_ERROR:
-      return {...state, ...action.payload};
+      return {...state, ...action.data};
     default: {
       return state;
     }

@@ -19,6 +19,7 @@ import NavigationService from '../Utils/NavigationService';
 import {articleReducer} from './reducers/articlesRedux';
 import {liveVideoReducer} from './reducers/liveVideoRedux';
 import {associationReducer} from './reducers/associationRedux';
+import {roleReducer} from './reducers/roleRedux';
 import {bookReducer} from './reducers/bookRedux';
 
 const persistConfig = {
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   articleStore: articleReducer,
   liveVideoStore: liveVideoReducer,
   associationStore: associationReducer,
+  roleStore: roleReducer,
 });
 
 const appReducer = (state, action) => {
@@ -45,7 +47,9 @@ const appReducer = (state, action) => {
     action.type === DISPATCH_UNAUTHORIZED_ERROR ||
     action.type === POST_LOGOUT_SUCCESS
   ) {
-    newState = undefined;
+    newState = {
+      accountStore: {tokenDevice: newState.accountStore.tokenDevice},
+    };
   }
 
   return rootReducer(newState, action);
@@ -66,7 +70,7 @@ const logoutUser = (store) => (next) => (action) => {
     action.meta.batch &&
     action.payload[0].type === DISPATCH_UNAUTHORIZED_ERROR
   ) {
-    NavigationService.navigate('Login');
+    NavigationService.navigate('LoginScreen');
   }
   return next(action);
 };

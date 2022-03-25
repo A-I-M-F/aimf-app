@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
+import {Text, TouchableOpacity, Image, ScrollView, View} from 'react-native';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import SpinnerButton from 'react-native-spinner-button';
@@ -7,48 +7,12 @@ import ErrorModal from '../Components/ErrorModal';
 import {CREDENTIALS_EMPTY_ERROR} from '../Utils/Constants';
 import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
 import {login} from '../store/reducers/authenticationRedux';
-import {navigate} from '../Utils/Account';
 import RenderInput from '../Components/RenderInput';
 import RenderPassword from '../Components/RenderPassoword';
-import {mainColor3Button} from "../Utils/colors";
+import styles from './Login/css';
+import {navigate} from '../Utils/Account';
 
-const styles = StyleSheet.create({
-  bodyWrapper: {
-    backgroundColor: '#fff',
-    height: 550,
-    paddingTop: 50,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-  createAccount: {
-    textAlign: 'center',
-  },
-  inputItem: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: 0,
-    paddingHorizontal: 10,
-    width: 300,
-    borderRadius: 10,
-  },
-  input: {
-    fontSize: 15,
-  },
-  loginButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 50,
-    width: 150,
-    borderRadius: 10,
-    backgroundColor: mainColor3Button,
-  },
-  nextButtonText: {
-    fontSize: 18,
-    color: '#fff',
-  },
-});
-
-class Login extends React.Component {
+class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,14 +22,8 @@ class Login extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.loadingLiveVideo === false) {
-      navigate(
-        this.props.account,
-        this.props.navigation,
-        'Login',
-        this.props?.video?.isLive,
-      );
-    }
+    // console.log('[Login] componentDidUpdate : ', this.props.account);
+    navigate(this.props.account, this.props.navigation, 'LoginScreen');
   }
 
   handleLogin = () => {
@@ -74,8 +32,7 @@ class Login extends React.Component {
       this.props.dispatchErrorMessage(CREDENTIALS_EMPTY_ERROR);
       return;
     }
-
-    this.props.login(email, password);
+    this.props.login(email, password, this.props.fcmToken);
   };
 
   render() {
@@ -83,8 +40,17 @@ class Login extends React.Component {
     const logo = require('../../assets/images/app_icon_text.png');
     return (
       <>
-        <View style={styles.bodyWrapper}>
-          <Image style={{width: 200, height: 130, borderRadius: 9}} source={logo} />
+        <ScrollView style={styles.bodyWrapper}>
+          <Image
+            style={{
+              width: 200,
+              height: 130,
+              borderRadius: 9,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+            source={logo}
+          />
           <RenderInput
             keyboardType="email-address"
             onChange={(value) => this.setState({email: value})}
@@ -97,23 +63,25 @@ class Login extends React.Component {
             value={password}
             placeholder="Mot de passe"
             itemStyle={styles.inputItem}
+            checkPassword={false}
           />
-          <SpinnerButton
-            buttonStyle={styles.loginButton}
-            isLoading={this.props.loading}
-            onPress={this.handleLogin}
-            spinnerType="SkypeIndicator">
-            <Text style={styles.nextButtonText}>Connexion</Text>
-          </SpinnerButton>
+          <View style={styles.loginButtonContainer}>
+            <SpinnerButton
+              buttonStyle={styles.loginButton}
+              isLoading={this.props.loading}
+              onPress={this.handleLogin}
+              spinnerType="SkypeIndicator">
+              <Text style={styles.nextButtonText}>Connexion</Text>
+            </SpinnerButton>
+          </View>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('SignUp')}
-            style={styles.touchable}
             activeOpacity={0.6}>
             <Text style={styles.createAccount}>
               Vous n&apos;avez pas encore un compte?
             </Text>
           </TouchableOpacity>
-        </View>
+        </ScrollView>
         {this.props.errorMessage && (
           <ErrorModal visible message={this.props.errorMessage} />
         )}
@@ -125,20 +93,19 @@ class Login extends React.Component {
 const mapStateToProps = (state) => {
   const {errorMessage} = state.errorMessageStore;
   const {loading} = state.authenticationStore;
-  const {loading: loadingLiveVideo, video} = state.liveVideoStore;
+  const {fcmToken} = state.accountStore;
   return {
     errorMessage,
     loading,
-    loadingLiveVideo,
-    video,
     account: state.accountStore,
+    fcmToken,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (email, password) => {
-      dispatch(login(email, password));
+    login: (email, password, fcmToken) => {
+      dispatch(login(email, password, fcmToken));
     },
     dispatchErrorMessage: (errorMessage) => {
       dispatch(dispatchErrorMessage(errorMessage));
@@ -146,15 +113,14 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-Login.propTypes = {
+LoginScreen.propTypes = {
   errorMessage: PropTypes.string,
   dispatchErrorMessage: PropTypes.func,
   login: PropTypes.func,
   navigation: PropTypes.object,
   loading: PropTypes.bool,
   account: PropTypes.object,
-  loadingLiveVideo: PropTypes.bool,
-  video: PropTypes.object,
+  fcmToken: PropTypes.string,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

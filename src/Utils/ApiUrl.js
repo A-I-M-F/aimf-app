@@ -27,3 +27,5 @@ export const GET_LIST_ASSOCIAITION_URI = `${API_URL}association`;
 export const GET_USER_ASSOCIAITION_URI = `${API_URL}user-association`;
 export const PATCH_USER_ASSOCIAITION_URI = `${API_URL}user-association`;
 export const TERMS_OF_USE_URI = `${API_URL}terms-of-use/latest`;
+export const DELETE_ARTICLE_URI = `${API_URL}article`;
+export const GET_LIST_ROLE_URI = `${API_URL}role`;

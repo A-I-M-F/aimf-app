@@ -10,7 +10,11 @@ import ErrorModal from '../Components/ErrorModal';
 import {logout} from '../store/reducers/authenticationRedux';
 import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
 import checkFormValues from '../Components/AccountForm/Validate';
-import {updateCurrentUser, updateAction} from '../store/reducers/accountRedux';
+import {
+  deleteUserAccount,
+  updateAction,
+  updateCurrentUser,
+} from '../store/reducers/accountRedux';
 import Loader from '../Components/Loader';
 
 class AccountScreen extends Component {
@@ -52,7 +56,7 @@ class AccountScreen extends Component {
 
   componentDidUpdate() {
     if (!this.props.account.user) {
-      this.props.navigation.navigate('Login');
+      this.props.navigation.navigate('LoginScreen');
     }
   }
 
@@ -149,16 +153,31 @@ class AccountScreen extends Component {
         <>
           {this.props.action === SHOW_ACCOUNT_ACTION ? (
             <ShowAccount
-              user={this.props.account && this.props.account.user}
+              scrollViewOpacity={
+                this.props.logoutLoading ||
+                this.props.updateLoading ||
+                this.props.errorMessage
+                  ? 0.6
+                  : 1
+              }
+              user={this.props.account ? this.props.account.user : null}
               gender={this.state.gender}
               fullName={getFullName(this.state)}
               updateAction={(value) => this.props.updateAction(value)}
               logout={() => this.props.logout()}
+              deleteCurrentUserAccount={async () => {
+                await this.props.deleteUserAccount(this.props.account.user.id);
+              }}
+              errorMessage={this.props.errorMessage}
             />
           ) : (
             <AccountForm
               scrollViewOpacity={
-                this.props.loading || this.props.errorMessage ? 0.6 : 1
+                this.props.logoutLoading ||
+                this.props.updateLoading ||
+                this.props.errorMessage
+                  ? 0.6
+                  : 1
               }
               action={UPDATE_ACCOUNT_ACTION}
               data={data}
@@ -172,7 +191,9 @@ class AccountScreen extends Component {
           {this.props.errorMessage && (
             <ErrorModal visible message={this.props.errorMessage} />
           )}
-          <Loader visible={!!this.props.loading} />
+          <Loader
+            visible={!!this.props.logoutLoading || !!this.props.updateLoading}
+          />
         </>
       );
     }
@@ -192,11 +213,14 @@ class AccountScreen extends Component {
 
 const mapStateToProps = (state) => {
   const {errorMessage} = state.errorMessageStore;
-  const {action} = state.accountStore;
+  const {action, loading: updateLoading} = state.accountStore;
+  const {loading: logoutLoading} = state.authenticationStore;
   return {
     errorMessage,
     action,
     account: state.accountStore,
+    logoutLoading,
+    updateLoading,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -206,6 +230,7 @@ const mapDispatchToProps = (dispatch) => {
     updateAction: (action) => dispatch(updateAction(action)),
     dispatchErrorMessage: (errorMessage) =>
       dispatch(dispatchErrorMessage(errorMessage)),
+    deleteUserAccount: (id) => dispatch(deleteUserAccount(id)),
   };
 };
 
@@ -217,7 +242,9 @@ AccountScreen.propTypes = {
   dispatchErrorMessage: PropTypes.func,
   updateCurrentUser: PropTypes.func,
   updateAction: PropTypes.func,
-  loading: PropTypes.bool,
+  deleteUserAccount: PropTypes.func,
+  logoutLoading: PropTypes.bool,
+  updateLoading: PropTypes.bool,
   action: PropTypes.string,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AccountScreen);
