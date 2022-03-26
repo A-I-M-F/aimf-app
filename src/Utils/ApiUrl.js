@@ -1,4 +1,5 @@
-const API_URL = '/api/';
+import {API_VERSION} from 'react-native-dotenv';
+const API_URL = `/api/${API_VERSION ? API_VERSION + '/' : ''}`;
 export const POST_LOGIN_URI = `${API_URL}auth/login`;
 export const POST_LOGOUT_URI = `${API_URL}auth/logout`;
 export const PATCH_UPDATE_USER_URI = `${API_URL}user/`;
