@@ -2,10 +2,15 @@ import React, {Component} from 'react';
 import {ActivityIndicator, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
+import {Button} from 'native-base';
 import ShowAccount from './AccountScreen/ShowAccount';
 import AccountForm from '../Components/AccountForm';
 import {getFullName, getIsoDate} from '../Utils/Functions';
-import {SHOW_ACCOUNT_ACTION, UPDATE_ACCOUNT_ACTION} from '../Utils/Constants';
+import {
+  ACCOUNT_STR,
+  SHOW_ACCOUNT_ACTION,
+  UPDATE_ACCOUNT_ACTION,
+} from '../Utils/Constants';
 import ErrorModal from '../Components/ErrorModal';
 import {logout} from '../store/reducers/authenticationRedux';
 import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
@@ -14,8 +19,11 @@ import {
   deleteUserAccount,
   updateAction,
   updateCurrentUser,
+  activateAccount,
 } from '../store/reducers/accountRedux';
 import Loader from '../Components/Loader';
+import styles from './AccountScreen/css.js';
+import InformationModal from '../Components/InformationModal';
 
 class AccountScreen extends Component {
   static navigationOptions = {
@@ -41,6 +49,7 @@ class AccountScreen extends Component {
       childrenNumber: 0,
       functionName: '',
       children: [],
+      showInformationModal: false,
     };
   }
 
@@ -78,6 +87,7 @@ class AccountScreen extends Component {
       childrenNumber,
       functionName,
       children,
+      showInformationModal,
     } = this.state;
     children.slice(0, childrenNumber);
     return {
@@ -97,6 +107,7 @@ class AccountScreen extends Component {
       confirmPassword,
       functionName,
       children,
+      showInformationModal,
     };
   };
 
@@ -146,6 +157,25 @@ class AccountScreen extends Component {
     });
   };
 
+  renderActivateAccountBtn() {
+    return (
+      <View style={styles.activateAccBtnContainer}>
+        <Button
+          style={styles.activateAccBtn}
+          onPress={() => {
+            this.props.activateAccount();
+            this.setState({
+              showInformationModal: true,
+            });
+          }}>
+          <Text style={styles.activateAccLabelBtn}>
+            {ACCOUNT_STR.activate_your_account}
+          </Text>
+        </Button>
+      </View>
+    );
+  }
+
   render() {
     const data = this.getDataFromState();
     if (this.state.email) {
@@ -188,6 +218,27 @@ class AccountScreen extends Component {
               onSubmit={() => this.onSubmit()}
             />
           )}
+          {!this.props.account.user.hasVerifiedEmail &&
+            !this.props.accountActivationSentMailActivation &&
+            this.renderActivateAccountBtn()}
+          {
+            <InformationModal
+              visible={
+                this.state.showInformationModal &&
+                this.props.accountActivationMessage != null
+              }
+              onHide={() =>
+                this.setState({
+                  showInformationModal: false,
+                })
+              }
+              title="Activation du compte">
+              <Text style={{color: '#3E3E3E', marginLeft: 5, marginBottom: 50}}>
+                {' '}
+                {this.props.accountActivationMessage}
+              </Text>
+            </InformationModal>
+          }
           {this.props.errorMessage && (
             <ErrorModal visible message={this.props.errorMessage} />
           )}
@@ -213,14 +264,22 @@ class AccountScreen extends Component {
 
 const mapStateToProps = (state) => {
   const {errorMessage} = state.errorMessageStore;
-  const {action, loading: updateLoading} = state.accountStore;
+  const {
+    action,
+    loading: updateLoading,
+    accountActivationSentMailActivation,
+    accountActivationMessage,
+  } = state.accountStore;
   const {loading: logoutLoading} = state.authenticationStore;
+  console.log(state.accountStore);
   return {
     errorMessage,
     action,
     account: state.accountStore,
     logoutLoading,
     updateLoading,
+    accountActivationSentMailActivation,
+    accountActivationMessage,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -228,6 +287,7 @@ const mapDispatchToProps = (dispatch) => {
     logout: () => dispatch(logout()),
     updateCurrentUser: (id, data) => dispatch(updateCurrentUser(id, data)),
     updateAction: (action) => dispatch(updateAction(action)),
+    activateAccount: () => dispatch(activateAccount()),
     dispatchErrorMessage: (errorMessage) =>
       dispatch(dispatchErrorMessage(errorMessage)),
     deleteUserAccount: (id) => dispatch(deleteUserAccount(id)),
@@ -243,6 +303,9 @@ AccountScreen.propTypes = {
   updateCurrentUser: PropTypes.func,
   updateAction: PropTypes.func,
   deleteUserAccount: PropTypes.func,
+  activateAccount: PropTypes.func,
+  accountActivationSentMailActivation: PropTypes.string,
+  accountActivationMessage: PropTypes.string,
   logoutLoading: PropTypes.bool,
   updateLoading: PropTypes.bool,
   action: PropTypes.string,

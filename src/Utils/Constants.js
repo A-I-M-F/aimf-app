@@ -228,3 +228,7 @@ export const LIVE_VIDEO_STR = {
   close_live_delay_message:
     "Une fois le live est terminé, merci d'attendre environ 15min avant de le clôturer",
 };
+
+export const ACCOUNT_STR = {
+  activate_your_account: 'Veuillez activer votre compte',
+};
