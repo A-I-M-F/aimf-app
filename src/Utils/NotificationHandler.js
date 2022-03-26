@@ -8,7 +8,7 @@ import {
 import {isAdmin, isNewMember} from './Account';
 
 const NotificationHandler = (navigationHandler, action, user) => {
-  console.log('[NotificationHandler]', action);
+  // console.log('[NotificationHandler]', action);
 
   // console.log('[NotificationHandler] Handle notification action : ', action);
   switch (action) {
