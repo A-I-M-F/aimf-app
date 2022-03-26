@@ -88,16 +88,16 @@ KoranStack.navigationOptions = {
   tabBarIcon: () => <CustomIcon name="coran" size={25} color="#000" />,
 };
 
-const disableKoranStack = createStackNavigator({
-  Koran: UnaccessibleScreen,
-});
-
-disableKoranStack.navigationOptions = {
-  tabBarLabel: 'Khetma',
-  tabBarIcon: () => (
-    <CustomIcon name="coran" style={{opacity: 0.5}} size={25} color="#000" />
-  ),
-};
+// const disableKoranStack = createStackNavigator({
+//   Koran: UnaccessibleScreen,
+// });
+//
+// disableKoranStack.navigationOptions = {
+//   tabBarLabel: 'Khetma',
+//   tabBarIcon: () => (
+//     <CustomIcon name="coran" style={{opacity: 0.5}} size={25} color="#000" />
+//   ),
+// };
 
 // ----------------------------------------------LibraryScreen-----------------------------------------------------
 
@@ -240,8 +240,9 @@ UserStack.navigationOptions = {
 export const unActiveUserTabNavigator = createBottomTabNavigator(
   {
     disableHomeStack,
-    disableKoranStack,
-    disableLibraryStack,
+    //todo enable this buttons on the 2.0 version
+    // disableKoranStack,
+    // disableLibraryStack,
     disableYouTubeStack,
     AccountStack,
   },
@@ -250,9 +251,9 @@ export const unActiveUserTabNavigator = createBottomTabNavigator(
       tabBarOnPress: ({navigation, defaultHandler}) => {
         if (
           navigation.state.routeName === 'disableHomeStack' ||
-          navigation.state.routeName === 'disableKoranStack' ||
-          navigation.state.routeName === 'disableYouTubeStack' ||
-          navigation.state.routeName === 'disableLibraryStack'
+          // navigation.state.routeName === 'disableKoranStack' ||
+          navigation.state.routeName === 'disableYouTubeStack'
+          // navigation.state.routeName === 'disableLibraryStack'
         ) {
           return null;
         }
@@ -266,16 +267,18 @@ export const unActiveUserTabNavigator = createBottomTabNavigator(
 
 export const activeUserTabNavigator = createBottomTabNavigator({
   HomeStack,
-  KoranStack,
-  libraryStack,
+  //todo enable this buttons on the 2.0 version
+  //KoranStack,
+  //libraryStack,
   YouTubeStack,
   AccountStack,
 });
 
 export const adminUserTabNavigator = createBottomTabNavigator({
   HomeStack,
-  KoranStack,
-  libraryStack,
+  //todo enable this buttons on the 2.0 version
+  //KoranStack,
+  //libraryStack,
   PostWorkflowStack,
   YouTubeStack,
   UserStack,
@@ -284,7 +287,9 @@ export const adminUserTabNavigator = createBottomTabNavigator({
 
 export const adminAssociationTabNavigator = createBottomTabNavigator({
   HomeStack,
-  KoranStack,
+  //todo enable this buttons on the 2.0 version
+  //KoranStack,
+  //libraryStack,
   PostWorkflowStack,
   YouTubeStack,
   AccountStack,
