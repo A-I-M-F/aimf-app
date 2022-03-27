@@ -1,5 +1,6 @@
 import {API_VERSION} from 'react-native-dotenv';
-const API_URL = `/api/${API_VERSION ? API_VERSION + '/' : ''}`;
+
+const API_URL = `/api/${API_VERSION ? `${API_VERSION}/` : ''}`;
 export const POST_LOGIN_URI = `${API_URL}auth/login`;
 export const POST_LOGOUT_URI = `${API_URL}auth/logout`;
 export const PATCH_UPDATE_USER_URI = `${API_URL}user/`;
@@ -27,6 +28,7 @@ export const GET_ARTICLES_URI = `${API_URL}article`;
 export const GET_DRAFT_ARTICLE_URI = `${API_URL}article/draft`;
 export const GET_LIVE_VIDEO_URI = `${API_URL}youtube/live-video`;
 export const REFRESH_LIVE_VIDEO_INFO_URI = `${API_URL}youtube/refresh-live-video`;
+export const STOP_LIVE_VIDEO_URI = `${API_URL}youtube/force-stop-video-live`;
 export const GET_LIST_ASSOCIAITION_URI = `${API_URL}association`;
 export const GET_USER_ASSOCIAITION_URI = `${API_URL}user-association`;
 export const PATCH_USER_ASSOCIAITION_URI = `${API_URL}user-association`;

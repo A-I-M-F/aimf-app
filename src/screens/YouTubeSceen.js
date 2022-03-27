@@ -17,6 +17,7 @@ import styles from './YouTubeScreen/css';
 import {
   getLiveVideo,
   refreshLiveVideoInfo,
+  stopLiveVideo,
 } from '../store/reducers/liveVideoRedux';
 import Loader from '../Components/Loader';
 import {LIVE_VIDEO_STR} from '../Utils/Constants';
@@ -102,9 +103,9 @@ class YouTubeScreen extends Component {
       <SafeAreaView style={styles.topHeader}>
         <Button
           onPress={() => {
-            if (!this.props.liveStarted) {
+            if (!this.props.isLive || this.props.video?.broadcast !== 'live') {
               this.props.refreshLiveVideoInfo();
-              this.props.getLiveVideo();
+              this.updateVideoInfoForAdmin();
             }
             this.setState({
               showInfoModal: true,
@@ -113,7 +114,9 @@ class YouTubeScreen extends Component {
           style={styles.topHeaderBtn}>
           <Icon type="SimpleLineIcons" name="refresh" color={white} size={22} />
           <Text style={styles.navigationText}>
-            {this.props.liveStarted && this.props.video?.isLive
+            {this.props.isLive &&
+            this.props.video?.isLive &&
+            this.props.video?.broadcast === 'live'
               ? LIVE_VIDEO_STR.end_live_btn_message
               : LIVE_VIDEO_STR.start_live_btn_message}
           </Text>
@@ -141,9 +144,13 @@ class YouTubeScreen extends Component {
     );
   }
 
+  updateVideoInfoForAdmin() {
+    this.props.getLiveVideo();
+  }
+
   renderStartLiveModal() {
     const visible =
-      (!this.props.video?.isLive || !this.props.video?.broadcast === 'live') &&
+      (!this.props.video?.isLive || this.props.video?.broadcast !== 'live') &&
       this.state.showInfoModal;
 
     return (
@@ -174,12 +181,11 @@ class YouTubeScreen extends Component {
         onHide={() =>
           this.setState({
             showInfoModal: false,
-            isModalVisible: false,
           })
         }
         onConfirm={() => {
-          this.props.refreshLiveVideoInfo();
-          this.props.getLiveVideo();
+          this.props.stopLiveVideo();
+          this.updateVideoInfoForAdmin();
         }}
         title={LIVE_VIDEO_STR.ending_live_btn_message}>
         <View>
@@ -190,9 +196,7 @@ class YouTubeScreen extends Component {
   }
 
   render() {
-    console.log(this.props?.video);
     const logo = require('../../assets/images/tamejida_47.jpg');
-    console.log(this.props.liveStarted);
     return (
       <>
         {isSuperAdmin(this.props.user) && this.renderAdminButton()}
@@ -209,18 +213,13 @@ class YouTubeScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const {
-    video,
-    loading,
-    liveStarted,
-    liveStartedMessage,
-  } = state.liveVideoStore;
+  const {video, loading, isLive, liveStartedMessage} = state.liveVideoStore;
 
   const {user} = state.accountStore;
   return {
     video,
     loading,
-    liveStarted,
+    isLive,
     liveStartedMessage,
     user,
   };
@@ -230,6 +229,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getLiveVideo: () => dispatch(getLiveVideo()),
     refreshLiveVideoInfo: () => dispatch(refreshLiveVideoInfo()),
+    stopLiveVideo: () => dispatch(stopLiveVideo()),
   };
 };
 
@@ -237,7 +237,7 @@ YouTubeScreen.propTypes = {
   video: PropTypes.object,
   getLiveVideo: PropTypes.func,
   loading: PropTypes.bool,
-  liveStarted: PropTypes.bool,
+  isLive: PropTypes.bool,
   liveStartedMessage: PropTypes.string,
   user: PropTypes.object,
   navigation: PropTypes.object.isRequired,

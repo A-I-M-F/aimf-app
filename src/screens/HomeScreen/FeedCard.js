@@ -12,9 +12,9 @@ import {
 import {API_BASE_URL} from 'react-native-dotenv';
 import {Icon} from 'react-native-elements';
 import {connect} from 'react-redux';
+import ParsedText from 'react-native-parsed-text';
 import {deleteArticle} from '../../store/reducers/articlesRedux';
 import {isAdmin} from '../../Utils/Account';
-import ParsedText from 'react-native-parsed-text';
 
 const ANIM_INIT_OFFSET = 0;
 const styles = StyleSheet.create({
@@ -65,11 +65,11 @@ const handleUrlPress = (url) => {
   });
 };
 
-const handleEmailPress = (email, matchIndex /*: number*/) => {
+const handleEmailPress = (email, matchIndex /*: number */) => {
   Linking.openURL(`mailto:${email}`);
 };
 
-const handlePhonePress = (phone, matchIndex /*: number*/) => {
+const handlePhonePress = (phone, matchIndex /*: number */) => {
   Linking.openURL(`tel:${phone}`);
 };
 

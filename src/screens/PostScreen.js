@@ -105,7 +105,7 @@ class PostScreen extends Component {
     }
 
     // Vérifier la saisie de la date d'expiration de l'annonce
-    const entredExpiredAt = expiredAt ? expiredAt : null;
+    const entredExpiredAt = expiredAt || null;
     if (!entredExpiredAt) {
       this.props.dispatchErrorMessage(
         "Merci de bien vouloir saisir le date d'expiration de l'annonce",

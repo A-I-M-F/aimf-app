@@ -2,10 +2,10 @@ import {Icon, Input, Item, Label} from 'native-base';
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
 import * as PropTypes from 'prop-types';
-import styles from './AccountForm/css';
-import {isCorrectPassword} from '../Utils/ValidatorFunctions';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
+import styles from './AccountForm/css';
+import {isCorrectPassword} from '../Utils/ValidatorFunctions';
 
 const RenderPassword = ({
   label,

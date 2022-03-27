@@ -241,7 +241,7 @@ UserStack.navigationOptions = {
 export const unActiveUserTabNavigator = createBottomTabNavigator(
   {
     disableHomeStack,
-    //todo enable this buttons on the 2.0 version
+    // todo enable this buttons on the 2.0 version
     // disableKoranStack,
     // disableLibraryStack,
     disableYouTubeStack,
@@ -268,18 +268,18 @@ export const unActiveUserTabNavigator = createBottomTabNavigator(
 
 export const activeUserTabNavigator = createBottomTabNavigator({
   HomeStack,
-  //todo enable this buttons on the 2.0 version
-  //KoranStack,
-  //libraryStack,
+  // todo enable this buttons on the 2.0 version
+  // KoranStack,
+  // libraryStack,
   YouTubeStack,
   AccountStack,
 });
 
 export const adminUserTabNavigator = createBottomTabNavigator({
   HomeStack,
-  //todo enable this buttons on the 2.0 version
-  //KoranStack,
-  //libraryStack,
+  // todo enable this buttons on the 2.0 version
+  // KoranStack,
+  // libraryStack,
   PostWorkflowStack,
   YouTubeStack,
   UserStack,
@@ -288,9 +288,9 @@ export const adminUserTabNavigator = createBottomTabNavigator({
 
 export const adminAssociationTabNavigator = createBottomTabNavigator({
   HomeStack,
-  //todo enable this buttons on the 2.0 version
-  //KoranStack,
-  //libraryStack,
+  // todo enable this buttons on the 2.0 version
+  // KoranStack,
+  // libraryStack,
   PostWorkflowStack,
   YouTubeStack,
   AccountStack,
