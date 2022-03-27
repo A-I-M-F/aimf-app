@@ -27,12 +27,6 @@ const checkFormValues = (values) => {
   if (!values.maritalStatus) {
     return 'Veuillez renseigner votre situation conjugale';
   }
-  if (!values.birthday) {
-    return 'Veuillez renseigner votre date de naissance';
-  }
-  if (!values.zipCode) {
-    return 'Veuillez renseigner votre code postal';
-  }
   if (!values.phoneNumber) {
     return 'Veuillez renseigner votre numéro de téléphone';
   }
@@ -46,9 +40,6 @@ const checkFormValues = (values) => {
     if (!values.response2) {
       return 'Veuillez renseigner la réponse à la deuxième question';
     }
-  }
-  if (values.action === UPDATE_ACCOUNT_ACTION && !values.functionName) {
-    return 'Veuillez renseigner votre fonction';
   }
   if (
     values.action === UPDATE_ACCOUNT_ACTION &&

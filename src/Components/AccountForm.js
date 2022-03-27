@@ -128,7 +128,7 @@ export default class AccountForm extends Component {
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             width: 300,
             marginLeft: 30,
           }}>
@@ -136,6 +136,7 @@ export default class AccountForm extends Component {
             style={{
               fontWeight: 'bold',
               fontSize: 14,
+              marginLeft: 30,
               width: 300,
             }}>
             {this.props.data.question2 && this.props.data.question2.question}*
@@ -211,7 +212,6 @@ export default class AccountForm extends Component {
         <ScrollView
           centerContent
           style={{
-            paddingTop: 20,
             opacity: this.props.scrollViewOpacity,
             backgroundColor: '#fce3ba',
           }}>
@@ -271,7 +271,7 @@ export default class AccountForm extends Component {
             required
             value={firstName}
           />
-          <Label style={styles.label}>Situation conjugale*</Label>
+          <Label style={styles.label}>Etat civil*</Label>
 
           <TextRadioButton
             options={maritalStatusOptions}
@@ -282,7 +282,7 @@ export default class AccountForm extends Component {
           <DatePicker
             minimumDate={moment('1900-01-01').toDate()}
             maximumDate={new Date()}
-            label="Date de naissance*"
+            label="Date de naissance"
             defaultDate={birthday && moment(birthday).toDate()}
             onCustomChange={(date) => this.setDate(date)}
           />
@@ -301,18 +301,18 @@ export default class AccountForm extends Component {
                 onChange={(value) =>
                   this.props.updateState({functionName: value})
                 }
-                required
+                required={false}
                 value={functionName}
               />
             </>
           ) : null}
           <RenderInput
             checkFunction={isCorrectZipCode}
-            label="Code postale"
+            label="Code postal"
             maxLength={5}
             keyboardType="numeric"
             onChange={(value) => this.props.updateState({zipCode: value})}
-            required
+            required={false}
             value={zipCode}
           />
           <RenderInput
@@ -331,6 +331,7 @@ export default class AccountForm extends Component {
               ...styles.inputItem,
               opacity: this.props.action === CREATE_ACCOUNT_ACTION ? 1 : 0.5,
             }}
+            autoCapitalize="none"
           />
           <RenderInput
             checkFunction={isCorrectPhoneNumber}
@@ -415,6 +416,27 @@ export default class AccountForm extends Component {
             data={this.state}
             navigation={this.props.navigation}
           />
+          <View>
+            <Button
+              transparent
+              onPress={() => {
+                if (this.props.action === UPDATE_ACCOUNT_ACTION) {
+                  this.props.updateState({
+                    ...this.props.initData,
+                  });
+                  this.props.updateAction(SHOW_ACCOUNT_ACTION);
+                } else {
+                  this.props.navigation.navigate('LoginScreen');
+                }
+              }}
+              style={{borderRadius: 30, width: 50}}>
+              <Icon
+                style={{color: '#000'}}
+                name="md-arrow-back"
+                type="Ionicons"
+              />
+            </Button>
+          </View>
         </ScrollView>
       </>
     );

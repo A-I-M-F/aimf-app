@@ -26,7 +26,7 @@ class SignUp extends Component {
       fatherName: '',
       middleName: '',
       firstName: '',
-      birthday: new Date(),
+      birthday: null,
       zipCode: '',
       phoneNumber: '',
       response1: '',
@@ -156,7 +156,10 @@ class SignUp extends Component {
           />
         )}
         {this.state.action === SHOW_CONDITION_ACTION && (
-          <TermsOfUse updateAction={this.updateAction} />
+          <TermsOfUse
+            updateAction={this.updateAction}
+            updateState={(state) => this.setState(state)}
+          />
         )}
         {this.props.errorMessage && (
           <ErrorModal visible message={this.props.errorMessage} />

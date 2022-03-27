@@ -14,6 +14,7 @@ const RenderInput = ({
   disabled,
   itemStyle,
   placeholder,
+  autoCapitalize,
 }) => {
   return (
     <>
@@ -46,6 +47,7 @@ const RenderInput = ({
           value={value}
           disabled={disabled}
           placeholder={placeholder}
+          autoCapitalize={autoCapitalize}
         />
         {value && checkFunction !== undefined && value.length > 0 ? (
           <Icon
@@ -69,6 +71,7 @@ RenderInput.propTypes = {
   disabled: PropTypes.bool,
   itemStyle: PropTypes.object,
   placeholder: PropTypes.string,
+  autoCapitalize: PropTypes.string,
 };
 
 export default RenderInput;
