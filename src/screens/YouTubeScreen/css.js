@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {mainColor} from '../../Utils/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +28,19 @@ const styles = StyleSheet.create({
   player: {
     alignSelf: 'stretch',
   },
+  topHeader: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    height: 50,
+    backgroundColor: '#fff',
+  },
+  topHeaderBtn: {
+    backgroundColor: mainColor,
+    padding: 10,
+    borderRadius: 5,
+    margin: 2,
+  },
+  navigationText: {fontSize: 16, marginLeft: 10, color: '#fff'},
 });
 
 export default styles;

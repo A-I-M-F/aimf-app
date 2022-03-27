@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import SpinnerButton from 'react-native-spinner-button';
 import ErrorModal from '../Components/ErrorModal';
-import {CREDENTIALS_EMPTY_ERROR} from '../Utils/Constants';
+import {CREDENTIALS_EMPTY_ERROR, LOGIN_STR} from '../Utils/Constants';
 import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
 import {login} from '../store/reducers/authenticationRedux';
 import RenderInput from '../Components/RenderInput';
@@ -76,10 +76,19 @@ class LoginScreen extends React.Component {
             </SpinnerButton>
           </View>
           <TouchableOpacity
+            onPress={() =>
+              this.props.navigation.navigate('PasswordResetScreen')
+            }
+            activeOpacity={0.6}>
+            <Text style={styles.forgotPasswd}>
+              {LOGIN_STR.you_forgot_your_password}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => this.props.navigation.navigate('SignUp')}
             activeOpacity={0.6}>
             <Text style={styles.createAccount}>
-              Vous n&apos;avez pas encore un compte?
+              {LOGIN_STR.you_dont_have_account_account}
             </Text>
           </TouchableOpacity>
         </ScrollView>

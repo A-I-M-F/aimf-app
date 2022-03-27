@@ -1,6 +1,7 @@
 import {batchActions} from 'redux-batched-actions';
 import getAxiosInstance from '../../Utils/axios';
 import {
+  ACTIVATE_ACCOUNT_URI,
   PATCH_UPDATE_USER_URI,
   POST_REGISTER_USER_URI,
   POST_RESET_PASSWORD_URI,
@@ -24,6 +25,13 @@ export const POST_REGISTER_USER_REQUEST = 'POST_REGISTER_USER_REQUEST';
 export const POST_REGISTER_USER_SUCCESS = 'POST_REGISTER_USER_SUCCESS';
 export const POST_REGISTER_USER_ERROR = 'POST_REGISTER_USER_ERROR';
 export const POST_BATCH_REGISTER_USER_ERROR = 'POST_BATCH_REGISTER_USER_ERROR';
+
+export const ACTIVATE_USER_ACCOUNT = 'ACTIVATE_USER_ACCOUNT';
+export const ACTIVATE_USER_ACCOUNT_SUCCESS = 'ACTIVATE_USER_ACCOUNT_SUCCESS';
+export const ACTIVATE_USER_ACCOUNT_ALREADY_ACTIVATED_ERROR =
+  'ACTIVATE_USER_ACCOUNT_ALREADY_ACTIVATED_ERROR';
+export const ACTIVATE_USER_ACCOUNT_ERROR = 'ACTIVATE_USER_ACCOUNT_ERROR';
+
 export const DELETE_USER_ACCOUNT_REQUEST = 'DELETE_USER_ACCOUNT_REQUEST';
 export const DELETE_USER_ACCOUNT_SUCCESS = 'DELETE_USER_ACCOUNT_SUCCESS';
 export const DELETE_USER_ACCOUNT_ERROR = 'DELETE_USER_ACCOUNT_ERROR';
@@ -103,6 +111,72 @@ export const updateAction = (action) => {
   return {
     type: CHANGE_ACTION,
     payload: action,
+  };
+};
+
+const activateAccountRequest = () => {
+  return {
+    type: ACTIVATE_USER_ACCOUNT,
+    payload: {
+      loading: true,
+    },
+  };
+};
+
+const activateAccountError = () => {
+  return {
+    type: ACTIVATE_USER_ACCOUNT_ERROR,
+    payload: {
+      loading: false,
+      accountActivationSentMailActivation: false,
+      accountActivationMessage: null,
+    },
+  };
+};
+
+const activateAccountAlreadyActivatedError = (data = null) => {
+  return {
+    type: ACTIVATE_USER_ACCOUNT_ALREADY_ACTIVATED_ERROR,
+    payload: {
+      loading: false,
+      accountActivationSentMailActivation: true,
+      accountActivationMessage: data.message,
+    },
+  };
+};
+
+const activateAccountSuccess = (data) => {
+  return {
+    type: ACTIVATE_USER_ACCOUNT_SUCCESS,
+    payload: {
+      loading: false,
+      accountActivationSentMailActivation: true,
+      accountActivationMessage: data.message,
+    },
+  };
+};
+
+export const activateAccount = () => {
+  return (dispatch) => {
+    dispatch(activateAccountRequest());
+
+    getAxiosInstance()
+      .get(ACTIVATE_ACCOUNT_URI)
+      .then((response) => {
+        if (response.data.status === 'success') {
+          dispatch(activateAccountSuccess(response.data));
+        } else {
+          dispatch(activateAccountAlreadyActivatedError(response.data));
+        }
+      })
+      .catch((error) => {
+        dispatch(
+          batchActions(
+            [dispatchError(error), activateAccountError()],
+            ACTIVATE_USER_ACCOUNT_ERROR,
+          ),
+        );
+      });
   };
 };
 
@@ -222,7 +296,11 @@ export const deleteUserAccount = (id) => {
   };
 };
 
-const initialState = {};
+const initialState = {
+  loading: false,
+  accountActivationSentMailActivation: false,
+  accountActivationMessage: null,
+};
 
 export const accountReducer = (state = initialState, data) => {
   switch (data.type) {
@@ -241,6 +319,12 @@ export const accountReducer = (state = initialState, data) => {
     }
     case DELETE_USER_ACCOUNT_SUCCESS: {
       return {...initialState};
+    }
+    case ACTIVATE_USER_ACCOUNT:
+    case ACTIVATE_USER_ACCOUNT_ERROR:
+    case ACTIVATE_USER_ACCOUNT_ALREADY_ACTIVATED_ERROR:
+    case ACTIVATE_USER_ACCOUNT_SUCCESS: {
+      return {...state, ...data.payload};
     }
     default: {
       return state;

@@ -11,6 +11,11 @@ export const APP_NAME = 'Tawat Connect';
 export const MARRIED = 'married';
 export const SINGLE = 'single';
 
+export const LOGIN_STR = {
+  you_dont_have_account_account: "Vous n'avez pas encore un compte?",
+  you_forgot_your_password: 'Vous avez oublié votre mot de passe?',
+};
+
 export const CHILDREN_YEAR_LABEL = [
   '1er',
   '2ème',
@@ -217,4 +222,21 @@ export const LIBRARY_STR = {
   i_want_to_borrow: 'Je veux réserver',
   please_show_the_qrcode_at_the_library:
     'Veuillez présenter ce QrCode à la bibliothèque',
+};
+
+export const LIVE_VIDEO_STR = {
+  start_live_btn_message: 'Lancer le live',
+  end_live_btn_message: 'Clôturer le live',
+  starting_live_btn_message: 'Lancement de live',
+  ending_live_btn_message: 'Arrêt de live',
+  close_live_confirmation_message: 'Êtes-vous sûr de vouloir arrêter le live?',
+  close_live_delay_message:
+    "Une fois le live est terminé, merci d'attendre environ 15min avant de le clôturer",
+};
+
+export const ACCOUNT_STR = {
+  your_account_is_not_activated_yet:
+    "Votre compte n'est toujours pas activé. Merci de pensez à l'activer dès que possible",
+  receive_account_activation_email: "Recevoir l'email d'activation",
+  activate_your_account: 'Veuillez activer votre compte',
 };

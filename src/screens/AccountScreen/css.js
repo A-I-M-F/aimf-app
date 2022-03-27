@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColor} from '../../Utils/colors';
+import {backgroundColor, mainColor} from '../../Utils/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -41,6 +41,25 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10,
     backgroundColor: '#cb8347',
+  },
+  activateAccContainer: {
+    padding: 10,
+  },
+  activateAccBtnContainer: {
+    paddingVertical: 7,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  activateAccBtn: {
+    backgroundColor: mainColor,
+    padding: 10,
+    borderRadius: 5,
+    margin: 2,
+  },
+  activateAccLabelBtn: {
+    color: '#fff',
   },
 });
 

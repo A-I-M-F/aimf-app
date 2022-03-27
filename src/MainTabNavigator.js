@@ -19,6 +19,7 @@ import BookDetails from './screens/LibraryScreen/BookDetails';
 import BookReservation from './screens/LibraryScreen/BookReservation';
 import MyReservations from './screens/LibraryScreen/MyReservations';
 import BookFavoriteList from './screens/LibraryScreen/BookFavoriteList';
+import {mainColor} from './Utils/colors';
 
 const CustomIcon = createIconSetFromIcoMoon(icoMoonConfig);
 // ----------------------------------------------HomeScreen-----------------------------------------------------
@@ -51,7 +52,7 @@ const PostWorkflowStackTabBarIcon = ({focused}) => (
     type="AntDesign"
     name="addfile"
     style={{fontSize: 23, marginBottom: -3}}
-    color={focused ? '#2f95dc' : '#ccc'}
+    color={focused ? mainColor : '#ccc'}
   />
 );
 PostWorkflowStackTabBarIcon.propTypes = {
@@ -123,7 +124,7 @@ const libraryStackTabBarIcon = ({focused}) => (
   <Icon
     type="FontAwesome"
     name="book"
-    color={focused ? '#2f95dc' : '#ccc'}
+    color={focused ? mainColor : '#ccc'}
     style={{fontSize: 28, marginBottom: -3}}
   />
 );
@@ -161,7 +162,7 @@ const YouTubeStackTabBarIcon = ({focused}) => (
     type="SimpleLineIcons"
     name="social-youtube"
     style={{fontSize: 30, marginBottom: -3}}
-    color={focused ? '#2f95dc' : '#ccc'}
+    color={focused ? mainColor : '#ccc'}
   />
 );
 
@@ -199,7 +200,7 @@ const AccountStackTabBarIcon = ({focused}) => (
   <Icon
     type="EvilIcons"
     name="user"
-    color={focused ? '#2f95dc' : '#ccc'}
+    color={focused ? mainColor : '#ccc'}
     style={{fontSize: 35, marginBottom: -3}}
   />
 );
@@ -223,7 +224,7 @@ const UserStackTabBarIcon = ({focused}) => (
   <Icon
     type="FontAwesome5"
     name="user-check"
-    color={focused ? '#2f95dc' : '#ccc'}
+    color={focused ? mainColor : '#ccc'}
     style={{marginBottom: -3, fontSize: 18}}
   />
 );
@@ -240,7 +241,7 @@ UserStack.navigationOptions = {
 export const unActiveUserTabNavigator = createBottomTabNavigator(
   {
     disableHomeStack,
-    //todo enable this buttons on the 2.0 version
+    // todo enable this buttons on the 2.0 version
     // disableKoranStack,
     // disableLibraryStack,
     disableYouTubeStack,
@@ -267,18 +268,18 @@ export const unActiveUserTabNavigator = createBottomTabNavigator(
 
 export const activeUserTabNavigator = createBottomTabNavigator({
   HomeStack,
-  //todo enable this buttons on the 2.0 version
-  //KoranStack,
-  //libraryStack,
+  // todo enable this buttons on the 2.0 version
+  // KoranStack,
+  // libraryStack,
   YouTubeStack,
   AccountStack,
 });
 
 export const adminUserTabNavigator = createBottomTabNavigator({
   HomeStack,
-  //todo enable this buttons on the 2.0 version
-  //KoranStack,
-  //libraryStack,
+  // todo enable this buttons on the 2.0 version
+  // KoranStack,
+  // libraryStack,
   PostWorkflowStack,
   YouTubeStack,
   UserStack,
@@ -287,9 +288,9 @@ export const adminUserTabNavigator = createBottomTabNavigator({
 
 export const adminAssociationTabNavigator = createBottomTabNavigator({
   HomeStack,
-  //todo enable this buttons on the 2.0 version
-  //KoranStack,
-  //libraryStack,
+  // todo enable this buttons on the 2.0 version
+  // KoranStack,
+  // libraryStack,
   PostWorkflowStack,
   YouTubeStack,
   AccountStack,

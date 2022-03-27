@@ -15,6 +15,7 @@ import {
   adminAssociationTabNavigator,
 } from './src/MainTabNavigator';
 import {store, persistor} from './src/store/configureStore';
+import PasswordResetScreen from './src/screens/PasswordResetScreen';
 // create our app's navigation stack
 const switchNavigator = createSwitchNavigator(
   {
@@ -25,6 +26,7 @@ const switchNavigator = createSwitchNavigator(
     adminUserTabNavigator,
     activeUserTabNavigator,
     adminAssociationTabNavigator,
+    PasswordResetScreen,
   },
   {
     initialRouteName: 'Loading',
