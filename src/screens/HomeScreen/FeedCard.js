@@ -1,14 +1,77 @@
 import React, {useState} from 'react';
 import {Card, CardItem, Thumbnail, Text, Left, Body} from 'native-base';
 import * as PropTypes from 'prop-types';
-import {TouchableOpacity, View, Animated, Alert} from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  Animated,
+  Alert,
+  StyleSheet,
+  Linking,
+} from 'react-native';
 import {API_BASE_URL} from 'react-native-dotenv';
 import {Icon} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {deleteArticle} from '../../store/reducers/articlesRedux';
 import {isAdmin} from '../../Utils/Account';
+import ParsedText from 'react-native-parsed-text';
 
 const ANIM_INIT_OFFSET = 0;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  url: {
+    color: 'red',
+    textDecorationLine: 'underline',
+  },
+  email: {
+    textDecorationLine: 'underline',
+  },
+  text: {
+    color: 'black',
+    fontSize: 15,
+  },
+  phone: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+  },
+  name: {
+    color: 'red',
+  },
+  username: {
+    color: 'green',
+    fontWeight: 'bold',
+  },
+  magicNumber: {
+    fontSize: 42,
+    color: 'pink',
+  },
+  hashTag: {
+    fontStyle: 'italic',
+  },
+});
+
+const handleUrlPress = (url) => {
+  Linking.canOpenURL(url).then((supported) => {
+    if (supported) {
+      Linking.openURL(url);
+    } else {
+      Alert.alert('cannot open this link');
+    }
+  });
+};
+
+const handleEmailPress = (email, matchIndex /*: number*/) => {
+  Linking.openURL(`mailto:${email}`);
+};
+
+const handlePhonePress = (phone, matchIndex /*: number*/) => {
+  Linking.openURL(`tel:${phone}`);
+};
 
 const mapStateToProps = (state) => ({
   user: state.accountStore.user,
@@ -150,7 +213,29 @@ const FeedCard = ({
       </CardItem>
       <CardItem style={{backgroundColor}}>
         <Body>
-          <Text>{description}</Text>
+          <ParsedText
+            selectable
+            style={styles.text}
+            parse={[
+              {
+                type: 'url',
+                style: styles.url,
+                onPress: (url) => handleUrlPress(url),
+              },
+              {
+                type: 'phone',
+                style: styles.phone,
+                onPress: (phone) => handlePhonePress(phone),
+              },
+              {
+                type: 'email',
+                style: styles.email,
+                onPress: (email) => handleEmailPress(email),
+              },
+            ]}
+            childrenProps={{allowFontScaling: false}}>
+            {description}
+          </ParsedText>
         </Body>
       </CardItem>
     </Card>

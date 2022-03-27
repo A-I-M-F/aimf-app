@@ -6,7 +6,10 @@ import {
   POST_RESET_PASSWORD_URI,
 } from '../../Utils/ApiUrl';
 import {dispatchError} from './errorMessageRedux';
-import {SHOW_ACCOUNT_ACTION} from '../../Utils/Constants';
+import {
+  SHOW_ACCOUNT_ACTION,
+  UPDATE_ACCOUNT_ACTION,
+} from '../../Utils/Constants';
 
 export const STORE_ACCOUNT = 'STORE_ACCOUNT';
 
@@ -15,6 +18,7 @@ export const PATCH_UPDATE_USER_SUCCESS = 'PATCH_UPDATE_USER_SUCCESS';
 export const PATCH_UPDATE_USER_ERROR = 'PATCH_UPDATE_USER_ERROR';
 export const PATCH_BATCH_UPDATE_USER_ERROR = 'PATCH_BATCH_UPDATE_USER_ERROR';
 export const CHANGE_ACTION = 'CHANGE_ACTION';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 
 export const POST_REGISTER_USER_REQUEST = 'POST_REGISTER_USER_REQUEST';
 export const POST_REGISTER_USER_SUCCESS = 'POST_REGISTER_USER_SUCCESS';
@@ -222,17 +226,21 @@ const initialState = {};
 
 export const accountReducer = (state = initialState, data) => {
   switch (data.type) {
-    case PATCH_UPDATE_USER_REQUEST:
     case PATCH_UPDATE_USER_SUCCESS:
-    case PATCH_UPDATE_USER_ERROR:
     case POST_REGISTER_USER_REQUEST:
     case POST_REGISTER_USER_SUCCESS:
     case POST_REGISTER_USER_ERROR:
     case STORE_TOKEN_DEVICE:
     case STORE_ACCOUNT:
       return {...state, action: SHOW_ACCOUNT_ACTION, ...data.payload};
+    case PATCH_UPDATE_USER_REQUEST:
+    case PATCH_UPDATE_USER_ERROR:
+      return {...state, action: UPDATE_ACCOUNT_ACTION, ...data.payload};
     case CHANGE_ACTION: {
       return {...state, action: data.payload};
+    }
+    case DELETE_USER_ACCOUNT_SUCCESS: {
+      return {...initialState};
     }
     default: {
       return state;

@@ -11,7 +11,7 @@ import {
   isCorrectEmailAddress,
   isCorrectPassword,
   isCorrectZipCode,
-} from '../Utils/Functions';
+} from '../Utils/ValidatorFunctions';
 import styles from './AccountForm/css';
 
 import {
@@ -352,6 +352,7 @@ export default class AccountForm extends Component {
               onChange={(value) => this.props.updateState({oldPassword: value})}
               required={this.props.action === CREATE_ACCOUNT_ACTION}
               value={oldPassword}
+              checkPassword={false}
             />
           ) : null}
 

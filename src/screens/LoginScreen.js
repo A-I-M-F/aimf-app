@@ -64,6 +64,7 @@ class LoginScreen extends React.Component {
             value={password}
             placeholder="Mot de passe"
             itemStyle={styles.inputItem}
+            checkPassword={false}
           />
           <View style={styles.loginButtonContainer}>
             <SpinnerButton

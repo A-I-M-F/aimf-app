@@ -1,4 +1,5 @@
-const API_URL = '/api/';
+import {API_VERSION} from 'react-native-dotenv';
+const API_URL = `/api/${API_VERSION ? API_VERSION + '/' : ''}`;
 export const POST_LOGIN_URI = `${API_URL}auth/login`;
 export const POST_LOGOUT_URI = `${API_URL}auth/logout`;
 export const PATCH_UPDATE_USER_URI = `${API_URL}user/`;
@@ -28,3 +29,4 @@ export const GET_USER_ASSOCIAITION_URI = `${API_URL}user-association`;
 export const PATCH_USER_ASSOCIAITION_URI = `${API_URL}user-association`;
 export const TERMS_OF_USE_URI = `${API_URL}terms-of-use/latest`;
 export const DELETE_ARTICLE_URI = `${API_URL}article`;
+export const GET_LIST_ROLE_URI = `${API_URL}role`;

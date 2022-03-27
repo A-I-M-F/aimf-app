@@ -17,7 +17,7 @@ import RenderInput from '../../Components/RenderInput';
 import {
   isCorrectNumberCopie,
   isCorrectPhoneNumber,
-} from '../../Utils/Functions';
+} from '../../Utils/ValidatorFunctions';
 import {
   failColor,
   failDarkColor,

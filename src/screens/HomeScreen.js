@@ -16,6 +16,7 @@ import {
   ayncReceiveKhatma,
   asyncReceiveUserKhatma,
 } from '../store/reducers/khatmaRedux';
+import {backgroundColor} from '../Utils/colors';
 import styles from './HomeScreen/css';
 
 class HomeScreen extends Component {

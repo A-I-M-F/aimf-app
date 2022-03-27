@@ -93,7 +93,7 @@ class ChildrenInformation extends Component {
   render() {
     return this.props.maritalStatus === MARRIED ? (
       <>
-        <Label style={styles.label}>Nombre d&apos;enfant*</Label>
+        <Label style={styles.label}>Nombre d&apos;enfants*</Label>
         <Item rounded style={styles.inputItem}>
           <Input
             style={styles.input}
