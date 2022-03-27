@@ -57,6 +57,7 @@ class LoginScreen extends React.Component {
             value={email}
             placeholder="Adresse email"
             itemStyle={styles.inputItem}
+            autoCapitalize="none"
           />
           <RenderPassword
             onChange={(value) => this.setState({password: value})}

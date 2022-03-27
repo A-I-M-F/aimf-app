@@ -37,6 +37,39 @@ class TermsOfUse extends Component {
           Les Conditions générales
         </ElementText>
         <Text>{this.props.termsOfUse && this.props.termsOfUse.content}</Text>
+        <View>
+          <Button
+            onPress={() => {
+              this.props.updateState({readTermsOfUse: true});
+              this.props.updateState({acceptTermsOfUse: true});
+              this.props.updateAction(CREATE_ACCOUNT_ACTION);
+            }}
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: 50,
+              width: 150,
+              borderRadius: 10,
+              backgroundColor: '#cb8347',
+              marginTop: 35,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}>
+            <Text style={{fontSize: 18, color: '#fff'}}>J&apos;accepte</Text>
+          </Button>
+        </View>
+        <View>
+          <Button
+            transparent
+            onPress={() => this.props.updateAction(CREATE_ACCOUNT_ACTION)}
+            style={{borderRadius: 30, width: 50}}>
+            <Icon
+              style={{color: '#000'}}
+              name="md-arrow-back"
+              type="Ionicons"
+            />
+          </Button>
+        </View>
       </ScrollView>
     );
   }
@@ -60,5 +93,6 @@ TermsOfUse.propTypes = {
   getTermsOfUse: PropTypes.func,
   termsOfUse: PropTypes.object,
   updateAction: PropTypes.func.isRequired,
+  updateState: PropTypes.func,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(TermsOfUse);

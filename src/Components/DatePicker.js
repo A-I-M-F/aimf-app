@@ -17,7 +17,7 @@ const DatePicker = ({
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [date, setDate] = useState(defaultDate || null);
 
-  if (date !== defaultDate) {
+  if (defaultDate && date !== defaultDate) {
     setDate(defaultDate);
   }
 

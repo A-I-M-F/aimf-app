@@ -94,6 +94,7 @@ const RenderPassword = ({
           value={value}
           disabled={disabled}
           placeholder={placeholder}
+          autoCapitalize="none"
         />
         {value && value.length > 0 ? (
           <Text
