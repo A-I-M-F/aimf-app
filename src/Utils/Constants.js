@@ -11,6 +11,11 @@ export const APP_NAME = 'Tawat Connect';
 export const MARRIED = 'married';
 export const SINGLE = 'single';
 
+export const LOGIN_STR = {
+  you_dont_have_account_account: "Vous n'avez pas encore un compte?",
+  you_forgot_your_password: 'Vous avez oublié votre mot de passe?',
+};
+
 export const CHILDREN_YEAR_LABEL = [
   '1er',
   '2ème',
@@ -230,5 +235,8 @@ export const LIVE_VIDEO_STR = {
 };
 
 export const ACCOUNT_STR = {
+  your_account_is_not_activated_yet:
+    "Votre compte n'est toujours pas activé. Merci de pensez à l'activer dès que possible",
+  receive_account_activation_email: "Recevoir l'email d'activation",
   activate_your_account: 'Veuillez activer votre compte',
 };

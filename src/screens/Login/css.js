@@ -7,11 +7,17 @@ const styles = StyleSheet.create({
     height: 550,
     paddingTop: 100,
   },
-  createAccount: {
+  forgotPasswd: {
     textAlign: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: 35,
+    marginBottom: 20,
+  },
+  createAccount: {
+    textAlign: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     marginBottom: 150,
   },
   inputItem: {

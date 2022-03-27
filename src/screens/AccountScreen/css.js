@@ -42,6 +42,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#cb8347',
   },
+  activateAccContainer: {
+    padding: 10,
+  },
   activateAccBtnContainer: {
     paddingVertical: 7,
     display: 'flex',

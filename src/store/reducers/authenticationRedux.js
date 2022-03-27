@@ -5,6 +5,7 @@ import {
   GET_SECURITY_QUESTIONS_URI,
   POST_LOGIN_URI,
   POST_LOGOUT_URI,
+  POST_FORGET_PASSWORD_URI,
 } from '../../Utils/ApiUrl';
 import getAxiosInstance from '../../Utils/axios';
 import {dispatchError} from './errorMessageRedux';
@@ -17,6 +18,8 @@ export const POST_LOGOUT_SUCCESS = 'POST_LOGOUT_SUCCESS';
 const POST_LOGIN_ERROR = 'POST_LOGIN_ERROR';
 const POST_BATCH_LOGIN_ERROR = 'POST_BATCH_LOGIN_ERROR';
 const POST_BATCH_LOGIN_SUCCESS = 'POST_BATCH_LOGIN_SUCCESS';
+const POST_FORGOT_PASSWORD_SUCCESS = 'POST_FORGOT_PASSWORD_SUCCESS';
+const POST_FORGOT_PASSWORD_ERROR = 'POST_FORGOT_PASSWORD_ERROR';
 
 const GET_QUESTIONS_ERROR = 'GET_QUESTIONS_ERROR';
 const GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS';
@@ -181,6 +184,47 @@ export const logout = () => {
   };
 };
 
+export const forgotPasswordResetSuccess = () => {
+  return {
+    type: POST_FORGOT_PASSWORD_SUCCESS,
+    payload: {
+      loading: false,
+      successResetPassword: true,
+    },
+  };
+};
+
+export const forgotPasswordResetError = (message) => {
+  return {
+    type: POST_FORGOT_PASSWORD_ERROR,
+    payload: {
+      loading: false,
+      successResetPassword: false,
+      errorResetPasswordMsg: message,
+    },
+  };
+};
+
+export const forgotPasswordReset = (email) => {
+  return (dispatch) => {
+    dispatch(postRequest());
+    getAxiosInstance()
+      .post(POST_FORGET_PASSWORD_URI, {
+        email,
+      })
+      .then((response) => {
+        if (response.data.status === 'success') {
+          dispatch(forgotPasswordResetSuccess());
+        } else {
+          dispatch(forgotPasswordResetError(response.data.message));
+        }
+      })
+      .catch((error) => {
+        dispatch(dispatch(forgotPasswordResetError(error.message)));
+      });
+  };
+};
+
 const initialState = {loading: false};
 
 export const authenticationReducer = (state = initialState, action) => {
@@ -192,7 +236,9 @@ export const authenticationReducer = (state = initialState, action) => {
     case GET_QUESTIONS_SUCCESS:
     case GET_QUESTIONS_ERROR:
     case GET_TERMS_OF_USE_SUCCESS:
-    case GET_TERMS_OF_USE_ERROR: {
+    case GET_TERMS_OF_USE_ERROR:
+    case POST_FORGOT_PASSWORD_SUCCESS:
+    case POST_FORGOT_PASSWORD_ERROR: {
       return {...state, ...action.payload};
     }
     default: {

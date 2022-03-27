@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {ActivityIndicator, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
-import {Button} from 'native-base';
+import {Button, Icon} from 'native-base';
 import ShowAccount from './AccountScreen/ShowAccount';
 import AccountForm from '../Components/AccountForm';
 import {getFullName, getIsoDate} from '../Utils/Functions';
@@ -159,19 +159,29 @@ class AccountScreen extends Component {
 
   renderActivateAccountBtn() {
     return (
-      <View style={styles.activateAccBtnContainer}>
-        <Button
-          style={styles.activateAccBtn}
-          onPress={() => {
-            this.props.activateAccount();
-            this.setState({
-              showInformationModal: true,
-            });
-          }}>
-          <Text style={styles.activateAccLabelBtn}>
-            {ACCOUNT_STR.activate_your_account}
-          </Text>
-        </Button>
+      <View style={styles.activateAccContainer}>
+        <Text>
+          <Icon
+            type="FontAwesome5"
+            name="exclamation"
+            style={{fontSize: 17, color: '#000'}}
+          />
+          {` ${ACCOUNT_STR.your_account_is_not_activated_yet}`}
+        </Text>
+        <View style={styles.activateAccBtnContainer}>
+          <Button
+            style={styles.activateAccBtn}
+            onPress={() => {
+              this.props.activateAccount();
+              this.setState({
+                showInformationModal: true,
+              });
+            }}>
+            <Text style={styles.activateAccLabelBtn}>
+              {ACCOUNT_STR.receive_account_activation_email}
+            </Text>
+          </Button>
+        </View>
       </View>
     );
   }
@@ -271,7 +281,6 @@ const mapStateToProps = (state) => {
     accountActivationMessage,
   } = state.accountStore;
   const {loading: logoutLoading} = state.authenticationStore;
-  console.log(state.accountStore);
   return {
     errorMessage,
     action,

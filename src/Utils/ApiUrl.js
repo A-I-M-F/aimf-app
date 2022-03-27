@@ -6,6 +6,7 @@ export const PATCH_UPDATE_USER_URI = `${API_URL}user/`;
 export const POST_REGISTER_USER_URI = `${API_URL}auth/register`;
 export const POST_RESET_PASSWORD_URI = `${API_URL}auth/reset-password`;
 export const ACTIVATE_ACCOUNT_URI = `${API_URL}auth/resend-activation-link`;
+export const POST_FORGET_PASSWORD_URI = `${API_URL}auth/forget-password`;
 export const GET_SECURITY_QUESTIONS_URI = `${API_URL}auth/security-questions`;
 export const GET_BOOK_LIST_URI = `${API_URL}book?with_image=1`;
 export const GET_BOOK_URI = `${API_URL}book/`;

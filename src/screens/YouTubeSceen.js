@@ -142,22 +142,6 @@ class YouTubeScreen extends Component {
     );
   }
 
-  render() {
-    const logo = require('../../assets/images/tamejida_47.jpg');
-    return (
-      <>
-        {isSuperAdmin(this.props.user) && this.renderAdminButton()}
-        {!this.props.loading &&
-        this.props?.video?.youtube_id &&
-        this.props?.video?.isLive
-          ? this.renderVideoContainer(logo)
-          : this.renderNoLivePlaceholder(logo)}
-        {this.renderStartLiveModal()}
-        {this.renderCloseLiveModal()}
-      </>
-    );
-  }
-
   renderStartLiveModal() {
     return (
       <InformationModal
@@ -190,6 +174,22 @@ class YouTubeScreen extends Component {
           <Text>{LIVE_VIDEO_STR.close_live_confirmation_message}</Text>
         </View>
       </InformationModal>
+    );
+  }
+
+  render() {
+    const logo = require('../../assets/images/tamejida_47.jpg');
+    return (
+      <>
+        {isSuperAdmin(this.props.user) && this.renderAdminButton()}
+        {!this.props.loading &&
+        this.props?.video?.youtube_id &&
+        this.props?.video?.isLive
+          ? this.renderVideoContainer(logo)
+          : this.renderNoLivePlaceholder(logo)}
+        {this.renderStartLiveModal()}
+        {this.renderCloseLiveModal()}
+      </>
     );
   }
 }
