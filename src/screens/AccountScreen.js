@@ -313,7 +313,7 @@ AccountScreen.propTypes = {
   updateAction: PropTypes.func,
   deleteUserAccount: PropTypes.func,
   activateAccount: PropTypes.func,
-  accountActivationSentMailActivation: PropTypes.string,
+  accountActivationSentMailActivation: PropTypes.bool,
   accountActivationMessage: PropTypes.string,
   logoutLoading: PropTypes.bool,
   updateLoading: PropTypes.bool,
