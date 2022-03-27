@@ -104,6 +104,7 @@ class YouTubeScreen extends Component {
           onPress={() => {
             if (!this.props.liveStarted) {
               this.props.refreshLiveVideoInfo();
+              this.props.getLiveVideo();
             }
             this.setState({
               showInfoModal: true,
@@ -112,9 +113,7 @@ class YouTubeScreen extends Component {
           style={styles.topHeaderBtn}>
           <Icon type="SimpleLineIcons" name="refresh" color={white} size={22} />
           <Text style={styles.navigationText}>
-            {this.props.liveStarted &&
-            this.props.video?.isLive &&
-            this.props.video?.broadcast === 'live'
+            {this.props.liveStarted && this.props.video?.isLive
               ? LIVE_VIDEO_STR.end_live_btn_message
               : LIVE_VIDEO_STR.start_live_btn_message}
           </Text>
@@ -143,9 +142,13 @@ class YouTubeScreen extends Component {
   }
 
   renderStartLiveModal() {
+    const visible =
+      (!this.props.video?.isLive || !this.props.video?.broadcast === 'live') &&
+      this.state.showInfoModal;
+
     return (
       <InformationModal
-        visible={!this.props.liveStarted && this.state.showInfoModal}
+        visible={visible}
         onHide={() =>
           this.setState({
             showInfoModal: false,
@@ -160,15 +163,24 @@ class YouTubeScreen extends Component {
   }
 
   renderCloseLiveModal() {
+    const visible =
+      this.props.video?.isLive &&
+      this.props.video?.broadcast === 'live' &&
+      this.state.showInfoModal;
+
     return (
       <InformationModal
-        visible={this.props.liveStarted && this.state.showInfoModal}
+        visible={visible}
         onHide={() =>
           this.setState({
             showInfoModal: false,
+            isModalVisible: false,
           })
         }
-        onConfirm={() => this.props.refreshLiveVideoInfo()}
+        onConfirm={() => {
+          this.props.refreshLiveVideoInfo();
+          this.props.getLiveVideo();
+        }}
         title={LIVE_VIDEO_STR.ending_live_btn_message}>
         <View>
           <Text>{LIVE_VIDEO_STR.close_live_confirmation_message}</Text>
@@ -178,7 +190,9 @@ class YouTubeScreen extends Component {
   }
 
   render() {
+    console.log(this.props?.video);
     const logo = require('../../assets/images/tamejida_47.jpg');
+    console.log(this.props.liveStarted);
     return (
       <>
         {isSuperAdmin(this.props.user) && this.renderAdminButton()}

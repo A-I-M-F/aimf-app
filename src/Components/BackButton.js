@@ -4,7 +4,6 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 
 const BackButton = ({navigation, alternativeRoute}) => {
-  console.log(navigation);
   return (
     <View style={{width: 100, height: 100}}>
       <Button

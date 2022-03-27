@@ -5,12 +5,16 @@ import * as PropTypes from 'prop-types';
 import styles from './css';
 
 const InformationModal = (props) => {
-  const {onHide} = props;
+  const {onHide, onShow} = props;
 
   return (
     <>
       {props.visible && (
-        <Modal animationType="slide" transparent visible={props.visible}>
+        <Modal
+          animationType="slide"
+          transparent
+          visible={props.visible}
+          onShow={onShow}>
           <View
             style={{
               position: 'absolute',
@@ -91,6 +95,7 @@ InformationModal.propTypes = {
   visible: PropTypes.bool,
   title: PropTypes.string,
   onHide: PropTypes.func,
+  onShow: PropTypes.func,
   onConfirm: PropTypes.func,
   children: PropTypes.array,
 };

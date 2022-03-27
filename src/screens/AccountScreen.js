@@ -228,7 +228,7 @@ class AccountScreen extends Component {
               onSubmit={() => this.onSubmit()}
             />
           )}
-          {!this.props.account.user.hasVerifiedEmail &&
+          {!this.props.account?.user?.hasVerifiedEmail &&
             !this.props.accountActivationSentMailActivation &&
             this.renderActivateAccountBtn()}
           {

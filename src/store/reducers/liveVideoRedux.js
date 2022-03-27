@@ -93,7 +93,9 @@ export const refreshLiveVideoInfo = () => {
   };
 };
 
-const initialState = {};
+const initialState = {
+  liveStarted: false,
+};
 
 export const liveVideoReducer = (state = initialState, action) => {
   switch (action.type) {
