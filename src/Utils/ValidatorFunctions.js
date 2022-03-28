@@ -24,7 +24,7 @@ export const isCorrectPassword = (password) => {
 };
 
 export const isCorrectZipCode = (zipCode) => {
-  return !!zipCode.match(/^[0-9]{5}$/);
+  return zipCode === '' || !!zipCode.match(/^[0-9]{5}$/);
 };
 
 export const isCorrectNumberCopie = (nbCopie) => {
