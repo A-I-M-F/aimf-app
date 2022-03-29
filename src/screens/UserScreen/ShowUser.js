@@ -238,6 +238,7 @@ class ShowUser extends Component {
       {field: 'email', label: 'Email'},
       {field: 'phoneNumber', label: 'Téléphone'},
       {field: 'zipCode', label: 'Code postal'},
+      {field: 'hasVerifiedEmail', label: 'Email vérifié'},
     ];
 
     if (this.props.data.maritalStatus === MARRIED) {
@@ -262,7 +263,12 @@ class ShowUser extends Component {
           </Text>
           <Text style={{color: '#3E3E3E', fontSize: 15}}>
             {row.field === 'birthday'
-              ? isoDateToFr(this.props.data[row.field])
+              ? this.props.data[row.field] &&
+                isoDateToFr(this.props.data[row.field])
+              : row.field === 'hasVerifiedEmail'
+              ? this.props.data[row.field]
+                ? 'Oui'
+                : 'Non'
               : this.props.data[row.field]}
           </Text>
         </View>,
