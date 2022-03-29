@@ -18,6 +18,7 @@ export const isCorrectPassword = (password) => {
   return (
     password.length > 7 &&
     password.match(/[a-z]/) &&
+    password.match(/[0-9]/) &&
     password.match(/[A-Z]/) &&
     password.match(/\W/)
   );
