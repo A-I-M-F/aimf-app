@@ -37,6 +37,7 @@ const RenderPassword = ({
                     {key: 'Au minimum 8 caractères'},
                     {key: 'Au moins Une lettre majuscule'},
                     {key: 'Au moins Une lettre minuscule'},
+                    {key: 'Au moins un chiffre'},
                     {key: 'Au moins un caractère spécial'},
                   ]}
                   renderItem={({item}) => (
