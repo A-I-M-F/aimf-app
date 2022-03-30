@@ -23,7 +23,7 @@ import Loader from '../Components/Loader';
 import {LIVE_VIDEO_STR} from '../Utils/Constants';
 import InformationModal from '../Components/InformationModal';
 import {white} from '../Utils/colors';
-import {isSuperAdmin} from '../Utils/Account';
+import {isAdmin, isSuperAdmin} from '../Utils/Account';
 
 class YouTubeScreen extends Component {
   static navigationOptions = {
@@ -199,7 +199,8 @@ class YouTubeScreen extends Component {
     const logo = require('../../assets/images/tamejida_47.jpg');
     return (
       <>
-        {isSuperAdmin(this.props.user) && this.renderAdminButton()}
+        {(isSuperAdmin(this.props.user) || isAdmin(this.props.user)) &&
+          this.renderAdminButton()}
         {!this.props.loading &&
         this.props?.video?.youtube_id &&
         this.props?.video?.isLive
