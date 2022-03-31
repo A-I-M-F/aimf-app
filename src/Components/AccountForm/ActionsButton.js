@@ -7,7 +7,7 @@ import {
   CREATE_ACCOUNT_ACTION,
   UPDATE_ACCOUNT_ACTION,
 } from '../../Utils/Constants';
-import FormStyles from "../../css/Form.css";
+import FormStyles from '../../css/Form.css';
 
 const ActionsButton = (props) => {
   const spinnerButtonStyle = {

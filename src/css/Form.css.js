@@ -26,7 +26,8 @@ const FormStyles = StyleSheet.create({
     borderRadius: 10,
     borderColor: mainColor3Button,
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
     height: 55,
   },
   linkedBtn: {
@@ -45,6 +46,8 @@ const FormStyles = StyleSheet.create({
   },
   datePicker: {
     width: '100%',
+    paddingLeft: 20,
+    paddingRight: 20,
   },
 });
 

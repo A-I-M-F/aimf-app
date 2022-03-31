@@ -4,7 +4,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Item, Label} from 'native-base';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import FormStyles from "../css/Form.css";
+import FormStyles from '../css/Form.css';
 
 const DatePicker = ({
   label,
@@ -40,10 +40,7 @@ const DatePicker = ({
 
   return (
     <View>
-      <Label
-        style={FormStyles.label}>
-        {label}
-      </Label>
+      <Label style={FormStyles.label}>{label}</Label>
 
       <Item
         onPress={showDatePicker}
@@ -51,7 +48,9 @@ const DatePicker = ({
           ...FormStyles.inputItem,
           ...style,
         }}>
-        <Text style={{...FormStyles.input, ...FormStyles.datePicker}}>{date && moment(date).format('DD/MM/YYYY')}</Text>
+        <Text style={{...FormStyles.input, ...FormStyles.datePicker}}>
+          {date && moment(date).format('DD/MM/YYYY')}
+        </Text>
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
           mode="date"

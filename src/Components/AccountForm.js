@@ -34,7 +34,8 @@ import DatePicker from './DatePicker';
 import RenderPassword from './RenderPassoword';
 import {backgroundColor, mainColor} from '../Utils/colors';
 import Template from '../css/Template.css';
-import FormStyles from "../css/Form.css";
+import FormStyles from '../css/Form.css';
+import BackArrowIcon from './icons/BackArrowIcon';
 
 export default class AccountForm extends Component {
   constructor(props) {
@@ -101,10 +102,7 @@ export default class AccountForm extends Component {
             width: 300,
             marginLeft: 10,
           }}>
-          <Label
-            style={
-              FormStyles.label
-            }>
+          <Label style={FormStyles.label}>
             {this.props.data.question1 && this.props.data.question1.question}*
           </Label>
           <SpinnerButton
@@ -132,8 +130,7 @@ export default class AccountForm extends Component {
             width: 300,
             marginLeft: 10,
           }}>
-          <Label
-            style={FormStyles.label}>
+          <Label style={FormStyles.label}>
             {this.props.data.question2 && this.props.data.question2.question}*
           </Label>
           <SpinnerButton
@@ -210,7 +207,7 @@ export default class AccountForm extends Component {
           centerContent
           style={{
             opacity: this.props.scrollViewOpacity,
-            backgroundColor: backgroundColor,
+            backgroundColor,
           }}>
           <View>
             <Button
@@ -225,21 +222,22 @@ export default class AccountForm extends Component {
                   this.props.navigation.navigate('LoginScreen');
                 }
               }}
-              style={{borderRadius: 30, width: 50}}>
-              <Icon
-                style={{color: '#000'}}
-                name="md-arrow-back"
-                type="Ionicons"
-              />
+              style={{
+                marginLeft: 20,
+                marginTop: 10,
+                borderRadius: 30,
+                width: 50,
+              }}>
+              <BackArrowIcon />
             </Button>
           </View>
           <Label style={Template.pageTitle}>Création de Compte</Label>
 
-          {/*<ImageRadioButton*/}
-          {/*  options={genderOptions}*/}
-          {/*  value={gender}*/}
-          {/*  onPress={(value) => this.props.updateState({gender: value})}*/}
-          {/*/>*/}
+          {/* <ImageRadioButton */}
+          {/*  options={genderOptions} */}
+          {/*  value={gender} */}
+          {/*  onPress={(value) => this.props.updateState({gender: value})} */}
+          {/* /> */}
 
           <TextRadioButton
             options={genderOptions}
@@ -432,12 +430,13 @@ export default class AccountForm extends Component {
                   this.props.navigation.navigate('LoginScreen');
                 }
               }}
-              style={{borderRadius: 30, width: 50}}>
-              <Icon
-                style={{color: mainColor}}
-                name="md-arrow-back"
-                type="Ionicons"
-              />
+              style={{
+                marginLeft: 20,
+                marginTop: 10,
+                borderRadius: 30,
+                width: 50,
+              }}>
+              <BackArrowIcon />
             </Button>
           </View>
         </ScrollView>

@@ -8,6 +8,7 @@ import RenderHtml from 'react-native-render-html';
 import {CREATE_ACCOUNT_ACTION} from '../../Utils/Constants';
 import {register} from '../../store/reducers/accountRedux';
 import {getTermsOfUse} from '../../store/reducers/authenticationRedux';
+import BackArrowIcon from '../../Components/icons/BackArrowIcon';
 
 const TermsOfUse = ({termsOfUse, getTermsOfUse, updateAction, updateState}) => {
   const {width} = useWindowDimensions();
@@ -25,8 +26,8 @@ const TermsOfUse = ({termsOfUse, getTermsOfUse, updateAction, updateState}) => {
         <Button
           transparent
           onPress={() => updateAction(CREATE_ACCOUNT_ACTION)}
-          style={{borderRadius: 30, width: 50}}>
-          <Icon style={{color: '#000'}} name="md-arrow-back" type="Ionicons" />
+          style={{marginLeft: 20, marginTop: 10, borderRadius: 30, width: 50}}>
+          <BackArrowIcon />
         </Button>
       </View>
       <RenderHtml contentWidth={width} source={source} />

@@ -24,6 +24,7 @@ import {
 import {isoDateToFr} from '../../Utils/Functions';
 import InformationModal from '../../Components/InformationModal';
 import {getAssociationRoleName} from '../../Utils/Role';
+import BackArrowIcon from '../../Components/icons/BackArrowIcon';
 
 class ShowUser extends Component {
   constructor(props) {
@@ -437,12 +438,14 @@ class ShowUser extends Component {
             onPress={() => {
               this.props.updateAction(LIST_USER_ACTION);
             }}
-            style={{borderRadius: 30, marginLeft: 20, marginBottom: 20}}>
-            <Icon
-              style={{color: '#000'}}
-              name="md-arrow-back"
-              type="Ionicons"
-            />
+            style={{
+              marginLeft: 20,
+              marginTop: 10,
+              borderRadius: 30,
+              width: 50,
+              marginBottom: 20,
+            }}>
+            <BackArrowIcon />
           </Button>
         </View>
         <Thumbnail source={logo} style={{marginBottom: 14}} />
