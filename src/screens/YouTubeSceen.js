@@ -13,7 +13,7 @@ import {Button, Thumbnail} from 'native-base';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from './YouTubeScreen/css';
+import styles from '../css/YouTubeScreen.css.js';
 import {
   getLiveVideo,
   refreshLiveVideoInfo,

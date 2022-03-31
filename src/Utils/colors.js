@@ -27,3 +27,5 @@ export const placeholderTextColor = '#9F9F9F';
 
 export const successDarkColor = '#025834';
 export const failDarkColor = '#B42B00';
+
+export const textColor1 = '#9F9F9F';

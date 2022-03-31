@@ -17,7 +17,7 @@ import {
   asyncReceiveUserKhatma,
 } from '../store/reducers/khatmaRedux';
 import {white2} from '../Utils/colors';
-import styles from './HomeScreen/css';
+import styles from '../css/HomeScreen.css.js';
 
 class HomeScreen extends Component {
   static navigationOptions = {

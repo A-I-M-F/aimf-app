@@ -328,7 +328,6 @@ export default class AccountForm extends Component {
             disabled={this.props.action === UPDATE_ACCOUNT_ACTION}
             value={email}
             itemStyle={{
-              ...styles.inputItem,
               opacity: this.props.action === CREATE_ACCOUNT_ACTION ? 1 : 0.5,
             }}
             autoCapitalize="none"

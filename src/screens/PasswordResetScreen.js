@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
-import {Container, Input, Item, Label} from 'native-base';
+import {Container} from 'native-base';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import SpinnerButton from 'react-native-spinner-button';
 import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
 import {forgotPasswordReset} from '../store/reducers/authenticationRedux';
-import styles from './PasswordResetScreen/css';
+import styles from '../css/PasswordResetScreen.css.js';
 import checkFormValues from './PasswordResetScreen/Validate';
 import BackButton from '../Components/BackButton';
 import ErrorModal from '../Components/ErrorModal';
+import RenderInput from '../Components/RenderInput';
+import FormStyles from '../css/Form.css';
 
 class PasswordResetScreen extends Component {
   constructor(props) {
@@ -42,20 +44,17 @@ class PasswordResetScreen extends Component {
           alternativeRoute="LoginScreen"
         />
         <View style={styles.subContainer}>
-          <Label style={styles.inputItemLabel}>
-            Veuillez saisir votre mail d'authenitication
-          </Label>
-          <Item rounded style={styles.inputItem}>
-            <Input
-              style={styles.input}
-              keyboardType="email-address"
-              onChangeText={(text) => this.setState({email: text})}
-              value={this.state.email}
-            />
-          </Item>
+          <RenderInput
+            label="Veuillez saisir votre mail d'authenitication"
+            maxLength={500}
+            keyboardType="email-address"
+            onChange={(text) => this.setState({email: text})}
+            required
+            value={this.state.email}
+          />
           <View style={styles.submitButtonContainer}>
             <SpinnerButton
-              buttonStyle={styles.submitButton}
+              buttonStyle={FormStyles.spinnerButton}
               onPress={() => this.onSubmit()}
               isLoading={this.props.loading}
               indicatorCount={10}

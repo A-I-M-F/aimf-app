@@ -3,7 +3,7 @@ import {Image, TouchableOpacity, View} from 'react-native';
 import {Button, Icon, Text} from 'native-base';
 import * as PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
-import styles from './css';
+import styles from '../../css/AccountScreen.css';
 import {
   ACCOUNT_NOT_VALIDATED_YET_MESSAGE,
   DELETE_USER_ACCOUNT_CONFIRM_MESSAGE_BODY,

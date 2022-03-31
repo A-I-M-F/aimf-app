@@ -22,7 +22,7 @@ import {
   activateAccount,
 } from '../store/reducers/accountRedux';
 import Loader from '../Components/Loader';
-import styles from './AccountScreen/css.js';
+import styles from '../css/AccountScreen.css.js';
 import InformationModal from '../Components/InformationModal';
 
 class AccountScreen extends Component {

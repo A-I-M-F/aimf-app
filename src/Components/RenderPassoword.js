@@ -4,8 +4,9 @@ import {Text, View} from 'react-native';
 import * as PropTypes from 'prop-types';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
-import styles from './AccountForm/css';
+import FormStyles from '../css/Form.css';
 import {isCorrectPassword} from '../Utils/ValidatorFunctions';
+import {textColor1} from '../Utils/colors';
 
 const RenderPassword = ({
   label,
@@ -26,7 +27,7 @@ const RenderPassword = ({
     <>
       {label && (
         <View style={{flexDirection: 'row'}}>
-          <Label style={styles.label}>{label}*</Label>
+          <Label style={FormStyles.label}>{label}*</Label>
           <Tooltip
             isVisible={toolTipVisible}
             content={
@@ -41,7 +42,7 @@ const RenderPassword = ({
                     {key: 'Au moins un caractère spécial'},
                   ]}
                   renderItem={({item}) => (
-                    <Text style={styles.item}>
+                    <Text style={FormStyles.item}>
                       <Icon
                         name="controller-record"
                         type="Entypo"
@@ -71,7 +72,7 @@ const RenderPassword = ({
 
       <Item
         rounded
-        style={itemStyle || styles.inputItem}
+        style={{...itemStyle, ...FormStyles.inputItem}}
         success={
           value !== null &&
           checkPassword &&
@@ -87,10 +88,11 @@ const RenderPassword = ({
               !isCorrectPassword(value)
         }>
         <Input
-          style={styles.input}
+          style={FormStyles.input}
           secureTextEntry={secureTextEntry}
           keyboardType={keyboardType || 'default'}
           maxLength={maxLength}
+          placeholderTextColor={textColor1}
           onChangeText={onChange}
           value={value}
           disabled={disabled}

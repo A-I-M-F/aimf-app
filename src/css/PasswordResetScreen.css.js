@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {mainColor3Button} from '../../Utils/colors';
+import {mainColor3Button} from '../Utils/colors';
 
 const styles = StyleSheet.create({
   mainContainer: {},

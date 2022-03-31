@@ -2,6 +2,8 @@ import {Icon, Input, Item, Label} from 'native-base';
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import styles from './AccountForm/css';
+import FormStyles from '../css/Form.css';
+import {textColor1} from '../Utils/colors';
 
 const RenderInput = ({
   label,
@@ -19,14 +21,14 @@ const RenderInput = ({
   return (
     <>
       {label && (
-        <Label style={styles.label}>
+        <Label style={FormStyles.label}>
           {label}
           {required ? '*' : ''}
         </Label>
       )}
       <Item
         rounded
-        style={{...(itemStyle || styles.inputItem), borderRadius: 4}}
+        style={{...FormStyles.inputItem, ...itemStyle}}
         success={
           value !== null &&
           checkFunction !== undefined &&
@@ -40,8 +42,9 @@ const RenderInput = ({
           !checkFunction(value)
         }>
         <Input
-          style={styles.input}
+          style={FormStyles.input}
           keyboardType={keyboardType || 'default'}
+          placeholderTextColor={textColor1}
           maxLength={maxLength}
           onChangeText={onChange}
           value={value}

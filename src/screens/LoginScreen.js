@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, Image, ScrollView, View} from 'react-native';
+import {Text, TouchableOpacity, ScrollView, View} from 'react-native';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import SpinnerButton from 'react-native-spinner-button';
@@ -9,8 +9,10 @@ import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
 import {login} from '../store/reducers/authenticationRedux';
 import RenderInput from '../Components/RenderInput';
 import RenderPassword from '../Components/RenderPassoword';
-import styles from './Login/css';
+import styles from '../css/Login.css.js';
 import {navigate} from '../Utils/Account';
+import LogoColorWriting from '../Components/icons/logos/LogoColorWriting';
+import FormStyles from '../css/Form.css';
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -37,26 +39,17 @@ class LoginScreen extends React.Component {
 
   render() {
     const {email, password} = this.state;
-    const logo = require('../../assets/images/app_icon_text.png');
     return (
       <>
         <ScrollView style={styles.bodyWrapper}>
-          <Image
-            style={{
-              width: 200,
-              height: 130,
-              borderRadius: 9,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-            source={logo}
-          />
+          <View style={styles.logoWrapper}>
+            <LogoColorWriting />
+          </View>
           <RenderInput
             keyboardType="email-address"
             onChange={(value) => this.setState({email: value})}
             value={email}
             placeholder="Adresse email"
-            itemStyle={styles.inputItem}
             autoCapitalize="none"
           />
           <RenderPassword
@@ -68,7 +61,7 @@ class LoginScreen extends React.Component {
           />
           <View style={styles.loginButtonContainer}>
             <SpinnerButton
-              buttonStyle={styles.loginButton}
+              buttonStyle={FormStyles.spinnerButton}
               isLoading={this.props.loading}
               onPress={this.handleLogin}
               spinnerType="SkypeIndicator">
@@ -76,19 +69,19 @@ class LoginScreen extends React.Component {
             </SpinnerButton>
           </View>
           <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('SignUp')}
+            activeOpacity={0.6}>
+            <Text style={{...FormStyles.linkedBtn, ...styles.createAccount}}>
+              {LOGIN_STR.you_dont_have_account_account}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() =>
               this.props.navigation.navigate('PasswordResetScreen')
             }
             activeOpacity={0.6}>
-            <Text style={styles.forgotPasswd}>
+            <Text style={{...FormStyles.linkedBtn, ...styles.forgotPasswd}}>
               {LOGIN_STR.you_forgot_your_password}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('SignUp')}
-            activeOpacity={0.6}>
-            <Text style={styles.createAccount}>
-              {LOGIN_STR.you_dont_have_account_account}
             </Text>
           </TouchableOpacity>
         </ScrollView>

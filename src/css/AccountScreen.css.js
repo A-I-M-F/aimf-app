@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColor, mainColor} from '../../Utils/colors';
+import {backgroundColor, mainColor} from '../Utils/colors';
 
 const styles = StyleSheet.create({
   container: {

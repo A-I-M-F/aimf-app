@@ -5,7 +5,7 @@ import SpinnerButton from 'react-native-spinner-button';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import moment from 'moment';
-import styles from './PostScreen/css';
+import styles from '../css/PostScreen.css.js';
 import ErrorModal from '../Components/ErrorModal';
 import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
 import Loader from '../Components/Loader';

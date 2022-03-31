@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {mainColor3Button} from '../../Utils/colors';
+import {mainColor3Button} from '../Utils/colors';
 
 const styles = StyleSheet.create({
   bodyWrapper: {
@@ -7,18 +7,23 @@ const styles = StyleSheet.create({
     height: 550,
     paddingTop: 100,
   },
+  logoWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 70,
+  },
   forgotPasswd: {
     textAlign: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 35,
-    marginBottom: 20,
   },
   createAccount: {
     textAlign: 'center',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: 150,
+    marginTop: 30,
   },
   inputItem: {
     marginBottom: 15,
