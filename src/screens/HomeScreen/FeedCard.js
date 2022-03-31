@@ -188,11 +188,14 @@ const FeedCard = ({
           <Body>
             <View style={{flexDirection: 'row'}}>
               <View style={{flex: 9}}>
-                <Text>{title}</Text>
-                <Text note>{date}</Text>
+                <Text selectable>{title}</Text>
+                <Text note selectable>
+                  {date}
+                </Text>
               </View>
               {isAdmin(user) && (
                 <View
+                  // eslint-disable-next-line react-native/no-inline-styles
                   style={{
                     flex: 1,
                     flexDirection: 'column',
@@ -213,29 +216,30 @@ const FeedCard = ({
       </CardItem>
       <CardItem style={{backgroundColor}}>
         <Body>
-          <ParsedText
-            selectable
-            style={styles.text}
-            parse={[
-              {
-                type: 'url',
-                style: styles.url,
-                onPress: (url) => handleUrlPress(url),
-              },
-              {
-                type: 'phone',
-                style: styles.phone,
-                onPress: (phone) => handlePhonePress(phone),
-              },
-              {
-                type: 'email',
-                style: styles.email,
-                onPress: (email) => handleEmailPress(email),
-              },
-            ]}
-            childrenProps={{allowFontScaling: false}}>
-            {description}
-          </ParsedText>
+          <Text selectable>
+            <ParsedText
+              style={styles.text}
+              parse={[
+                {
+                  type: 'url',
+                  style: styles.url,
+                  onPress: (url) => handleUrlPress(url),
+                },
+                {
+                  type: 'phone',
+                  style: styles.phone,
+                  onPress: (phone) => handlePhonePress(phone),
+                },
+                {
+                  type: 'email',
+                  style: styles.email,
+                  onPress: (email) => handleEmailPress(email),
+                },
+              ]}
+              childrenProps={{allowFontScaling: false}}>
+              {description}
+            </ParsedText>
+          </Text>
         </Body>
       </CardItem>
     </Card>
