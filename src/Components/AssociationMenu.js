@@ -62,6 +62,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
   },
+  title: {
+    marginTop: 20,
+    fontSize: 30,
+    fontWeight: 'bold',
+    fontFamily: 'Magra-Bold',
+    letterSpacing: 0,
+    color: '#9F9F9F',
+    opacity: 1,
+    // letter-spacing: var(--unnamed-character-spacing-0);
+    // color: var(--unnamed-color-9f9f9f);
+    // text-align: left;
+    // font: normal normal bold 30px/34px Helvetica Neue;
+    // letter-spacing: 0px;
+  },
 });
 
 class AssociationMenu extends Component {
@@ -129,16 +143,14 @@ class AssociationMenu extends Component {
   };
 
   render() {
-    const {screenerTitle, associationList, userAssociationList} = this.props;
+    const {associationList, userAssociationList} = this.props;
     const {hideMenu} = this.state;
     return (
       <View style={{backgroundColor}}>
         <View style={{flexDirection: 'row', paddingHorizontal: 14}}>
           <View>
-            <Text style={{fontSize: 26, fontWeight: '700'}}>Bienvenue, </Text>
-            <Text style={{fontSize: 22, fontWeight: '500', opacity: 0.6}}>
-              {`Dans votre espace ${screenerTitle}`}
-            </Text>
+            <Text style={styles.title}>Bienvenue, </Text>
+            <Text style={{fontSize: 22, fontWeight: '500', opacity: 0.6}} />
           </View>
           <View style={{position: 'absolute', right: 20, bottom: 5}}>
             {hideMenu ? (
