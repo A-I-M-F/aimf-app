@@ -1,4 +1,4 @@
-import {isCorrectEmailAddress} from '../../Utils/Functions';
+import {isCorrectEmailAddress} from '../../Utils/ValidatorFunctions';
 
 const checkFormValues = (values) => {
   if (!values.email) {
