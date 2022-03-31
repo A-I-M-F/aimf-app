@@ -32,6 +32,9 @@ import ImageRadioButton from './ImageRadioButton';
 import TextRadioButton from './TextRadioButton';
 import DatePicker from './DatePicker';
 import RenderPassword from './RenderPassoword';
+import {backgroundColor, mainColor} from '../Utils/colors';
+import Template from '../css/Template.css';
+import FormStyles from "../css/Form.css";
 
 export default class AccountForm extends Component {
   constructor(props) {
@@ -96,15 +99,12 @@ export default class AccountForm extends Component {
             flexDirection: 'row',
             justifyContent: 'center',
             width: 300,
-            marginLeft: 30,
+            marginLeft: 10,
           }}>
           <Label
-            style={{
-              fontWeight: 'bold',
-              fontSize: 14,
-              marginLeft: 30,
-              width: 300,
-            }}>
+            style={
+              FormStyles.label
+            }>
             {this.props.data.question1 && this.props.data.question1.question}*
           </Label>
           <SpinnerButton
@@ -115,9 +115,9 @@ export default class AccountForm extends Component {
             <Icon style={{color: '#d3d3d3', fontSize: 14}} name="sync" />
           </SpinnerButton>
         </View>
-        <Item rounded style={styles.inputItem}>
+        <Item rounded style={{...FormStyles.inputItem, ...styles.inputItem}}>
           <Input
-            style={styles.input}
+            style={FormStyles.input}
             autoCapitalize="sentences"
             keyboardType="default"
             onChangeText={(response1) => this.props.updateState({response1})}
@@ -130,15 +130,10 @@ export default class AccountForm extends Component {
             flexDirection: 'row',
             justifyContent: 'center',
             width: 300,
-            marginLeft: 30,
+            marginLeft: 10,
           }}>
           <Label
-            style={{
-              fontWeight: 'bold',
-              fontSize: 14,
-              marginLeft: 30,
-              width: 300,
-            }}>
+            style={FormStyles.label}>
             {this.props.data.question2 && this.props.data.question2.question}*
           </Label>
           <SpinnerButton
@@ -149,9 +144,9 @@ export default class AccountForm extends Component {
             <Icon style={{color: '#d3d3d3', fontSize: 14}} name="sync" />
           </SpinnerButton>
         </View>
-        <Item rounded style={styles.inputItem}>
+        <Item rounded style={FormStyles.inputItem}>
           <Input
-            style={styles.input}
+            style={FormStyles.input}
             autoCapitalize="sentences"
             keyboardType="default"
             onChangeText={(response2) => this.props.updateState({response2})}
@@ -186,11 +181,13 @@ export default class AccountForm extends Component {
     const genderOptions = [
       {
         value: MALE_GENDER,
+        label: 'Homme',
         selectedImage: require('../../assets/images/male_selected.png'),
         unselectedImage: require('../../assets/images/male_unselected.png'),
       },
       {
         value: FEMALE_GENDER,
+        label: 'Femme',
         selectedImage: require('../../assets/images/female_selected.png'),
         unselectedImage: require('../../assets/images/female_unselected.png'),
       },
@@ -213,7 +210,7 @@ export default class AccountForm extends Component {
           centerContent
           style={{
             opacity: this.props.scrollViewOpacity,
-            backgroundColor: '#fce3ba',
+            backgroundColor: backgroundColor,
           }}>
           <View>
             <Button
@@ -236,13 +233,20 @@ export default class AccountForm extends Component {
               />
             </Button>
           </View>
-          <Label style={styles.label}>Je suis *</Label>
+          <Label style={Template.pageTitle}>Création de Compte</Label>
 
-          <ImageRadioButton
+          {/*<ImageRadioButton*/}
+          {/*  options={genderOptions}*/}
+          {/*  value={gender}*/}
+          {/*  onPress={(value) => this.props.updateState({gender: value})}*/}
+          {/*/>*/}
+
+          <TextRadioButton
             options={genderOptions}
             value={gender}
             onPress={(value) => this.props.updateState({gender: value})}
           />
+
           <RenderInput
             checkFunction={isCorrectName}
             label="Nom"
@@ -271,7 +275,6 @@ export default class AccountForm extends Component {
             required
             value={firstName}
           />
-          <Label style={styles.label}>Etat civil*</Label>
 
           <TextRadioButton
             options={maritalStatusOptions}
@@ -385,17 +388,17 @@ export default class AccountForm extends Component {
               <CheckBox
                 containerStyle={{marginTop: -10}}
                 checked={acceptTermsOfUse}
-                checkedColor="#cb8347"
-                uncheckedColor="#cb8347"
+                checkedColor={mainColor}
+                uncheckedColor={mainColor}
                 onPress={() =>
                   this.props.updateState({acceptTermsOfUse: !acceptTermsOfUse})
                 }
               />
-              <Text style={{marginRight: 40}}>
+              <Text style={{marginRight: 20}}>
                 En s&apos;inscrivant, vous acceptez les{' '}
                 <Text
                   style={{
-                    color: '#cb8347',
+                    color: mainColor,
                     fontWeight: 'bold',
                     textDecorationLine: 'underline',
                   }}
@@ -431,7 +434,7 @@ export default class AccountForm extends Component {
               }}
               style={{borderRadius: 30, width: 50}}>
               <Icon
-                style={{color: '#000'}}
+                style={{color: mainColor}}
                 name="md-arrow-back"
                 type="Ionicons"
               />

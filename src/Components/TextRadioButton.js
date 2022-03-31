@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import * as PropTypes from 'prop-types';
+import {mainColor} from '../Utils/colors';
 
 const TextRadioButton = (props) => {
   return (
@@ -8,11 +9,11 @@ const TextRadioButton = (props) => {
       style={{
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        marginLeft: 30,
-        marginRight: 30,
+        marginLeft: '20%',
+        marginRight: '20%',
         borderRadius: 10,
-        height: 40,
-        borderColor: '#c18b64',
+        height: 49,
+        borderColor: mainColor,
         borderWidth: 2,
         marginBottom: 10,
       }}>
@@ -21,7 +22,7 @@ const TextRadioButton = (props) => {
           <View
             key={row.value}
             style={{
-              backgroundColor: '#c18b64',
+              backgroundColor: mainColor,
               color: '#FFF',
               flex: 1,
               justifyContent: 'center',
@@ -51,7 +52,7 @@ const TextRadioButton = (props) => {
             key={row.value}
             style={{
               backgroundColor: '#FFF',
-              color: '#c18b64',
+              color: mainColor,
               fontSize: 15,
               flex: 1,
               justifyContent: 'center',
@@ -69,7 +70,7 @@ const TextRadioButton = (props) => {
               onPress={() => props.onPress(row.value)}>
               <Text
                 style={{
-                  color: '#c18b64',
+                  color: mainColor,
                   textAlignVertical: 'center',
                   fontSize: 18,
                 }}>
