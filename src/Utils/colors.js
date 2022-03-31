@@ -3,6 +3,7 @@ export const gray = '#8e8e93';
 export const gray2 = '#aeaeb2';
 export const gray3 = '#f5f5f5';
 export const white = '#fff';
+export const white2 = '#ffffff';
 export const red = '#b71845';
 export const orange = '#f26f28';
 export const orange2 = '#cb8347';

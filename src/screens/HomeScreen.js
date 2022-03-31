@@ -16,7 +16,7 @@ import {
   ayncReceiveKhatma,
   asyncReceiveUserKhatma,
 } from '../store/reducers/khatmaRedux';
-import {backgroundColor} from '../Utils/colors';
+import {white2} from '../Utils/colors';
 import styles from './HomeScreen/css';
 
 class HomeScreen extends Component {
@@ -82,7 +82,7 @@ class HomeScreen extends Component {
           title={item.title}
           date={isoDateToFr(item.publishedAt)}
           description={item.description}
-          backgroundColor={!item.isExpired ? '#ffffff' : '#dadada'}
+          backgroundColor={white2}
           associationName={item?.association?.name}
           logo={item?.association?.logo}
         />

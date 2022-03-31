@@ -104,15 +104,6 @@ class PostScreen extends Component {
       return;
     }
 
-    // Vérifier la saisie de la date d'expiration de l'annonce
-    const entredExpiredAt = expiredAt || null;
-    if (!entredExpiredAt) {
-      this.props.dispatchErrorMessage(
-        "Merci de bien vouloir saisir le date d'expiration de l'annonce",
-      );
-      return;
-    }
-
     const association =
       isSuperAdmin(this.props.user) || isAdmin(this.props.user)
         ? {associationId: this.state.associationId}
@@ -179,7 +170,7 @@ class PostScreen extends Component {
           />
           <DatePicker
             minimumDate={new Date()}
-            label="Date d'expiration*"
+            label="Date d'expiration"
             defaultDate={expiredAt && moment(expiredAt).toDate()}
             onCustomChange={(date) => this.setDate(date)}
           />
