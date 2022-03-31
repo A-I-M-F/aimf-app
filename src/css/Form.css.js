@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
 import {mainColor3Button, textColor1} from '../Utils/colors';
-import DatePicker from "../Components/DatePicker";
 
 const FormStyles = StyleSheet.create({
   inputItem: {
@@ -46,7 +45,7 @@ const FormStyles = StyleSheet.create({
   },
   datePicker: {
     width: '100%',
-  }
+  },
 });
 
 export default FormStyles;
