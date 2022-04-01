@@ -32,8 +32,9 @@ const FormStyles = StyleSheet.create({
   },
   linkedBtn: {
     color: textColor1,
-    fontFamily: 'Helvetica Neue',
+    fontFamily: 'HelveticaNeue-Bold',
     backgroundColor: 'transparent',
+    fontSize: 16,
     marginBottom: 5,
     marginTop: 5,
   },

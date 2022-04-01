@@ -2,6 +2,7 @@ import * as React from 'react';
 import Svg, {G, Circle, Path} from 'react-native-svg';
 import PropTypes from 'prop-types';
 import HomeIcon from './HomeIcon';
+import {mainColor} from '../../../Utils/colors';
 
 function LiveBroadcastIcon({size}) {
   const size_ = size ?? 31;
@@ -16,7 +17,7 @@ function LiveBroadcastIcon({size}) {
         data-name="Groupe 524"
         transform="translate(-1492.796 544.263)"
         fill="none"
-        stroke="#fff"
+        stroke={mainColor}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}>

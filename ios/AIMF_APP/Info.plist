@@ -67,6 +67,11 @@
 		<string>rubicon-icon-font.ttf</string>
 		<string>icomoon.ttf</string>
 		<string>Fontisto.ttf</string>
+		<string>HelveticaNeue-Bold.ttf</string>
+		<string>HelveticaNeue-Medium.ttf</string>
+		<string>HelveticaNeue-Thin.ttf</string>
+		<string>Magra-Bold.ttf</string>
+		<string>Raleway-Regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

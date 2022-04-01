@@ -165,7 +165,7 @@ class AccountScreen extends Component {
           <Icon
             name="information-circle-outline"
             type="Ionicons"
-            style={{fontSize: 21, color: mainColor2Button}}
+            style={{fontSize: 21, color: textColor2}}
           />
           {` ${ACCOUNT_STR.your_account_is_not_activated_yet}`}
         </Text>

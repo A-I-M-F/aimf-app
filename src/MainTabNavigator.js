@@ -32,10 +32,6 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Accueil',
-  tabBarActiveTintColor: mainColor,
-  tabBarStyle: {
-    backgroundColor: mainColor,
-  },
   tabBarIcon: () => <HomeIcon />,
 };
 
@@ -58,7 +54,7 @@ const PostWorkflowStackTabBarIcon = ({focused}) => (
   <Icon
     type="AntDesign"
     name="addfile"
-    style={{fontSize: 23, marginBottom: -3}}
+    style={{fontSize: 25, marginBottom: -3, color: mainColor}}
     color={focused ? mainColor : '#ccc'}
   />
 );
@@ -93,7 +89,7 @@ const KoranStack = createStackNavigator({
 
 KoranStack.navigationOptions = {
   tabBarLabel: 'Khetma',
-  tabBarIcon: () => <CustomIcon name="coran" size={25} color="#000" />,
+  tabBarIcon: () => <CustomIcon name="coran" size={25} color={mainColor} />,
 };
 
 // const disableKoranStack = createStackNavigator({
@@ -132,7 +128,7 @@ const libraryStackTabBarIcon = ({focused}) => (
     type="FontAwesome"
     name="book"
     color={focused ? mainColor : '#ccc'}
-    style={{fontSize: 28, marginBottom: -3}}
+    style={{fontSize: 28, marginBottom: -3, color: mainColor}}
   />
 );
 libraryStackTabBarIcon.propTypes = {
@@ -229,10 +225,10 @@ const UserStack = createStackNavigator({
 
 const UserStackTabBarIcon = ({focused}) => (
   <Icon
-    type="FontAwesome5"
-    name="user-check"
-    color={focused ? mainColor : '#ccc'}
-    style={{marginBottom: -3, fontSize: 18}}
+    type="AntDesign"
+    name="addusergroup"
+    color={mainColor}
+    style={{marginBottom: -3, fontSize: 28, color: mainColor}}
   />
 );
 UserStackTabBarIcon.propTypes = {
