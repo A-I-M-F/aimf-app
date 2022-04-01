@@ -27,7 +27,7 @@ const FormStyles = StyleSheet.create({
     borderColor: mainColorButton,
     paddingVertical: 10,
     paddingLeft: 20,
-    paddingRight: 20,
+    paddingRight: 30,
     height: 55,
   },
   linkedBtn: {

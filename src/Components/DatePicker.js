@@ -48,7 +48,12 @@ const DatePicker = ({
           ...FormStyles.inputItem,
           ...style,
         }}>
-        <Text style={{...FormStyles.input, ...FormStyles.datePicker}}>
+        <Text
+          style={{
+            ...FormStyles.input,
+            ...FormStyles.datePicker,
+            paddingTop: 16,
+          }}>
           {date && moment(date).format('DD/MM/YYYY')}
         </Text>
         <DateTimePickerModal

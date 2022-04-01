@@ -38,6 +38,7 @@ class YouTubeScreen extends Component {
     this.state = {
       playerWidth: Dimensions.get('window').width,
       showInfoModal: false,
+      playing: true,
     };
   }
 
@@ -52,52 +53,52 @@ class YouTubeScreen extends Component {
     this.focusListener.remove();
   }
 
-  renderVideoContainer(logo) {
-    return (
-      <ScrollView style={styles.container}>
-        <YouTube
-          resumePlayAndroid={false}
-          ref={this.youTubeRef}
-          apiKey="apiKey"
-          videoId={this.props.video.youtube_id}
-          play
-          loop={false}
-          fullscreen={false}
-          controls={1}
-          style={[
-            {
-              height: PixelRatio.roundToNearestPixel(
-                this.state.playerWidth / (16 / 9),
-              ),
-            },
-            styles.player,
-          ]}
-        />
-        <View
-          style={{
-            margin: 25,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <View style={{width: '80%'}}>
-            <Text style={{fontSize: 17, fontWeight: 'bold'}}>
-              {this.props?.video?.title}
-            </Text>
-          </View>
-          <View style={{marginLeft: 10}}>
-            <Thumbnail source={logo} />
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Tamejida 47</Text>
-          </View>
-        </View>
-        <View
-          style={{
-            margin: 25,
-          }}>
-          <Text style={{fontSize: 16}}>{this.props?.video?.description}</Text>
-        </View>
-      </ScrollView>
-    );
-  }
+  // renderVideoContainer(logo) {
+  //   return (
+  //     <ScrollView style={styles.container}>
+  //       <YouTube
+  //         resumePlayAndroid={false}
+  //         ref={this.youTubeRef}
+  //         apiKey="apiKey"
+  //         videoId={this.props.video.youtube_id}
+  //         play
+  //         loop={false}
+  //         fullscreen={false}
+  //         controls={1}
+  //         style={[
+  //           {
+  //             height: PixelRatio.roundToNearestPixel(
+  //               this.state.playerWidth / (16 / 9),
+  //             ),
+  //           },
+  //           styles.player,
+  //         ]}
+  //       />
+  //       <View
+  //         style={{
+  //           margin: 25,
+  //           flexDirection: 'row',
+  //           justifyContent: 'space-between',
+  //         }}>
+  //         <View style={{width: '80%'}}>
+  //           <Text style={{fontSize: 17, fontWeight: 'bold'}}>
+  //             {this.props?.video?.title}
+  //           </Text>
+  //         </View>
+  //         <View style={{marginLeft: 10}}>
+  //           <Thumbnail source={logo} />
+  //           <Text style={{fontSize: 14, fontWeight: 'bold'}}>Tamejida 47</Text>
+  //         </View>
+  //       </View>
+  //       <View
+  //         style={{
+  //           margin: 25,
+  //         }}>
+  //         <Text style={{fontSize: 16}}>{this.props?.video?.description}</Text>
+  //       </View>
+  //     </ScrollView>
+  //   );
+  // }
 
   renderVideoSimpleContainer() {
     return (
@@ -116,7 +117,7 @@ class YouTubeScreen extends Component {
           ref={this.youTubeRef}
           apiKey="apiKey"
           videoId={this.props.video.youtube_id}
-          play={false}
+          play={this.state.playing}
           loop={false}
           fullscreen={false}
           controls={1}
@@ -186,7 +187,7 @@ class YouTubeScreen extends Component {
     );
   }
 
-  renderNoLivePlaceholder(logo) {
+  renderNoLivePlaceholder() {
     return (
       <View
         style={{
@@ -265,7 +266,7 @@ class YouTubeScreen extends Component {
   }
 
   render() {
-    const logo = require('../../assets/images/tamejida_47.jpg');
+    // const logo = require('../../assets/images/tamejida_47.jpg');
     return (
       <>
         {(isSuperAdmin(this.props.user) || isAdmin(this.props.user)) &&
@@ -273,8 +274,8 @@ class YouTubeScreen extends Component {
         {!this.props.loading &&
         this.props?.video?.youtube_id &&
         this.props?.video?.isLive
-          ? this.renderVideoSimpleContainer(logo)
-          : this.renderNoLivePlaceholder(logo)}
+          ? this.renderVideoSimpleContainer()
+          : this.renderNoLivePlaceholder()}
         {this.renderStartLiveModal()}
         {this.renderCloseLiveModal()}
       </>

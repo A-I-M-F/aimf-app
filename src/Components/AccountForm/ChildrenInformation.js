@@ -9,7 +9,7 @@ import {
   MARRIED,
   SCHOOL_LEVELS,
 } from '../../Utils/Constants';
-import styles from './css';
+import FormStyles from '../../css/Form.css';
 
 class ChildrenInformation extends Component {
   renderPicker = (index) => {
@@ -22,13 +22,15 @@ class ChildrenInformation extends Component {
     return (
       <View key={index}>
         <Label
-          style={this.props.itemStyle ? this.props.itemStyle : styles.label}>
+          style={
+            this.props.itemStyle ? this.props.itemStyle : FormStyles.label
+          }>
           Année de naissance {CHILDREN_YEAR_LABEL[index]} enfant
         </Label>
         <Item
           rounded
           style={{
-            ...styles.inputItem,
+            ...FormStyles.inputItem,
             height: 60,
             padding: 5,
           }}>
@@ -53,10 +55,10 @@ class ChildrenInformation extends Component {
             itemSpace={30}
           />
         </Item>
-        <Label style={styles.label}>
+        <Label style={FormStyles.label}>
           Niveau scolaire du {CHILDREN_YEAR_LABEL[index]} enfant
         </Label>
-        <Item rounded style={{...styles.inputItem, height: 60, padding: 5}}>
+        <Item rounded style={{...FormStyles.inputItem, height: 60, padding: 5}}>
           <Picker
             style={{backgroundColor: '#FFF', width: 280, height: 55}}
             selectedValue={
@@ -93,10 +95,10 @@ class ChildrenInformation extends Component {
   render() {
     return this.props.maritalStatus === MARRIED ? (
       <>
-        <Label style={styles.label}>Nombre d&apos;enfants*</Label>
-        <Item rounded style={styles.inputItem}>
+        <Label style={FormStyles.label}>Nombre d&apos;enfants*</Label>
+        <Item rounded style={FormStyles.inputItem}>
           <Input
-            style={styles.input}
+            style={FormStyles.input}
             keyboardType="numeric"
             maxLength={1}
             onChangeText={(childrenNumber) => {

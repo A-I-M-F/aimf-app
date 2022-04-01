@@ -6,12 +6,11 @@ import Tooltip from 'react-native-walkthrough-tooltip';
 import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
 import FormStyles from '../css/Form.css';
 import {isCorrectPassword} from '../Utils/ValidatorFunctions';
-import {textColor1} from '../Utils/colors';
+import {mainColor2Button, textColor1} from '../Utils/colors';
 
 const RenderPassword = ({
   label,
   value,
-  required,
   checkPassword,
   onChange,
   keyboardType,
@@ -57,12 +56,12 @@ const RenderPassword = ({
             placement="top"
             onClose={() => setToolTipVisible(false)}>
             <TouchableHighlight onPress={() => setToolTipVisible(true)}>
-              <Text style={{backgroundColor: '#fce3ba', fontSize: 0}}>
+              <Text style={{backgroundColor: 'transparent', fontSize: 0}}>
                 {' '}
                 <Icon
-                  style={{fontSize: 16}}
-                  name="infocirlce"
-                  type="AntDesign"
+                  style={{fontSize: 19, color: mainColor2Button}}
+                  name="information-circle-outline"
+                  type="Ionicons"
                 />
               </Text>
             </TouchableHighlight>
@@ -100,12 +99,23 @@ const RenderPassword = ({
           autoCapitalize="none"
         />
         {value && value.length > 0 ? (
-          <Text
+          <Icon
             onPress={() => setSecureTextEntry(!secureTextEntry)}
-            style={{color: '#cb8347'}}>
-            {!secureTextEntry ? 'Masquer' : 'Afficher'}
-          </Text>
-        ) : null}
+            type="AntDesign"
+            name={secureTextEntry ? 'eye' : 'eyeo'}
+            style={{
+              color: mainColor2Button,
+              marginBottom: -3,
+              fontSize: 18,
+              marginLeft: -35,
+            }}
+          />
+        ) : // <Text
+        //   onPress={() => setSecureTextEntry(!secureTextEntry)}
+        //   style={{color: '#cb8347'}}>
+        //   {!secureTextEntry ? 'Masquer' : 'Afficher'}
+        // </Text>
+        null}
       </Item>
     </>
   );

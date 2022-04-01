@@ -55,7 +55,11 @@ const RenderInput = ({
         {value && checkFunction !== undefined && value.length > 0 ? (
           <Icon
             name={checkFunction(value) ? 'checkmark-circle' : 'close-circle'}
-            style={checkFunction(value) ? styles.green : styles.red}
+            style={
+              checkFunction(value)
+                ? {...styles.green, marginLeft: -40}
+                : {...styles.red, marginLeft: -40}
+            }
           />
         ) : null}
       </Item>
