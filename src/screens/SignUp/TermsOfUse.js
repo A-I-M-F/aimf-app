@@ -1,7 +1,6 @@
 import {ScrollView, Text, View, useWindowDimensions} from 'react-native';
 import React, {useEffect} from 'react';
-import {Button, Icon} from 'native-base';
-import {Text as ElementText} from 'react-native-elements';
+import {Button} from 'native-base';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import RenderHtml from 'react-native-render-html';

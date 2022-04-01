@@ -55,10 +55,10 @@ export const formatDateWithDayAndMonthName = (apiDate) => {
 };
 
 export const getFullName = ({lastName, firstName}) => {
-  return lastName && firstName
-    ? `${lastName.toUpperCase()} ${firstName
+  return lastName || firstName
+    ? `${lastName?.toUpperCase()} ${firstName
         .charAt(0)
-        .toUpperCase()}${firstName.slice(1).toLowerCase()}`
+        .toUpperCase()}${firstName?.slice(1).toLowerCase()}`
     : '';
 };
 

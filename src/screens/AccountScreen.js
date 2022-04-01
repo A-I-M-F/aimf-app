@@ -24,6 +24,7 @@ import {
 import Loader from '../Components/Loader';
 import styles from '../css/AccountScreen.css.js';
 import InformationModal from '../Components/InformationModal';
+import {textColor1, textColor2} from '../Utils/colors';
 
 class AccountScreen extends Component {
   static navigationOptions = {
@@ -160,11 +161,11 @@ class AccountScreen extends Component {
   renderActivateAccountBtn() {
     return (
       <View style={styles.activateAccContainer}>
-        <Text>
+        <Text style={{color: textColor2}}>
           <Icon
             type="FontAwesome5"
             name="exclamation"
-            style={{fontSize: 17, color: '#000'}}
+            style={{fontSize: 17, color: textColor2}}
           />
           {` ${ACCOUNT_STR.your_account_is_not_activated_yet}`}
         </Text>

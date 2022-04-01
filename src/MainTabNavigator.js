@@ -20,6 +20,9 @@ import BookReservation from './screens/LibraryScreen/BookReservation';
 import MyReservations from './screens/LibraryScreen/MyReservations';
 import BookFavoriteList from './screens/LibraryScreen/BookFavoriteList';
 import {mainColor} from './Utils/colors';
+import HomeIcon from './Components/icons/navbar/HomeIcon';
+import LiveBroadcastIcon from './Components/icons/navbar/LiveBroadcastIcon';
+import UserIcon from './Components/icons/navbar/UserIcon';
 
 const CustomIcon = createIconSetFromIcoMoon(icoMoonConfig);
 // ----------------------------------------------HomeScreen-----------------------------------------------------
@@ -29,7 +32,11 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Accueil',
-  tabBarIcon: () => <CustomIcon name="minaret" size={25} color="#000" />,
+  tabBarActiveTintColor: mainColor,
+  tabBarStyle: {
+    backgroundColor: mainColor,
+  },
+  tabBarIcon: () => <HomeIcon />,
 };
 
 const disableHomeStack = createStackNavigator({
@@ -39,7 +46,7 @@ const disableHomeStack = createStackNavigator({
 disableHomeStack.navigationOptions = {
   tabBarLabel: 'Accueil',
   tabBarIcon: () => (
-    <CustomIcon style={{opacity: 0.5}} name="minaret" size={25} color="#000" />
+    <HomeIcon /> // todo change disabled style
   ),
 };
 
@@ -157,22 +164,22 @@ const YouTubeStack = createStackNavigator({
   YouTube: YouTubeScreen,
 });
 
-const YouTubeStackTabBarIcon = ({focused}) => (
-  <Icon
-    type="SimpleLineIcons"
-    name="social-youtube"
-    style={{fontSize: 30, marginBottom: -3}}
-    color={focused ? mainColor : '#ccc'}
-  />
-);
-
-YouTubeStackTabBarIcon.propTypes = {
-  focused: PropTypes.string.isRequired,
-};
+// const YouTubeStackTabBarIcon = ({focused}) => (
+//   <Icon
+//     type="SimpleLineIcons"
+//     name="social-youtube"
+//     style={{fontSize: 30, marginBottom: -3}}
+//     color={focused ? mainColor : '#ccc'}
+//   />
+// );
+//
+// YouTubeStackTabBarIcon.propTypes = {
+//   focused: PropTypes.string.isRequired,
+// };
 
 YouTubeStack.navigationOptions = {
   tabBarLabel: 'Direct',
-  tabBarIcon: YouTubeStackTabBarIcon,
+  tabBarIcon: () => <LiveBroadcastIcon />,
 };
 
 const disableYouTubeStack = createStackNavigator({
@@ -196,22 +203,22 @@ const AccountStack = createStackNavigator({
   Account: AccountScreen,
 });
 
-const AccountStackTabBarIcon = ({focused}) => (
-  <Icon
-    type="EvilIcons"
-    name="user"
-    color={focused ? mainColor : '#ccc'}
-    style={{fontSize: 35, marginBottom: -3}}
-  />
-);
-
-AccountStackTabBarIcon.propTypes = {
-  focused: PropTypes.string.isRequired,
-};
+// const AccountStackTabBarIcon = ({focused}) => (
+//   <Icon
+//     type="EvilIcons"
+//     name="user"
+//     color={focused ? mainColor : '#ccc'}
+//     style={{fontSize: 35, marginBottom: -3}}
+//   />
+// );
+//
+// AccountStackTabBarIcon.propTypes = {
+//   focused: PropTypes.string.isRequired,
+// };
 
 AccountStack.navigationOptions = {
   tabBarLabel: 'Compte',
-  tabBarIcon: AccountStackTabBarIcon,
+  tabBarIcon: () => <UserIcon />,
 };
 
 // ----------------------------------------------UserScreen-----------------------------------------------------

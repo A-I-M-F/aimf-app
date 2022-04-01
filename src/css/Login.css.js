@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {mainColor3Button} from '../Utils/colors';
+import {mainColorButton} from '../Utils/colors';
 
 const styles = StyleSheet.create({
   bodyWrapper: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 150,
     borderRadius: 10,
-    backgroundColor: mainColor3Button,
+    backgroundColor: mainColorButton,
   },
   nextButtonText: {
     fontSize: 18,

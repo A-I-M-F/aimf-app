@@ -3,7 +3,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Svg, {G, Path} from 'react-native-svg';
 import styles from '../css/SplashScreen.css';
 
-const SplashScreen = ({}) => {
+const SplashScreen = () => {
   const renderLogo = () => {
     return (
       <Svg

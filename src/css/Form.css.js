@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {mainColor3Button, textColor1} from '../Utils/colors';
+import {mainColorButton, textColor1} from '../Utils/colors';
 
 const FormStyles = StyleSheet.create({
   inputItem: {
@@ -24,7 +24,7 @@ const FormStyles = StyleSheet.create({
     fontSize: 15,
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: mainColor3Button,
+    borderColor: mainColorButton,
     paddingVertical: 10,
     paddingLeft: 20,
     paddingRight: 20,
@@ -42,7 +42,7 @@ const FormStyles = StyleSheet.create({
     height: 58,
     fontSize: 20,
     borderRadius: 10,
-    backgroundColor: mainColor3Button,
+    backgroundColor: mainColorButton,
   },
   datePicker: {
     width: '100%',

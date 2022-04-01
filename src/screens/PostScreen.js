@@ -19,6 +19,8 @@ import RenderInput from '../Components/RenderInput';
 import DatePicker from '../Components/DatePicker';
 import SelectAssociation from '../Components/SelectAssociation';
 import {isAdmin, isSuperAdmin} from '../Utils/Account';
+import {mainColor2Button, mainColorButton} from '../Utils/colors';
+import FormStyles from '../css/Form.css';
 
 class PostScreen extends Component {
   static navigationOptions = {
@@ -174,10 +176,10 @@ class PostScreen extends Component {
             defaultDate={expiredAt && moment(expiredAt).toDate()}
             onCustomChange={(date) => this.setDate(date)}
           />
-          <Label style={styles.label}>Message*</Label>
+          <Label style={FormStyles.label}>Message*</Label>
           <Item rounded style={styles.textItem}>
             <TextInput
-              style={styles.textInput}
+              style={{...styles.textInput}}
               textAlignVertical="top"
               autoCapitalize="sentences"
               multiline
@@ -198,7 +200,7 @@ class PostScreen extends Component {
               buttonStyle={{
                 ...styles.spinnerButton,
                 marginRight: 20,
-                backgroundColor: '#f6a351',
+                backgroundColor: mainColorButton,
               }}
               onPress={() => this.savePost(DRAFT_ARTICLE_STATUS)}
               indicatorCount={10}
@@ -213,7 +215,7 @@ class PostScreen extends Component {
               // eslint-disable-next-line react-native/no-inline-styles
               buttonStyle={{
                 ...styles.spinnerButton,
-                backgroundColor: '#cb8347',
+                backgroundColor: mainColor2Button,
               }}
               onPress={() => this.savePost(PUBLISHED_ARTICLE_STATUS)}
               indicatorCount={10}

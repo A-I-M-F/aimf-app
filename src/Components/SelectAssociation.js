@@ -7,6 +7,7 @@ import {API_BASE_URL} from 'react-native-dotenv';
 import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
 import {receiveAssociationData} from '../store/reducers/associationRedux';
 import DropDownPicker from './DropDownPicker';
+import FormStyles from '../css/Form.css';
 
 const styles = StyleSheet.create({
   label: {
@@ -44,7 +45,7 @@ class SelectAssociation extends Component {
       <>
         {!this.props.loading && (
           <>
-            <Label style={styles.label}>Association*</Label>
+            <Label style={FormStyles.label}>Association*</Label>
             <DropDownPicker
               items={this.props.associationList}
               labelField="name"
@@ -52,7 +53,7 @@ class SelectAssociation extends Component {
               activeLabelStyle={styles.activeLabelStyle}
               defaultValue={this.props.selectedAssociationId}
               containerStyle={styles.dropDownPickerContainerStyle}
-              style={{backgroundColor: '#fafafa'}}
+              style={FormStyles.input}
               itemStyle={{
                 justifyContent: 'flex-start',
               }}

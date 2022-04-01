@@ -14,6 +14,9 @@ import {
 } from '../../Utils/Constants';
 import {isAuthorized} from '../../Utils/Account';
 import InformationModal from '../../Components/InformationModal';
+import FormStyles from '../../css/Form.css';
+import {mainColor} from '../../Utils/colors';
+import UserAvatarIcon from '../../Components/icons/placeholders/UserAvatarIcon';
 
 class ShowAccount extends Component {
   static navigationOptions = {
@@ -50,16 +53,20 @@ class ShowAccount extends Component {
     return (
       <View
         style={{...styles.container, opacity: this.props.scrollViewOpacity}}>
-        <Text style={styles.myAccountText}>Mon compte</Text>
-        <Image style={styles.logo} source={icon} />
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        <UserAvatarIcon size={170} />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            marginTop: 15,
+          }}>
           <Text style={styles.fullnameText}>{this.props.fullName}</Text>
           <Button
             transparent
             onPress={() => {
               this.props.updateAction(UPDATE_ACCOUNT_ACTION);
             }}
-            style={{alignSelf: 'center', borderRadius: 30, paddingBottom: 15}}>
+            style={{borderRadius: 30, paddingBottom: 15}}>
             <Icon name="edit" type="AntDesign" style={styles.updateIcon} />
           </Button>
         </View>
@@ -74,18 +81,21 @@ class ShowAccount extends Component {
           rounded
           danger
           onPress={this.props.logout}
-          style={styles.logoutButton}>
+          style={{
+            ...FormStyles.spinnerButton,
+            alignSelf: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+          }}>
           <Text>Déconnexion</Text>
         </Button>
         <TouchableOpacity onPress={() => this.showDeleteConfirmation(true)}>
           <Text
             style={{
-              marginTop: 25,
+              ...FormStyles.linkedBtn,
+              color: mainColor,
               textAlign: 'center',
-              color: '#6a0000',
-              opacity: 0.7,
-              textDecorationLine: 'underline',
-              fontSize: 13,
+              marginTop: 18,
             }}>
             Supprimer mon compte
           </Text>

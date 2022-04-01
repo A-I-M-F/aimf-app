@@ -12,7 +12,6 @@ import YouTube from 'react-native-youtube';
 import {Button, Thumbnail} from 'native-base';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../css/YouTubeScreen.css.js';
 import {
   getLiveVideo,
@@ -22,7 +21,9 @@ import {
 import Loader from '../Components/Loader';
 import {LIVE_VIDEO_STR} from '../Utils/Constants';
 import InformationModal from '../Components/InformationModal';
-import {white} from '../Utils/colors';
+import NoVideoIcon from '../Components/icons/placeholders/NoVideoIcon';
+import Template from '../css/Template.css';
+import LiveBroadcastIcon from '../Components/icons/navbar/LiveBroadcastIcon';
 import {isAdmin, isSuperAdmin} from '../Utils/Account';
 
 class YouTubeScreen extends Component {
@@ -59,7 +60,7 @@ class YouTubeScreen extends Component {
           ref={this.youTubeRef}
           apiKey="apiKey"
           videoId={this.props.video.youtube_id}
-          play={false}
+          play
           loop={false}
           fullscreen={false}
           controls={1}
@@ -98,6 +99,66 @@ class YouTubeScreen extends Component {
     );
   }
 
+  renderVideoSimpleContainer() {
+    return (
+      <ScrollView style={styles.container}>
+        <Text
+          style={{
+            ...Template.pageTitle,
+            alignSelf: 'flex-start',
+            marginLeft: 10,
+            marginBottom: 5,
+          }}>
+          Diffusion en cours
+        </Text>
+        <YouTube
+          resumePlayAndroid={false}
+          ref={this.youTubeRef}
+          apiKey="apiKey"
+          videoId={this.props.video.youtube_id}
+          play={false}
+          loop={false}
+          fullscreen={false}
+          controls={1}
+          style={[
+            {
+              height: PixelRatio.roundToNearestPixel(
+                this.state.playerWidth / (16 / 9),
+              ),
+            },
+            styles.player,
+          ]}
+        />
+        <View
+          style={{
+            marginLeft: 25,
+            marginTop: 10,
+          }}>
+          <Text style={styles.dateTitleText}>
+            {new Date().toLocaleDateString('fr-FR')}
+          </Text>
+        </View>
+        <View
+          style={{
+            margin: 25,
+            marginTop: 7,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <View style={{width: '98%'}}>
+            <Text style={styles.videoTitle}>{this.props?.video?.title}</Text>
+          </View>
+        </View>
+        <View
+          style={{
+            margin: 25,
+          }}>
+          <Text style={styles.videoDesc}>{this.props?.video?.description}</Text>
+        </View>
+      </ScrollView>
+    );
+  }
+
   renderAdminButton() {
     return (
       <SafeAreaView style={styles.topHeader}>
@@ -112,7 +173,7 @@ class YouTubeScreen extends Component {
             });
           }}
           style={styles.topHeaderBtn}>
-          <Icon type="SimpleLineIcons" name="refresh" color={white} size={22} />
+          <LiveBroadcastIcon size={23} />
           <Text style={styles.navigationText}>
             {this.props.isLive &&
             this.props.video?.isLive &&
@@ -134,9 +195,17 @@ class YouTubeScreen extends Component {
         }}>
         {!this.props.loading && (
           <>
-            <Text style={styles.noneLiveText}>Aucun live en cours</Text>
-            <Thumbnail large style={styles.noneLiveLogo} source={logo} />
-            <Text style={styles.noneLiveLogoText}>Tamejida 47</Text>
+            <NoVideoIcon size={45} />
+            <Text
+              style={{
+                ...Template.pageTitle,
+                marginTop: 30,
+                marginLeft: 30,
+                marginRight: 20,
+                textAlign: 'center',
+              }}>
+              Il y a pas de diffusion en cours
+            </Text>
           </>
         )}
         <Loader visible={!!this.props.loading} />
@@ -204,7 +273,7 @@ class YouTubeScreen extends Component {
         {!this.props.loading &&
         this.props?.video?.youtube_id &&
         this.props?.video?.isLive
-          ? this.renderVideoContainer(logo)
+          ? this.renderVideoSimpleContainer(logo)
           : this.renderNoLivePlaceholder(logo)}
         {this.renderStartLiveModal()}
         {this.renderCloseLiveModal()}
