@@ -3,13 +3,13 @@ import {
   backgroundColor,
   mainColor,
   textColor1,
-  textColor2,
 } from '../Utils/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
