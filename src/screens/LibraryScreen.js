@@ -18,6 +18,7 @@ import HeartIcon from '../Components/icons/HeartIcon';
 import IconForms from '../Components/icons/IconForms';
 import {OCalendarIcon} from '../Components/icons/CalendarIcon';
 import {backgroundColor} from '../Utils/colors';
+import MainHeader from '../Components/MainHeader';
 
 const styles = StyleSheet.create({
   topButtonContainer: {
@@ -195,6 +196,7 @@ const LibraryScreen = ({
 
   return (
     <>
+      <MainHeader />
       {canReserveBook(account.user) && (
         <View
           style={{

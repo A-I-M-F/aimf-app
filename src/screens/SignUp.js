@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getIsoDate} from '../Utils/Functions';
+import {getIsoDate} from '../Utils/DateUtils';
 import Loader from '../Components/Loader';
 import ErrorModal from '../Components/ErrorModal';
 import {CREATE_ACCOUNT_ACTION, SHOW_CONDITION_ACTION} from '../Utils/Constants';

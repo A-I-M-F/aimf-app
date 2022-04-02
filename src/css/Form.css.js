@@ -50,6 +50,13 @@ const FormStyles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
+  item: {
+    color: textColor1,
+  },
+  itemIcon: {
+    fontSize: 10,
+    color: textColor1,
+  },
 });
 
 export default FormStyles;

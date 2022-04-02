@@ -18,30 +18,44 @@ import {
   receiveUserAssociationData,
   receiveAssociationData,
 } from '../store/reducers/associationRedux';
-import {white, black, backgroundColor} from '../Utils/colors';
+import {
+  white,
+  black,
+  backgroundColor,
+  textColor1,
+  mainColorButton,
+  gray4,
+} from '../Utils/colors';
 
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    paddingHorizontal: 14,
+    justifyContent: 'space-between',
+    marginTop: 15,
+    marginBottom: 15,
+  },
   activeAssociation: {
     height: 140,
     width: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#cb8347',
+    backgroundColor: mainColorButton,
     borderRadius: 10,
     marginRight: 14,
     borderWidth: 0.5,
-    borderColor: '#dddddd',
+    borderColor: gray4,
   },
   noActiveAssociation: {
     height: 140,
     width: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#e9ecef',
+    backgroundColor: gray4,
     borderRadius: 10,
     marginRight: 14,
     borderWidth: 0.5,
-    borderColor: '#57a1bf',
+    borderColor: gray4,
   },
   selAllIconbg: {
     width: 70,
@@ -63,18 +77,26 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   title: {
-    marginTop: 20,
     fontSize: 30,
     fontWeight: 'bold',
-    fontFamily: 'Magra-Bold',
+    fontFamily: 'Helvetica Neue',
     letterSpacing: 0,
-    color: '#9F9F9F',
+    color: textColor1,
     opacity: 1,
-    // letter-spacing: var(--unnamed-character-spacing-0);
-    // color: var(--unnamed-color-9f9f9f);
-    // text-align: left;
-    // font: normal normal bold 30px/34px Helvetica Neue;
-    // letter-spacing: 0px;
+  },
+  animatedView: {
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingHorizontal: 14,
+  },
+  navicon1: {
+    alignSelf: 'center',
+    marginTop: 5,
+    transform: [{rotate: '90deg'}],
+  },
+  navicon2: {
+    alignSelf: 'center',
+    marginTop: 5,
   },
 });
 
@@ -147,40 +169,34 @@ class AssociationMenu extends Component {
     const {hideMenu} = this.state;
     return (
       <View style={{backgroundColor}}>
-        <View style={{flexDirection: 'row', paddingHorizontal: 14}}>
+        <View style={styles.header}>
           <View>
-            <Text style={styles.title}>Bienvenue, </Text>
-            <Text style={{fontSize: 22, fontWeight: '500', opacity: 0.6}} />
+            <Text style={styles.title}>Bienvenue</Text>
           </View>
-          <View style={{position: 'absolute', right: 20, bottom: 5}}>
+          <View>
             {hideMenu ? (
               <TouchableOpacity onPress={() => this.hide()}>
                 <Icon
-                  name="angle-double-down"
-                  color={black}
+                  name="navicon"
+                  color={textColor1}
                   size={28}
-                  style={{alignSelf: 'center'}}
+                  style={styles.navicon1}
                 />
               </TouchableOpacity>
             ) : (
               <TouchableOpacity onPress={() => this.show()}>
                 <Icon
-                  name="angle-double-right"
-                  color={black}
+                  name="navicon"
+                  color={textColor1}
                   size={28}
-                  style={{alignSelf: 'center'}}
+                  style={styles.navicon2}
                 />
               </TouchableOpacity>
             )}
           </View>
         </View>
         <Animated.View style={{height: this.state.fadeAnim}}>
-          <View
-            style={{
-              flexDirection: 'row',
-              paddingTop: 10,
-              paddingHorizontal: 14,
-            }}>
+          <View style={styles.animatedView}>
             <FlatList
               data={associationList}
               keyExtractor={(item) => `${item.id}`}

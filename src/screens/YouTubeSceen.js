@@ -25,6 +25,8 @@ import NoVideoIcon from '../Components/icons/placeholders/NoVideoIcon';
 import Template from '../css/Template.css';
 import LiveBroadcastIcon from '../Components/icons/navbar/LiveBroadcastIcon';
 import {isAdmin, isSuperAdmin} from '../Utils/Account';
+import MainHeader from '../Components/MainHeader';
+import {getIsoDate, getLogFrDate} from '../Utils/DateUtils';
 
 class YouTubeScreen extends Component {
   static navigationOptions = {
@@ -136,7 +138,7 @@ class YouTubeScreen extends Component {
             marginTop: 10,
           }}>
           <Text style={styles.dateTitleText}>
-            {new Date().toLocaleDateString('fr-FR')}
+            {getLogFrDate(getIsoDate(new Date()))}
           </Text>
         </View>
         <View
@@ -269,6 +271,7 @@ class YouTubeScreen extends Component {
     // const logo = require('../../assets/images/tamejida_47.jpg');
     return (
       <>
+        <MainHeader />
         {(isSuperAdmin(this.props.user) || isAdmin(this.props.user)) &&
           this.renderAdminButton()}
         {!this.props.loading &&

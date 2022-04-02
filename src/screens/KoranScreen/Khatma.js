@@ -20,7 +20,7 @@ import {
   saveUserReads,
   updateKhatma,
 } from '../../store/reducers/khatmaRedux';
-import {formatDateWithDayAndMonthName} from '../../Utils/Functions';
+import {formatDateWithDayAndMonthName} from '../../Utils/DateUtils';
 import {black, orange2, backgroundColor} from '../../Utils/colors';
 import {
   isAdmin,

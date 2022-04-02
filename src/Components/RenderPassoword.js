@@ -31,7 +31,9 @@ const RenderPassword = ({
             isVisible={toolTipVisible}
             content={
               <>
-                <Text>Le mot de passe doit contenir :</Text>
+                <Text style={FormStyles.item}>
+                  Le mot de passe doit contenir :
+                </Text>
                 <FlatList
                   data={[
                     {key: 'Au minimum 8 caractères'},
@@ -45,7 +47,7 @@ const RenderPassword = ({
                       <Icon
                         name="controller-record"
                         type="Entypo"
-                        style={{fontSize: 10}}
+                        style={FormStyles.itemIcon}
                       />
                       {item.key}
                     </Text>
@@ -57,7 +59,6 @@ const RenderPassword = ({
             onClose={() => setToolTipVisible(false)}>
             <TouchableHighlight onPress={() => setToolTipVisible(true)}>
               <Text style={{backgroundColor: 'transparent', fontSize: 0}}>
-                {' '}
                 <Icon
                   style={{fontSize: 19, color: mainColor2Button}}
                   name="information-circle-outline"
@@ -110,12 +111,7 @@ const RenderPassword = ({
               marginLeft: -35,
             }}
           />
-        ) : // <Text
-        //   onPress={() => setSecureTextEntry(!secureTextEntry)}
-        //   style={{color: '#cb8347'}}>
-        //   {!secureTextEntry ? 'Masquer' : 'Afficher'}
-        // </Text>
-        null}
+        ) : null}
       </Item>
     </>
   );

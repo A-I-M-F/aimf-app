@@ -21,6 +21,7 @@ import SelectAssociation from '../Components/SelectAssociation';
 import {isAdmin, isSuperAdmin} from '../Utils/Account';
 import {mainColor2Button, mainColorButton} from '../Utils/colors';
 import FormStyles from '../css/Form.css';
+import MainHeader from '../Components/MainHeader';
 
 class PostScreen extends Component {
   static navigationOptions = {
@@ -147,6 +148,7 @@ class PostScreen extends Component {
 
     return (
       <>
+        <MainHeader />
         <ScrollView
           // eslint-disable-next-line react-native/no-inline-styles
           style={{
@@ -179,7 +181,8 @@ class PostScreen extends Component {
           <Label style={FormStyles.label}>Message*</Label>
           <Item rounded style={styles.textItem}>
             <TextInput
-              style={{...styles.textInput}}
+              selectable
+              style={styles.textInput}
               textAlignVertical="top"
               autoCapitalize="sentences"
               multiline

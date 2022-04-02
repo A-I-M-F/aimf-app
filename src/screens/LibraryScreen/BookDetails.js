@@ -20,7 +20,7 @@ import {
   addToFavoritesRequest,
   getBooks,
 } from '../../store/reducers/bookRedux';
-import {isoDateToFr} from '../../Utils/Functions';
+import {isoDateToFr} from '../../Utils/DateUtils';
 import {
   backgroundColor,
   failColor,

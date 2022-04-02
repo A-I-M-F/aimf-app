@@ -28,14 +28,13 @@ import getRandomQuestionIndex from './AccountForm/Functions';
 import ActionsButton from './AccountForm/ActionsButton';
 import ChildrenInformation from './AccountForm/ChildrenInformation';
 import RenderInput from './RenderInput';
-import ImageRadioButton from './ImageRadioButton';
 import TextRadioButton from './TextRadioButton';
 import DatePicker from './DatePicker';
 import RenderPassword from './RenderPassoword';
 import {backgroundColor, mainColor} from '../Utils/colors';
 import Template from '../css/Template.css';
-import FormStyles from '../css/Form.css';
 import BackArrowIcon from './icons/BackArrowIcon';
+import FormStyles from '../css/Form.css';
 
 export default class AccountForm extends Component {
   constructor(props) {
@@ -231,7 +230,11 @@ export default class AccountForm extends Component {
               <BackArrowIcon />
             </Button>
           </View>
-          <Label style={Template.pageTitle}>Création de Compte</Label>
+          <Label style={Template.pageTitle}>
+            {this.props.action === UPDATE_ACCOUNT_ACTION
+              ? 'Mes informations'
+              : 'Création de Compte'}{' '}
+          </Label>
 
           {/* <ImageRadioButton */}
           {/*  options={genderOptions} */}

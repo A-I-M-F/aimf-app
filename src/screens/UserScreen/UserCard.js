@@ -12,7 +12,7 @@ import {
 import {View} from 'react-native';
 import * as PropTypes from 'prop-types';
 import {FEMALE_GENDER} from '../../Utils/Constants';
-import {getFullName} from '../../Utils/Functions';
+import {getFullName} from '../../Utils/Fonctions';
 import {
   getUserAssociationRoleId,
   isAdmin,

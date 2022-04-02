@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types';
 import {Button, Icon} from 'native-base';
 import ShowAccount from './AccountScreen/ShowAccount';
 import AccountForm from '../Components/AccountForm';
-import {getFullName, getIsoDate} from '../Utils/Functions';
+import {getFullName, getIsoDate} from '../Utils/Fonctions';
 import {
   ACCOUNT_STR,
   SHOW_ACCOUNT_ACTION,
@@ -24,7 +24,8 @@ import {
 import Loader from '../Components/Loader';
 import styles from '../css/AccountScreen.css.js';
 import InformationModal from '../Components/InformationModal';
-import {mainColor2Button, textColor2} from '../Utils/colors';
+import {textColor2} from '../Utils/colors';
+import MainHeader from '../Components/MainHeader';
 
 class AccountScreen extends Component {
   static navigationOptions = {
@@ -192,6 +193,7 @@ class AccountScreen extends Component {
     if (this.state.email) {
       return (
         <>
+          <MainHeader />
           {this.props.action === SHOW_ACCOUNT_ACTION ? (
             <ShowAccount
               scrollViewOpacity={

@@ -21,7 +21,7 @@ import {
   isAuthorized,
   isSuperAdmin,
 } from '../../Utils/Account';
-import {isoDateToFr} from '../../Utils/Functions';
+import {isoDateToFr} from '../../Utils/DateUtils';
 import InformationModal from '../../Components/InformationModal';
 import {getAssociationRoleName} from '../../Utils/Role';
 import BackArrowIcon from '../../Components/icons/BackArrowIcon';

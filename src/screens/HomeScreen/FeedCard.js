@@ -15,6 +15,7 @@ import {connect} from 'react-redux';
 import ParsedText from 'react-native-parsed-text';
 import {deleteArticle} from '../../store/reducers/articlesRedux';
 import {isAdmin} from '../../Utils/Account';
+import {textColor1} from '../../Utils/colors';
 
 const ANIM_INIT_OFFSET = 0;
 const styles = StyleSheet.create({
@@ -31,10 +32,7 @@ const styles = StyleSheet.create({
   email: {
     textDecorationLine: 'underline',
   },
-  text: {
-    color: 'black',
-    fontSize: 15,
-  },
+
   phone: {
     color: 'blue',
     textDecorationLine: 'underline',
@@ -53,6 +51,67 @@ const styles = StyleSheet.create({
   hashTag: {
     fontStyle: 'italic',
   },
+  aritcleTitle: {
+    marginTop: -18,
+    marginBottom: 9,
+    fontWeight: 'bold',
+    color: '#777676',
+    fontSize: 18,
+  },
+  associationName: {
+    marginTop: 10,
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: '#777676',
+  },
+  date: {
+    color: '#777676',
+    fontSize: 15,
+  },
+  description: {
+    color: '#777676',
+    fontSize: 18,
+    flexDirection: 'column',
+  },
+  readFlow: {fontWeight: 'bold', color: '#777676', fontSize: 17},
+
+  deleteArticleMenu: {
+    backgroundColor: 'white',
+    borderRadius: 50,
+    padding: 4,
+    elevation: 5,
+    width: 35,
+    height: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  card: {
+    width: '74%',
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 17,
+    borderRadius: 9,
+    paddingEnd: 5,
+    paddingBottom: 6,
+    elevation: 5,
+  },
+  cardItem: {
+    borderRadius: 15,
+    backgroundColor: '#FAFAFA',
+  },
+  cardItemLeftView: {
+    justifyContent: 'center',
+    flexDirection: 'column',
+  },
+  adminView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  bodyView: {flexDirection: 'row'},
+  adminButton: {padding: 5},
+  header: {flex: 9},
 });
 
 const handleUrlPress = (url) => {
@@ -93,6 +152,7 @@ const FeedCard = ({
   description,
 }) => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [completeText, setCompleteText] = useState(description.length <= 10);
   const [animeY] = useState(new Animated.Value(ANIM_INIT_OFFSET));
   const [animeOpacity] = useState(new Animated.Value(0));
 
@@ -111,7 +171,39 @@ const FeedCard = ({
       }),
     ]).start();
   };
-
+  const renderDescription = (value) => {
+    return (
+      <>
+        <ParsedText
+          parse={[
+            {
+              type: 'url',
+              style: styles.url,
+              onPress: (url) => handleUrlPress(url),
+            },
+            {
+              type: 'phone',
+              style: styles.phone,
+              onPress: (phone) => handlePhonePress(phone),
+            },
+            {
+              type: 'email',
+              style: styles.email,
+              onPress: (email) => handleEmailPress(email),
+            },
+          ]}
+          childrenProps={{allowFontScaling: false}}>
+          {completeText ? value : value.slice(0, 500)}
+          {!completeText && '...'}
+        </ParsedText>
+        {!completeText && (
+          <Text onPress={() => setCompleteText(true)} style={styles.readFlow}>
+            Lire la suite
+          </Text>
+        )}
+      </>
+    );
+  };
   const handleDeleteArticle = () => {
     Alert.alert(
       'Confirmation',
@@ -149,16 +241,7 @@ const FeedCard = ({
         ]}>
         <TouchableOpacity
           onPress={!menuVisible ? null : () => handleDeleteArticle()}
-          style={{
-            backgroundColor: 'white',
-            borderRadius: 50,
-            padding: 4,
-            elevation: 5,
-            width: 35,
-            height: 35,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+          style={styles.deleteArticleMenu}>
           <Icon name="delete" color="red" />
         </TouchableOpacity>
       </Animated.View>
@@ -166,46 +249,36 @@ const FeedCard = ({
   };
 
   return (
-    <Card style={{width: '74%', marginLeft: 10, marginRight: 10}}>
-      <CardItem style={{backgroundColor}}>
+    <Card
+      style={{
+        ...styles.card,
+        backgroundColor,
+      }}>
+      <CardItem style={styles.cardItem}>
         <Left>
-          <View
-            style={{
-              justifyContent: 'center',
-              flexDirection: 'column',
-            }}>
+          <View style={styles.cardItemLeftView}>
             <Thumbnail
               source={{
                 uri: `${API_BASE_URL}/${logo}`,
               }}
             />
-            <Text
-              style={{fontSize: 10, marginRight: 'auto', marginLeft: 'auto'}}>
-              {associationName}
-            </Text>
           </View>
-
           <Body>
-            <View style={{flexDirection: 'row'}}>
-              <View style={{flex: 9}}>
-                <Text selectable>{title}</Text>
-                <Text note selectable>
+            <View style={styles.bodyView}>
+              <View style={styles.header}>
+                <Text selectable style={styles.associationName}>
+                  {associationName}
+                </Text>
+                <Text note selectable style={styles.date}>
                   {date}
                 </Text>
               </View>
               {isAdmin(user) && (
-                <View
-                  // eslint-disable-next-line react-native/no-inline-styles
-                  style={{
-                    flex: 1,
-                    flexDirection: 'column',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                  }}>
+                <View style={styles.adminView}>
                   <TouchableOpacity
-                    style={{padding: 5}}
+                    style={styles.adminButton}
                     onPress={() => showMenu()}>
-                    <Icon name="more-vert" type="material" />
+                    <Icon color={textColor1} name="more-vert" type="material" />
                   </TouchableOpacity>
                   {renderMenu()}
                 </View>
@@ -216,29 +289,11 @@ const FeedCard = ({
       </CardItem>
       <CardItem style={{backgroundColor}}>
         <Body>
-          <Text selectable>
-            <ParsedText
-              style={styles.text}
-              parse={[
-                {
-                  type: 'url',
-                  style: styles.url,
-                  onPress: (url) => handleUrlPress(url),
-                },
-                {
-                  type: 'phone',
-                  style: styles.phone,
-                  onPress: (phone) => handlePhonePress(phone),
-                },
-                {
-                  type: 'email',
-                  style: styles.email,
-                  onPress: (email) => handleEmailPress(email),
-                },
-              ]}
-              childrenProps={{allowFontScaling: false}}>
-              {description}
-            </ParsedText>
+          <ParsedText selectable style={styles.aritcleTitle}>
+            {title}
+          </ParsedText>
+          <Text style={styles.description} selectable>
+            {renderDescription(description)}
           </Text>
         </Body>
       </CardItem>

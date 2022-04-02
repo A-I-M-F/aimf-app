@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 0,
     backgroundColor,
+    marginEnd: 8,
   },
   hiddenItemeContainer: {
     // borderWidth: 1,

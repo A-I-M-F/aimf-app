@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, {Defs, G, Path, Stop} from 'react-native-svg';
+import Svg, {Defs, G, Path} from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
 
 const LogoColorWriting = () => {

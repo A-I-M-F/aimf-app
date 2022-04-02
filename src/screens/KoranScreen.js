@@ -13,7 +13,7 @@ import {
 import {Button} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
-import {formatDateWithDayAndMonthName} from '../Utils/Functions';
+import {formatDateWithDayAndMonthName} from '../Utils/DateUtils';
 import KoranItem from '../Components/KoranScreen/KoranItem';
 import AssociationMenu from '../Components/AssociationMenu';
 import {
@@ -26,6 +26,7 @@ import HistoryItem from '../Components/KoranScreen/HistoryItem';
 import {isAdmin, isSuperAdmin, isAssociationAdmin} from '../Utils/Account';
 import ErrorModal from '../Components/ErrorModal';
 import Loader from '../Components/Loader';
+import MainHeader from '../Components/MainHeader';
 
 YellowBox.ignoreWarnings([
   'VirtualizedLists should never be nested', // TODO: Remove when fixed
@@ -127,6 +128,7 @@ class KoranScreen extends Component {
 
     return (
       <SafeAreaView style={styles.container}>
+        <MainHeader />
         <AssociationMenu screenerTitle="Khatma" />
         <ScrollView scrollEventThrottle={16}>
           <View style={{flex: 1}}>

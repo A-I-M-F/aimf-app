@@ -5,7 +5,7 @@ const Template = StyleSheet.create({
   pageTitle: {
     color: textColor1,
     fontFamily: 'helvetica-neue',
-    fontSize: 35,
+    fontSize: 25,
     fontWeight: 'bold',
     margin: 'auto',
     alignSelf: 'center',

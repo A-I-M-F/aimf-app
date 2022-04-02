@@ -8,20 +8,22 @@ import {CREATE_ACCOUNT_ACTION} from '../../Utils/Constants';
 import {register} from '../../store/reducers/accountRedux';
 import {getTermsOfUse} from '../../store/reducers/authenticationRedux';
 import BackArrowIcon from '../../Components/icons/BackArrowIcon';
-
+import styles from '../../css/PostScreen.css';
+import {
+  mainColorButton,
+  backgroundColor,
+  textColor1,
+  textColor2,
+} from '../../Utils/colors';
+import SpinnerButton from 'react-native-spinner-button';
 const TermsOfUse = ({termsOfUse, getTermsOfUse, updateAction, updateState}) => {
   const {width} = useWindowDimensions();
   useEffect(() => getTermsOfUse(), []);
   const source = {html: termsOfUse && termsOfUse.content};
 
-  return (
-    <ScrollView
-      centerContent
-      style={{
-        padding: 20,
-        backgroundColor: '#fce3ba',
-      }}>
-      <View style={{width: 100, height: 100}}>
+  const renderBackButton = () => {
+    return (
+      <View style={{width: 100, height: 30, marginBottom: 40}}>
         <Button
           transparent
           onPress={() => updateAction(CREATE_ACCOUNT_ACTION)}
@@ -29,36 +31,44 @@ const TermsOfUse = ({termsOfUse, getTermsOfUse, updateAction, updateState}) => {
           <BackArrowIcon />
         </Button>
       </View>
-      <RenderHtml contentWidth={width} source={source} />
-      <View>
-        <Button
+    );
+  };
+
+  return (
+    <ScrollView
+      centerContent
+      style={{
+        padding: 20,
+        backgroundColor,
+      }}>
+      {renderBackButton()}
+      <RenderHtml
+        baseStyle={{color: textColor2}}
+        contentWidth={width}
+        source={source}
+      />
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+        <SpinnerButton
+          // eslint-disable-next-line react-native/no-inline-styles
+          buttonStyle={{
+            ...styles.spinnerButton,
+            backgroundColor: mainColorButton,
+          }}
           onPress={() => {
             updateState({readTermsOfUse: true});
             updateState({acceptTermsOfUse: true});
             updateAction(CREATE_ACCOUNT_ACTION);
           }}
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: 50,
-            width: 150,
-            borderRadius: 10,
-            backgroundColor: '#cb8347',
-            marginTop: 35,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}>
-          <Text style={{fontSize: 18, color: '#fff'}}>J&apos;accepte</Text>
-        </Button>
+          indicatorCount={10}
+          spinnerType="SkypeIndicator">
+          <Text style={styles.buttonText}>J'accepte</Text>
+        </SpinnerButton>
       </View>
-      <View style={{width: 100, height: 100}}>
-        <Button
-          transparent
-          onPress={() => updateAction(CREATE_ACCOUNT_ACTION)}
-          style={{borderRadius: 30, width: 50}}>
-          <Icon style={{color: '#000'}} name="md-arrow-back" type="Ionicons" />
-        </Button>
-      </View>
+      {renderBackButton()}
     </ScrollView>
   );
 };
