@@ -19,11 +19,31 @@ import BookDetails from './screens/LibraryScreen/BookDetails';
 import BookReservation from './screens/LibraryScreen/BookReservation';
 import MyReservations from './screens/LibraryScreen/MyReservations';
 import BookFavoriteList from './screens/LibraryScreen/BookFavoriteList';
-import {mainColor} from './Utils/colors';
+import {gray, mainColorButton, white} from './Utils/colors';
 import HomeIcon from './Components/icons/navbar/HomeIcon';
 import LiveBroadcastIcon from './Components/icons/navbar/LiveBroadcastIcon';
 import UserIcon from './Components/icons/navbar/UserIcon';
+import {StyleSheet, View} from 'react-native';
 
+const styles = StyleSheet.create({
+  icon: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: 45,
+    paddingBottom: 14,
+    marginBottom: -16,
+    borderBottomColor: white,
+  },
+});
+
+const tabBarOptions = {
+  pressOpacity: 0.2,
+  style: {
+    height: 60,
+    backgroundColor: mainColorButton,
+  },
+  showLabel: false,
+};
 const CustomIcon = createIconSetFromIcoMoon(icoMoonConfig);
 // ----------------------------------------------HomeScreen-----------------------------------------------------
 const HomeStack = createStackNavigator({
@@ -32,7 +52,15 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Accueil',
-  tabBarIcon: () => <HomeIcon />,
+  tabBarIcon: (tabBarIconProps) => (
+    <View
+      style={{
+        ...styles.icon,
+        borderBottomWidth: tabBarIconProps.focused ? 2.5 : 0,
+      }}>
+      <HomeIcon stroke={white} />
+    </View>
+  ),
 };
 
 const disableHomeStack = createStackNavigator({
@@ -42,7 +70,8 @@ const disableHomeStack = createStackNavigator({
 disableHomeStack.navigationOptions = {
   tabBarLabel: 'Accueil',
   tabBarIcon: () => (
-    <HomeIcon /> // todo change disabled style
+    <HomeIcon stroke={gray} />
+    // todo change disabled style
   ),
 };
 
@@ -51,12 +80,17 @@ const PostWorkflowStack = createStackNavigator({
   PostWorkflow: PostScreen,
 });
 const PostWorkflowStackTabBarIcon = ({focused}) => (
-  <Icon
-    type="AntDesign"
-    name="addfile"
-    style={{fontSize: 25, marginBottom: -3, color: mainColor}}
-    color={focused ? mainColor : '#ccc'}
-  />
+  <View
+    style={{
+      ...styles.icon,
+      borderBottomWidth: focused ? 2.5 : 0,
+    }}>
+    <Icon
+      type="AntDesign"
+      name="addfile"
+      style={{fontSize: 25, marginBottom: -3, color: white}}
+    />
+  </View>
 );
 PostWorkflowStackTabBarIcon.propTypes = {
   focused: PropTypes.string.isRequired,
@@ -89,7 +123,15 @@ const KoranStack = createStackNavigator({
 
 KoranStack.navigationOptions = {
   tabBarLabel: 'Khetma',
-  tabBarIcon: () => <CustomIcon name="coran" size={25} color={mainColor} />,
+  tabBarIcon: (tabBarIconProps) => (
+    <View
+      style={{
+        ...styles.icon,
+        borderBottomWidth: tabBarIconProps.focused ? 2.5 : 0,
+      }}>
+      <CustomIcon name="coran" size={25} color={white} />
+    </View>
+  ),
 };
 
 // const disableKoranStack = createStackNavigator({
@@ -124,12 +166,14 @@ const libraryStack = createStackNavigator({
 });
 
 const libraryStackTabBarIcon = ({focused}) => (
-  <Icon
-    type="FontAwesome"
-    name="book"
-    color={focused ? mainColor : '#ccc'}
-    style={{fontSize: 28, marginBottom: -3, color: mainColor}}
-  />
+  <View
+    style={{
+      ...styles.icon,
+      borderBottomWidth: focused ? 2.5 : 0,
+    }}>
+    {' '}
+    <Icon type="FontAwesome" name="book" color={white} />
+  </View>
 );
 libraryStackTabBarIcon.propTypes = {
   focused: PropTypes.string.isRequired,
@@ -175,7 +219,15 @@ const YouTubeStack = createStackNavigator({
 
 YouTubeStack.navigationOptions = {
   tabBarLabel: 'Direct',
-  tabBarIcon: () => <LiveBroadcastIcon />,
+  tabBarIcon: (tabBarIconProps) => (
+    <View
+      style={{
+        ...styles.icon,
+        borderBottomWidth: tabBarIconProps.focused ? 2.5 : 0,
+      }}>
+      <LiveBroadcastIcon stroke={white} />
+    </View>
+  ),
 };
 
 const disableYouTubeStack = createStackNavigator({
@@ -184,16 +236,35 @@ const disableYouTubeStack = createStackNavigator({
 
 disableYouTubeStack.navigationOptions = {
   tabBarLabel: 'Direct',
-  tabBarIcon: () => (
-    <Icon
-      type="SimpleLineIcons"
-      name="social-youtube"
-      style={{opacity: 0.5}}
-      color="#000"
-    />
-  ),
+  tabBarIcon: () => <LiveBroadcastIcon stroke={gray} />,
 };
 
+// ----------------------------------------------UserScreen-----------------------------------------------------
+
+const UserStack = createStackNavigator({
+  User: UserScreen,
+});
+
+const UserStackTabBarIcon = ({focused}) => (
+  <View
+    style={{
+      ...styles.icon,
+      borderBottomWidth: focused ? 2.5 : 0,
+    }}>
+    <Icon
+      type="AntDesign"
+      name="addusergroup"
+      style={{marginBottom: -3, fontSize: 28, color: white}}
+    />
+  </View>
+);
+UserStackTabBarIcon.propTypes = {
+  focused: PropTypes.string.isRequired,
+};
+UserStack.navigationOptions = {
+  tabBarLabel: 'User',
+  tabBarIcon: UserStackTabBarIcon,
+};
 // ----------------------------------------------AccountScreen-----------------------------------------------------
 const AccountStack = createStackNavigator({
   Account: AccountScreen,
@@ -214,29 +285,15 @@ const AccountStack = createStackNavigator({
 
 AccountStack.navigationOptions = {
   tabBarLabel: 'Compte',
-  tabBarIcon: () => <UserIcon />,
-};
-
-// ----------------------------------------------UserScreen-----------------------------------------------------
-
-const UserStack = createStackNavigator({
-  User: UserScreen,
-});
-
-const UserStackTabBarIcon = ({focused}) => (
-  <Icon
-    type="AntDesign"
-    name="addusergroup"
-    color={mainColor}
-    style={{marginBottom: -3, fontSize: 28, color: mainColor}}
-  />
-);
-UserStackTabBarIcon.propTypes = {
-  focused: PropTypes.string.isRequired,
-};
-UserStack.navigationOptions = {
-  tabBarLabel: 'User',
-  tabBarIcon: UserStackTabBarIcon,
+  tabBarIcon: (tabBarIconProps) => (
+    <View
+      style={{
+        ...styles.icon,
+        borderBottomWidth: tabBarIconProps.focused ? 2.5 : 0,
+      }}>
+      <UserIcon />
+    </View>
+  ),
 };
 
 // ----------------------------------------------Tab navigators-----------------------------------------------------
@@ -266,35 +323,51 @@ export const unActiveUserTabNavigator = createBottomTabNavigator(
       },
     },
     initialRouteName: 'AccountStack',
+    tabBarOptions,
   },
 );
 
-export const activeUserTabNavigator = createBottomTabNavigator({
-  HomeStack,
-  // todo enable this buttons on the 2.0 version
-  // KoranStack,
-  // libraryStack,
-  YouTubeStack,
-  AccountStack,
-});
+export const activeUserTabNavigator = createBottomTabNavigator(
+  {
+    HomeStack,
+    // todo enable this buttons on the 2.0 version
+    // KoranStack,
+    // libraryStack,
+    YouTubeStack,
+    AccountStack,
+  },
+  {
+    tabBarOptions,
+  },
+);
 
-export const adminUserTabNavigator = createBottomTabNavigator({
-  HomeStack,
-  // todo enable this buttons on the 2.0 version
-  // KoranStack,
-  // libraryStack,
-  PostWorkflowStack,
-  YouTubeStack,
-  UserStack,
-  AccountStack,
-});
+export const adminUserTabNavigator = createBottomTabNavigator(
+  {
+    HomeStack,
+    // todo enable this buttons on the 2.0 version
+    // KoranStack,
+    // libraryStack,
+    PostWorkflowStack,
+    YouTubeStack,
+    UserStack,
+    AccountStack,
+  },
+  {
+    tabBarOptions,
+  },
+);
 
-export const adminAssociationTabNavigator = createBottomTabNavigator({
-  HomeStack,
-  // todo enable this buttons on the 2.0 version
-  // KoranStack,
-  // libraryStack,
-  PostWorkflowStack,
-  YouTubeStack,
-  AccountStack,
-});
+export const adminAssociationTabNavigator = createBottomTabNavigator(
+  {
+    HomeStack,
+    // todo enable this buttons on the 2.0 version
+    // KoranStack,
+    // libraryStack,
+    PostWorkflowStack,
+    YouTubeStack,
+    AccountStack,
+  },
+  {
+    tabBarOptions,
+  },
+);

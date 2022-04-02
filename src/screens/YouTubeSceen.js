@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import YouTube from 'react-native-youtube';
 
-import {Button, Thumbnail} from 'native-base';
+import {Button} from 'native-base';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from '../css/YouTubeScreen.css.js';

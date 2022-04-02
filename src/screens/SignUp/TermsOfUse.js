@@ -10,12 +10,7 @@ import {register} from '../../store/reducers/accountRedux';
 import {getTermsOfUse} from '../../store/reducers/authenticationRedux';
 import BackArrowIcon from '../../Components/icons/BackArrowIcon';
 import styles from '../../css/PostScreen.css';
-import {
-  mainColorButton,
-  backgroundColor,
-  textColor1,
-  textColor2,
-} from '../../Utils/colors';
+import {textColor2, mainColorButton, backgroundColor} from '../../Utils/colors';
 
 const TermsOfUse = ({termsOfUse, getTermsOfUse, updateAction, updateState}) => {
   const {width} = useWindowDimensions();

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColor, mainColor, textColor1} from '../Utils/colors';
+import {backgroundColor, gray, mainColor, textColor1} from '../Utils/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   accountValidationText: {
     textAlign: 'center',
     fontSize: 15,
-    color: '#cb8347',
+    color: gray,
     marginBottom: 20,
   },
 
