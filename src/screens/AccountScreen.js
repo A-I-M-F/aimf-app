@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types';
 import {Button, Icon} from 'native-base';
 import ShowAccount from './AccountScreen/ShowAccount';
 import AccountForm from '../Components/AccountForm';
-import {getFullName, getIsoDate} from '../Utils/Fonctions';
+import {getFullName} from '../Utils/Fonctions';
 import {
   ACCOUNT_STR,
   SHOW_ACCOUNT_ACTION,
@@ -26,6 +26,7 @@ import styles from '../css/AccountScreen.css.js';
 import InformationModal from '../Components/InformationModal';
 import {textColor2} from '../Utils/colors';
 import MainHeader from '../Components/MainHeader';
+import {getIsoDate} from '../Utils/DateUtils';
 
 class AccountScreen extends Component {
   static navigationOptions = {

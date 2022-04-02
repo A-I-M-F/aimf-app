@@ -2,7 +2,7 @@ import * as React from 'react';
 import Svg, {G, Path} from 'react-native-svg';
 import PropTypes from 'prop-types';
 
-function HomeIcon({size, stroke}) {
+function HomeIcon({size, color}) {
   const size_ = size ?? 30;
   return (
     <Svg
@@ -14,7 +14,7 @@ function HomeIcon({size, stroke}) {
         <G
           data-name="Groupe 136"
           fill="none"
-          stroke={stroke}
+          stroke={color}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={2}>

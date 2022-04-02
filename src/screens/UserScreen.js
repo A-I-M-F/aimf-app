@@ -94,6 +94,7 @@ class UserScreen extends Component {
           <SafeAreaView
             style={{
               opacity: this.props.loading || this.props.errorMessage ? 0.6 : 1,
+              paddingBottom: 50,
             }}>
             <FlatList
               data={this.props.users}

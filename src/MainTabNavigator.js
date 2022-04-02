@@ -58,7 +58,7 @@ HomeStack.navigationOptions = {
         ...styles.icon,
         borderBottomWidth: tabBarIconProps.focused ? 2.5 : 0,
       }}>
-      <HomeIcon stroke={white} />
+      <HomeIcon color={white} />
     </View>
   ),
 };
@@ -70,7 +70,7 @@ const disableHomeStack = createStackNavigator({
 disableHomeStack.navigationOptions = {
   tabBarLabel: 'Accueil',
   tabBarIcon: () => (
-    <HomeIcon stroke={gray} />
+    <HomeIcon color={gray} />
     // todo change disabled style
   ),
 };
@@ -225,7 +225,7 @@ YouTubeStack.navigationOptions = {
         ...styles.icon,
         borderBottomWidth: tabBarIconProps.focused ? 2.5 : 0,
       }}>
-      <LiveBroadcastIcon stroke={white} />
+      <LiveBroadcastIcon color={white} />
     </View>
   ),
 };
@@ -236,7 +236,7 @@ const disableYouTubeStack = createStackNavigator({
 
 disableYouTubeStack.navigationOptions = {
   tabBarLabel: 'Direct',
-  tabBarIcon: () => <LiveBroadcastIcon stroke={gray} />,
+  tabBarIcon: () => <LiveBroadcastIcon color={gray} />,
 };
 
 // ----------------------------------------------UserScreen-----------------------------------------------------
