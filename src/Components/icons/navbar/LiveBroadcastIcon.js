@@ -4,20 +4,18 @@ import PropTypes from 'prop-types';
 import HomeIcon from './HomeIcon';
 import {mainColor} from '../../../Utils/colors';
 
-function LiveBroadcastIcon({size}) {
-  const size_ = size ?? 31;
-
+function LiveBroadcastIcon({size = 31, color = mainColor}) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={size_}
-      height={size_ * 0.8}
+      width={size}
+      height={size * 0.8}
       viewBox="0 0 32.005 27.349">
       <G
         data-name="Groupe 524"
         transform="translate(-1492.796 544.263)"
         fill="none"
-        stroke={mainColor}
+        stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}>
@@ -57,5 +55,6 @@ function LiveBroadcastIcon({size}) {
 
 HomeIcon.propTypes = {
   size: PropTypes.number,
+  color: PropTypes.string,
 };
 export default LiveBroadcastIcon;

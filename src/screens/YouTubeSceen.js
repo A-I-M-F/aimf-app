@@ -176,7 +176,7 @@ class YouTubeScreen extends Component {
             });
           }}
           style={styles.topHeaderBtn}>
-          <LiveBroadcastIcon size={23} />
+          <LiveBroadcastIcon size={23} color={'white'} />
           <Text style={styles.navigationText}>
             {this.props.isLive &&
             this.props.video?.isLive &&
