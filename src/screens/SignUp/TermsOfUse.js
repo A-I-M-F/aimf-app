@@ -4,6 +4,7 @@ import {Button} from 'native-base';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import RenderHtml from 'react-native-render-html';
+import SpinnerButton from 'react-native-spinner-button';
 import {CREATE_ACCOUNT_ACTION} from '../../Utils/Constants';
 import {register} from '../../store/reducers/accountRedux';
 import {getTermsOfUse} from '../../store/reducers/authenticationRedux';
@@ -15,7 +16,7 @@ import {
   textColor1,
   textColor2,
 } from '../../Utils/colors';
-import SpinnerButton from 'react-native-spinner-button';
+
 const TermsOfUse = ({termsOfUse, getTermsOfUse, updateAction, updateState}) => {
   const {width} = useWindowDimensions();
   useEffect(() => getTermsOfUse(), []);
