@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import axios from 'axios';
@@ -16,14 +15,7 @@ import {
 import NotificationHandler from '../Utils/NotificationHandler';
 import LocalNotificationService from '../services/LocalNotificationService';
 import {logout} from '../store/reducers/authenticationRedux';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+import SplashScreen from './SplashScreen';
 
 class Loading extends React.Component {
   constructor(props) {
@@ -33,8 +25,10 @@ class Loading extends React.Component {
     this.localNotificationService = null;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // console.log('[Loading] componentDidMount : ', this.props.account);
+    await new Promise((_) => setTimeout(_, 1000));
+
     if (this.props.account && this.props.account.access_token) {
       axios.defaults.headers.Authorization = `Bearer ${this.props.account.access_token}`;
     }
@@ -105,12 +99,7 @@ class Loading extends React.Component {
   };
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
-      </View>
-    );
+    return <SplashScreen />;
   }
 }
 

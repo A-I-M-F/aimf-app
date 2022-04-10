@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {View, Animated, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
-import {isoDateToFr} from '../Utils/Functions';
-import FeedCardOld from './HomeScreen/FeedCard';
+import {getLogFrDate} from '../Utils/DateUtils';
+import FeedCard from './HomeScreen/FeedCard';
 import {getArticles} from '../store/reducers/articlesRedux';
 import {
   receiveAssociationData,
@@ -16,8 +16,8 @@ import {
   ayncReceiveKhatma,
   asyncReceiveUserKhatma,
 } from '../store/reducers/khatmaRedux';
-import {white2} from '../Utils/colors';
-import styles from './HomeScreen/css';
+import styles from '../css/HomeScreen.css.js';
+import MainHeader from '../Components/MainHeader';
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -77,12 +77,12 @@ class HomeScreen extends Component {
   renderItem = (item) => {
     return (
       <View style={styles.articleView}>
-        <FeedCardOld
+        <FeedCard
           id={item.id}
           title={item.title}
-          date={isoDateToFr(item.publishedAt)}
+          date={getLogFrDate(item.publishedAt)}
           description={item.description}
-          backgroundColor={white2}
+          backgroundColor="#FAFAFA"
           associationName={item?.association?.name}
           logo={item?.association?.logo}
         />
@@ -93,6 +93,7 @@ class HomeScreen extends Component {
   render() {
     return (
       <>
+        <MainHeader />
         <AssociationMenu screenerTitle="Actualités" />
         <FlatList
           style={{

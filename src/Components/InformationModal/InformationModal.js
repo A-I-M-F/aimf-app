@@ -32,7 +32,6 @@ const InformationModal = (props) => {
             }}>
             <View
               style={{
-                height: 35,
                 backgroundColor: '#ebebeb',
                 width: '100%',
                 flexDirection: 'row',
@@ -41,13 +40,15 @@ const InformationModal = (props) => {
                 marginBottom: 5,
                 borderTopStartRadius: 10,
                 borderTopEndRadius: 10,
+                paddingVertical: 5,
                 borderWidth: 1,
                 borderColor: '#cbcbcb',
               }}>
-              <Text style={{marginLeft: 15, marginTop: 5, fontSize: 15}}>
+              <Text
+                style={{marginLeft: 15, marginTop: 5, fontSize: 15, flex: 10}}>
                 {props.title}
               </Text>
-              <TouchableHighlight onPress={() => onHide()}>
+              <TouchableHighlight style={{flex: 1}} onPress={() => onHide()}>
                 <Icon
                   name="close"
                   type="AntDesign"

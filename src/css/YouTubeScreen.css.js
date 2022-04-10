@@ -1,14 +1,15 @@
 import {StyleSheet} from 'react-native';
-import {mainColor} from '../../Utils/colors';
+import {mainColor, backgroundColor, textColor2} from '../Utils/colors';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fce3ba',
+    backgroundColor,
   },
   noneLiveContainer: {
-    backgroundColor: '#fce3ba',
+    backgroundColor,
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   noneLiveText: {
     textAlign: 'center',
@@ -38,9 +39,15 @@ const styles = StyleSheet.create({
     backgroundColor: mainColor,
     padding: 10,
     borderRadius: 5,
-    margin: 2,
+    margin: 5,
   },
   navigationText: {fontSize: 16, marginLeft: 10, color: '#fff'},
+  videoTitle: {fontSize: 15, fontWeight: 'bold', color: textColor2},
+  videoDesc: {fontSize: 15, color: textColor2},
+  dateTitleText: {
+    fontSize: 12,
+    color: textColor2,
+  },
 });
 
 export default styles;

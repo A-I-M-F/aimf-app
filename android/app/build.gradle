@@ -125,7 +125,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.aimfapp"
+        applicationId "com.tawatconnect"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

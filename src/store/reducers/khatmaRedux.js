@@ -10,11 +10,8 @@ import {
 import getAxiosInstance from '../../Utils/axios';
 import {dispatchError} from './errorMessageRedux';
 
-import {
-  formatKhatma,
-  formatDateAsApiDate,
-  replaceElement,
-} from '../../Utils/Functions';
+import {formatDateAsApiDate} from '../../Utils/DateUtils';
+import {formatKhatma, replaceElement} from '../../Utils/Fonctions';
 
 const MAX_DATE = '2035-12-31 00:00:00';
 //

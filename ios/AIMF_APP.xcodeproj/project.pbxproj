@@ -67,6 +67,11 @@
 		F341263D019048B7A1616AE4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C37BE5AD6E224008B369C10B /* Zocial.ttf */; };
 		FDD6E3D305634922995CBF4F /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB4FAC9BF0804770B760B9F7 /* FontAwesome5_Regular.ttf */; };
 		60C16DEF2A8A4758AAF05ED1 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 840B177755DF452DAAAFEC39 /* Fontisto.ttf */; };
+		40E67EAD48F14BD7BF8F19B2 /* HelveticaNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C30CB90B02F14580BD0B9ACB /* HelveticaNeue-Bold.ttf */; };
+		5CE91883898846B293F58AD0 /* HelveticaNeue-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFDE9C6BFE3A445E9898B934 /* HelveticaNeue-Medium.ttf */; };
+		6C16994166A24E01A78B8CEB /* HelveticaNeue-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FFF1346A2CF74B70B5CE0B4B /* HelveticaNeue-Thin.ttf */; };
+		DE1D5EECB5BF4852AEA0C7CC /* Magra-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E957E86BE3D464B91DEC32C /* Magra-Bold.ttf */; };
+		E0996737D73D4AB6BF96C319 /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD49A2293805491C970D9127 /* Raleway-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +213,11 @@
 		FE1598D3639840D386DF0774 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		FF4F4107B949C2623C328D8C /* Pods-AIMF_APP-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIMF_APP-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-AIMF_APP-tvOSTests/Pods-AIMF_APP-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		840B177755DF452DAAAFEC39 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/native-base/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C30CB90B02F14580BD0B9ACB /* HelveticaNeue-Bold.ttf */ = {isa = PBXFileReference; name = "HelveticaNeue-Bold.ttf"; path = "../assets/fonts/HelveticaNeue-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BFDE9C6BFE3A445E9898B934 /* HelveticaNeue-Medium.ttf */ = {isa = PBXFileReference; name = "HelveticaNeue-Medium.ttf"; path = "../assets/fonts/HelveticaNeue-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FFF1346A2CF74B70B5CE0B4B /* HelveticaNeue-Thin.ttf */ = {isa = PBXFileReference; name = "HelveticaNeue-Thin.ttf"; path = "../assets/fonts/HelveticaNeue-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6E957E86BE3D464B91DEC32C /* Magra-Bold.ttf */ = {isa = PBXFileReference; name = "Magra-Bold.ttf"; path = "../assets/fonts/Magra-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DD49A2293805491C970D9127 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; name = "Raleway-Regular.ttf"; path = "../assets/fonts/Raleway-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -354,6 +364,11 @@
 				1821521D34454866B08550D7 /* icomoon2.ttf */,
 				35B43E2A649F42BC8A11912F /* icomoon3.ttf */,
 				840B177755DF452DAAAFEC39 /* Fontisto.ttf */,
+				C30CB90B02F14580BD0B9ACB /* HelveticaNeue-Bold.ttf */,
+				BFDE9C6BFE3A445E9898B934 /* HelveticaNeue-Medium.ttf */,
+				FFF1346A2CF74B70B5CE0B4B /* HelveticaNeue-Thin.ttf */,
+				6E957E86BE3D464B91DEC32C /* Magra-Bold.ttf */,
+				DD49A2293805491C970D9127 /* Raleway-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -402,13 +417,6 @@
 			isa = PBXGroup;
 			children = (
 				9243D47E2481165C00616565 /* libRCTYouTube.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		925351A7248D9E68008591EE /* Products */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -695,6 +703,11 @@
 				7B6D9EC57D8349DC8754BBC4 /* icomoon.ttf in Resources */,
 				E54477DCC5484AEDBF58A21C /* AppCenter-Config.plist in Resources */,
 				60C16DEF2A8A4758AAF05ED1 /* Fontisto.ttf in Resources */,
+				40E67EAD48F14BD7BF8F19B2 /* HelveticaNeue-Bold.ttf in Resources */,
+				5CE91883898846B293F58AD0 /* HelveticaNeue-Medium.ttf in Resources */,
+				6C16994166A24E01A78B8CEB /* HelveticaNeue-Thin.ttf in Resources */,
+				DE1D5EECB5BF4852AEA0C7CC /* Magra-Bold.ttf in Resources */,
+				E0996737D73D4AB6BF96C319 /* Raleway-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

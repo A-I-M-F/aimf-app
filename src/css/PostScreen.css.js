@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColor} from '../../Utils/colors';
+import {backgroundColor, mainColorButton} from '../Utils/colors';
 
 const styles = StyleSheet.create({
   view: {
@@ -18,17 +18,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   textInput: {
-    width: 300,
+    width: '100%',
     height: 180,
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: mainColorButton,
   },
   textItem: {
     marginBottom: 15,
     marginLeft: 30,
     marginRight: 30,
     paddingTop: 0,
-    paddingLeft: 5,
-    borderRadius: 10,
+    paddingLeft: 0,
     height: 180,
+    borderColor: 'transparent',
     backgroundColor: '#FFF',
   },
   label: {

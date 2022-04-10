@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types';
 import {Button, Icon} from 'native-base';
 import ShowAccount from './AccountScreen/ShowAccount';
 import AccountForm from '../Components/AccountForm';
-import {getFullName, getIsoDate} from '../Utils/Functions';
+import {getFullName} from '../Utils/Fonctions';
 import {
   ACCOUNT_STR,
   SHOW_ACCOUNT_ACTION,
@@ -22,8 +22,11 @@ import {
   activateAccount,
 } from '../store/reducers/accountRedux';
 import Loader from '../Components/Loader';
-import styles from './AccountScreen/css.js';
+import styles from '../css/AccountScreen.css.js';
 import InformationModal from '../Components/InformationModal';
+import {textColor2} from '../Utils/colors';
+import MainHeader from '../Components/MainHeader';
+import {getIsoDate} from '../Utils/DateUtils';
 
 class AccountScreen extends Component {
   static navigationOptions = {
@@ -160,11 +163,11 @@ class AccountScreen extends Component {
   renderActivateAccountBtn() {
     return (
       <View style={styles.activateAccContainer}>
-        <Text>
+        <Text style={{color: textColor2}}>
           <Icon
-            type="FontAwesome5"
-            name="exclamation"
-            style={{fontSize: 17, color: '#000'}}
+            name="information-circle-outline"
+            type="Ionicons"
+            style={{fontSize: 21, color: textColor2}}
           />
           {` ${ACCOUNT_STR.your_account_is_not_activated_yet}`}
         </Text>
@@ -191,6 +194,7 @@ class AccountScreen extends Component {
     if (this.state.email) {
       return (
         <>
+          <MainHeader />
           {this.props.action === SHOW_ACCOUNT_ACTION ? (
             <ShowAccount
               scrollViewOpacity={

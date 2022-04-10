@@ -15,6 +15,7 @@ import ErrorModal from '../Components/ErrorModal';
 import {isAdmin, isSuperAdmin} from '../Utils/Account';
 import Loader from '../Components/Loader';
 import {receiveRoleData} from '../store/reducers/roleRedux';
+import MainHeader from '../Components/MainHeader';
 
 class UserScreen extends Component {
   static navigationOptions = {
@@ -74,6 +75,7 @@ class UserScreen extends Component {
   render() {
     return (
       <>
+        <MainHeader />
         {this.props.action === SHOW_USER_ACTION ? (
           <ShowUser
             style={{
@@ -92,6 +94,7 @@ class UserScreen extends Component {
           <SafeAreaView
             style={{
               opacity: this.props.loading || this.props.errorMessage ? 0.6 : 1,
+              paddingBottom: 50,
             }}>
             <FlatList
               data={this.props.users}

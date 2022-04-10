@@ -4,7 +4,7 @@ import {View, StyleSheet, Alert, Text, SafeAreaView} from 'react-native';
 import PropTypes from 'prop-types';
 import CostumHeader from '../../Components/KoranScreen/CostumHeader';
 import {ayncSaveKhatma} from '../../store/reducers/khatmaRedux';
-import {formatDateWithDayAndMonthName} from '../../Utils/Functions';
+import {formatDateWithDayAndMonthName} from '../../Utils/DateUtils';
 import DatePicker from '../../Components/DatePicker';
 import ErrorModal from '../../Components/ErrorModal';
 import Loader from '../../Components/Loader';

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ScrollView, View} from 'react-native';
-import {Button, Icon, Text, Thumbnail} from 'native-base';
+import {Button, Text, Thumbnail} from 'native-base';
 import * as PropTypes from 'prop-types';
 import SpinnerButton from 'react-native-spinner-button';
 import SettingsSwitch from '../../Components/switch';
@@ -21,9 +21,10 @@ import {
   isAuthorized,
   isSuperAdmin,
 } from '../../Utils/Account';
-import {isoDateToFr} from '../../Utils/Functions';
+import {isoDateToFr} from '../../Utils/DateUtils';
 import InformationModal from '../../Components/InformationModal';
 import {getAssociationRoleName} from '../../Utils/Role';
+import BackArrowIcon from '../../Components/icons/BackArrowIcon';
 
 class ShowUser extends Component {
   constructor(props) {
@@ -231,7 +232,7 @@ class ShowUser extends Component {
     const fields = [
       {field: 'lastName', label: 'Nom'},
       {field: 'firstName', label: 'Prénom'},
-      {field: 'brothe', label: 'Fils de'},
+      {field: 'fatherName', label: 'Fils de'},
       {field: 'birthday', label: 'Date de naissance'},
       {field: 'maritalStatus', label: 'Situation familiale'},
       {field: 'function', label: 'Fonction'},
@@ -437,12 +438,14 @@ class ShowUser extends Component {
             onPress={() => {
               this.props.updateAction(LIST_USER_ACTION);
             }}
-            style={{borderRadius: 30, marginLeft: 20, marginBottom: 20}}>
-            <Icon
-              style={{color: '#000'}}
-              name="md-arrow-back"
-              type="Ionicons"
-            />
+            style={{
+              marginLeft: 20,
+              marginTop: 10,
+              borderRadius: 30,
+              width: 50,
+              marginBottom: 20,
+            }}>
+            <BackArrowIcon />
           </Button>
         </View>
         <Thumbnail source={logo} style={{marginBottom: 14}} />

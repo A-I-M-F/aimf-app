@@ -12,8 +12,8 @@ export const MARRIED = 'married';
 export const SINGLE = 'single';
 
 export const LOGIN_STR = {
-  you_dont_have_account_account: "Vous n'avez pas encore un compte?",
-  you_forgot_your_password: 'Vous avez oublié votre mot de passe?',
+  you_dont_have_account_account: 'Créer votre compte',
+  you_forgot_your_password: 'Mot de passe oublié ?',
 };
 
 export const CHILDREN_YEAR_LABEL = [

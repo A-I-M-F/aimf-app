@@ -9,11 +9,10 @@ import {
 } from 'react-native';
 import YouTube from 'react-native-youtube';
 
-import {Button, Thumbnail} from 'native-base';
+import {Button} from 'native-base';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from './YouTubeScreen/css';
+import styles from '../css/YouTubeScreen.css.js';
 import {
   getLiveVideo,
   refreshLiveVideoInfo,
@@ -22,8 +21,12 @@ import {
 import Loader from '../Components/Loader';
 import {LIVE_VIDEO_STR} from '../Utils/Constants';
 import InformationModal from '../Components/InformationModal';
-import {white} from '../Utils/colors';
+import NoVideoIcon from '../Components/icons/placeholders/NoVideoIcon';
+import Template from '../css/Template.css';
+import LiveBroadcastIcon from '../Components/icons/navbar/LiveBroadcastIcon';
 import {isAdmin, isSuperAdmin} from '../Utils/Account';
+import MainHeader from '../Components/MainHeader';
+import {getIsoDate, getLogFrDate} from '../Utils/DateUtils';
 
 class YouTubeScreen extends Component {
   static navigationOptions = {
@@ -37,6 +40,7 @@ class YouTubeScreen extends Component {
     this.state = {
       playerWidth: Dimensions.get('window').width,
       showInfoModal: false,
+      playing: true,
     };
   }
 
@@ -51,15 +55,71 @@ class YouTubeScreen extends Component {
     this.focusListener.remove();
   }
 
-  renderVideoContainer(logo) {
+  // renderVideoContainer(logo) {
+  //   return (
+  //     <ScrollView style={styles.container}>
+  //       <YouTube
+  //         resumePlayAndroid={false}
+  //         ref={this.youTubeRef}
+  //         apiKey="apiKey"
+  //         videoId={this.props.video.youtube_id}
+  //         play
+  //         loop={false}
+  //         fullscreen={false}
+  //         controls={1}
+  //         style={[
+  //           {
+  //             height: PixelRatio.roundToNearestPixel(
+  //               this.state.playerWidth / (16 / 9),
+  //             ),
+  //           },
+  //           styles.player,
+  //         ]}
+  //       />
+  //       <View
+  //         style={{
+  //           margin: 25,
+  //           flexDirection: 'row',
+  //           justifyContent: 'space-between',
+  //         }}>
+  //         <View style={{width: '80%'}}>
+  //           <Text style={{fontSize: 17, fontWeight: 'bold'}}>
+  //             {this.props?.video?.title}
+  //           </Text>
+  //         </View>
+  //         <View style={{marginLeft: 10}}>
+  //           <Thumbnail source={logo} />
+  //           <Text style={{fontSize: 14, fontWeight: 'bold'}}>Tamejida 47</Text>
+  //         </View>
+  //       </View>
+  //       <View
+  //         style={{
+  //           margin: 25,
+  //         }}>
+  //         <Text style={{fontSize: 16}}>{this.props?.video?.description}</Text>
+  //       </View>
+  //     </ScrollView>
+  //   );
+  // }
+
+  renderVideoSimpleContainer() {
     return (
       <ScrollView style={styles.container}>
+        <Text
+          style={{
+            ...Template.pageTitle,
+            alignSelf: 'flex-start',
+            marginLeft: 10,
+            marginBottom: 5,
+          }}>
+          Diffusion en cours
+        </Text>
         <YouTube
           resumePlayAndroid={false}
           ref={this.youTubeRef}
           apiKey="apiKey"
           videoId={this.props.video.youtube_id}
-          play={false}
+          play={this.state.playing}
           loop={false}
           fullscreen={false}
           controls={1}
@@ -74,25 +134,29 @@ class YouTubeScreen extends Component {
         />
         <View
           style={{
+            marginLeft: 25,
+            marginTop: 10,
+          }}>
+          <Text style={styles.dateTitleText}>
+            {getLogFrDate(getIsoDate(new Date()))}
+          </Text>
+        </View>
+        <View
+          style={{
             margin: 25,
+            marginTop: 7,
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <View style={{width: '80%'}}>
-            <Text style={{fontSize: 17, fontWeight: 'bold'}}>
-              {this.props?.video?.title}
-            </Text>
-          </View>
-          <View style={{marginLeft: 10}}>
-            <Thumbnail source={logo} />
-            <Text style={{fontSize: 14, fontWeight: 'bold'}}>Tamejida 47</Text>
+          <View style={{width: '98%'}}>
+            <Text style={styles.videoTitle}>{this.props?.video?.title}</Text>
           </View>
         </View>
         <View
           style={{
             margin: 25,
           }}>
-          <Text style={{fontSize: 16}}>{this.props?.video?.description}</Text>
+          <Text style={styles.videoDesc}>{this.props?.video?.description}</Text>
         </View>
       </ScrollView>
     );
@@ -112,7 +176,7 @@ class YouTubeScreen extends Component {
             });
           }}
           style={styles.topHeaderBtn}>
-          <Icon type="SimpleLineIcons" name="refresh" color={white} size={22} />
+          <LiveBroadcastIcon size={23} color={'white'} />
           <Text style={styles.navigationText}>
             {this.props.isLive &&
             this.props.video?.isLive &&
@@ -125,7 +189,7 @@ class YouTubeScreen extends Component {
     );
   }
 
-  renderNoLivePlaceholder(logo) {
+  renderNoLivePlaceholder() {
     return (
       <View
         style={{
@@ -134,9 +198,17 @@ class YouTubeScreen extends Component {
         }}>
         {!this.props.loading && (
           <>
-            <Text style={styles.noneLiveText}>Aucun live en cours</Text>
-            <Thumbnail large style={styles.noneLiveLogo} source={logo} />
-            <Text style={styles.noneLiveLogoText}>Tamejida 47</Text>
+            <NoVideoIcon size={45} />
+            <Text
+              style={{
+                ...Template.pageTitle,
+                marginTop: 30,
+                marginLeft: 30,
+                marginRight: 20,
+                textAlign: 'center',
+              }}>
+              Il y a pas de diffusion en cours
+            </Text>
           </>
         )}
         <Loader visible={!!this.props.loading} />
@@ -196,16 +268,17 @@ class YouTubeScreen extends Component {
   }
 
   render() {
-    const logo = require('../../assets/images/tamejida_47.jpg');
+    // const logo = require('../../assets/images/tamejida_47.jpg');
     return (
       <>
+        <MainHeader />
         {(isSuperAdmin(this.props.user) || isAdmin(this.props.user)) &&
           this.renderAdminButton()}
         {!this.props.loading &&
         this.props?.video?.youtube_id &&
         this.props?.video?.isLive
-          ? this.renderVideoContainer(logo)
-          : this.renderNoLivePlaceholder(logo)}
+          ? this.renderVideoSimpleContainer()
+          : this.renderNoLivePlaceholder()}
         {this.renderStartLiveModal()}
         {this.renderCloseLiveModal()}
       </>

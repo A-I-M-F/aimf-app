@@ -1,4 +1,4 @@
-package com.aimfapp;
+package com.tawatconnect;
 
 import com.facebook.react.ReactActivity;
     // react-native-gesture-handler

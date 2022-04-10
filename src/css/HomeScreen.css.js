@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColor} from '../../Utils/colors';
+import {backgroundColor} from '../Utils/colors';
 
 const styles = StyleSheet.create({
   articleView: {
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 0,
     backgroundColor,
+    marginEnd: 8,
   },
   hiddenItemeContainer: {
     // borderWidth: 1,

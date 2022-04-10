@@ -4,13 +4,13 @@ import {Text, View} from 'react-native';
 import * as PropTypes from 'prop-types';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {FlatList, TouchableHighlight} from 'react-native-gesture-handler';
-import styles from './AccountForm/css';
+import FormStyles from '../css/Form.css';
 import {isCorrectPassword} from '../Utils/ValidatorFunctions';
+import {mainColor2Button, textColor1} from '../Utils/colors';
 
 const RenderPassword = ({
   label,
   value,
-  required,
   checkPassword,
   onChange,
   keyboardType,
@@ -26,12 +26,14 @@ const RenderPassword = ({
     <>
       {label && (
         <View style={{flexDirection: 'row'}}>
-          <Label style={styles.label}>{label}*</Label>
+          <Label style={FormStyles.label}>{label}*</Label>
           <Tooltip
             isVisible={toolTipVisible}
             content={
               <>
-                <Text>Le mot de passe doit contenir :</Text>
+                <Text style={FormStyles.item}>
+                  Le mot de passe doit contenir :
+                </Text>
                 <FlatList
                   data={[
                     {key: 'Au minimum 8 caractères'},
@@ -41,11 +43,11 @@ const RenderPassword = ({
                     {key: 'Au moins un caractère spécial'},
                   ]}
                   renderItem={({item}) => (
-                    <Text style={styles.item}>
+                    <Text style={FormStyles.item}>
                       <Icon
                         name="controller-record"
                         type="Entypo"
-                        style={{fontSize: 10}}
+                        style={FormStyles.itemIcon}
                       />
                       {item.key}
                     </Text>
@@ -56,12 +58,11 @@ const RenderPassword = ({
             placement="top"
             onClose={() => setToolTipVisible(false)}>
             <TouchableHighlight onPress={() => setToolTipVisible(true)}>
-              <Text style={{backgroundColor: '#fce3ba', fontSize: 0}}>
-                {' '}
+              <Text style={{backgroundColor: 'transparent', fontSize: 0}}>
                 <Icon
-                  style={{fontSize: 16}}
-                  name="infocirlce"
-                  type="AntDesign"
+                  style={{fontSize: 19, color: mainColor2Button}}
+                  name="information-circle-outline"
+                  type="Ionicons"
                 />
               </Text>
             </TouchableHighlight>
@@ -71,7 +72,7 @@ const RenderPassword = ({
 
       <Item
         rounded
-        style={itemStyle || styles.inputItem}
+        style={{...itemStyle, ...FormStyles.inputItem}}
         success={
           value !== null &&
           checkPassword &&
@@ -87,10 +88,11 @@ const RenderPassword = ({
               !isCorrectPassword(value)
         }>
         <Input
-          style={styles.input}
+          style={FormStyles.input}
           secureTextEntry={secureTextEntry}
           keyboardType={keyboardType || 'default'}
           maxLength={maxLength}
+          placeholderTextColor={textColor1}
           onChangeText={onChange}
           value={value}
           disabled={disabled}
@@ -98,11 +100,17 @@ const RenderPassword = ({
           autoCapitalize="none"
         />
         {value && value.length > 0 ? (
-          <Text
+          <Icon
             onPress={() => setSecureTextEntry(!secureTextEntry)}
-            style={{color: '#cb8347'}}>
-            {!secureTextEntry ? 'Masquer' : 'Afficher'}
-          </Text>
+            type="AntDesign"
+            name={secureTextEntry ? 'eye' : 'eyeo'}
+            style={{
+              color: mainColor2Button,
+              marginBottom: -3,
+              fontSize: 18,
+              marginLeft: -35,
+            }}
+          />
         ) : null}
       </Item>
     </>

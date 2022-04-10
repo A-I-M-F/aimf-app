@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start  --reset-cache",
+    "link": "npx react-native link",
     "android": "npx react-native run-android",
     "ios": "npx react-native run-ios",
     "postinstall": "jetifier -r",
     "refresh:env": "rm -rf node_modules && rm -rf android/.gradle && rm -rf android/app/build && yarn install && npx jetify",
     "test": "jest",
     "lint": "eslint --cache --fix -c .eslintrc.json src",
-    "build:release": "cd android && gradlew assembleRelease"
+    "build:release:apk": "cd android && gradlew assembleRelease",
+    "build:release:aab": "cd android && ./gradlew bundleRelease"
   },
   "husky": {
     "hooks": {

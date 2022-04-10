@@ -3,7 +3,7 @@ import {CardItem, Text, Left, Body, Thumbnail} from 'native-base';
 import {TouchableOpacity, View} from 'react-native';
 import PropTypes from 'prop-types';
 import {API_BASE_URL} from 'react-native-dotenv';
-import {isoDateToFr} from '../../Utils/Functions';
+import {isoDateToFr} from '../../Utils/DateUtils';
 
 import {
   black,

@@ -5,26 +5,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
   },
-  inputItem: {
-    marginBottom: 15,
-    marginLeft: 30,
-    marginRight: 30,
-    paddingHorizontal: 10,
-    paddingLeft: 5,
-    borderRadius: 10,
-    height: 45,
-    backgroundColor: '#FFF',
-  },
-  label: {
-    fontWeight: 'bold',
-    fontSize: 14,
-    marginLeft: 30,
-    marginRight: 10,
-  },
-  input: {
-    fontSize: 15,
-    paddingLeft: 10,
-  },
   registerButton: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -36,7 +16,6 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-
   refreshButton: {
     height: 20,
     width: 20,

@@ -1,11 +1,13 @@
 import {StyleSheet} from 'react-native';
-import {backgroundColor, mainColor} from '../../Utils/colors';
+import {backgroundColor, gray, mainColor, textColor1} from '../Utils/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor,
+    marginTop: 20,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   logo: {
     width: 100,
@@ -20,20 +22,22 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   updateIcon: {
-    color: '#595959',
+    color: textColor1,
     fontSize: 20,
     marginLeft: 2,
   },
   fullnameText: {
     textAlign: 'center',
-    fontSize: 20,
-    color: '#595959',
-    marginBottom: 20,
+    fontSize: 22,
+    marginRight: 7,
+    color: textColor1,
+    marginBottom: 27,
+    fontWeight: 'bold',
   },
   accountValidationText: {
     textAlign: 'center',
     fontSize: 15,
-    color: '#cb8347',
+    color: gray,
     marginBottom: 20,
   },
 
@@ -43,7 +47,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#cb8347',
   },
   activateAccContainer: {
+    borderTopColor: textColor1,
+    borderTopWidth: 1,
     padding: 10,
+    paddingTop: 25,
   },
   activateAccBtnContainer: {
     paddingVertical: 7,

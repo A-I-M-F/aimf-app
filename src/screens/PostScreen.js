@@ -5,7 +5,7 @@ import SpinnerButton from 'react-native-spinner-button';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import moment from 'moment';
-import styles from './PostScreen/css';
+import styles from '../css/PostScreen.css.js';
 import ErrorModal from '../Components/ErrorModal';
 import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
 import Loader from '../Components/Loader';
@@ -19,6 +19,9 @@ import RenderInput from '../Components/RenderInput';
 import DatePicker from '../Components/DatePicker';
 import SelectAssociation from '../Components/SelectAssociation';
 import {isAdmin, isSuperAdmin} from '../Utils/Account';
+import {mainColor2Button, mainColorButton} from '../Utils/colors';
+import FormStyles from '../css/Form.css';
+import MainHeader from '../Components/MainHeader';
 
 class PostScreen extends Component {
   static navigationOptions = {
@@ -145,6 +148,7 @@ class PostScreen extends Component {
 
     return (
       <>
+        <MainHeader />
         <ScrollView
           // eslint-disable-next-line react-native/no-inline-styles
           style={{
@@ -174,9 +178,10 @@ class PostScreen extends Component {
             defaultDate={expiredAt && moment(expiredAt).toDate()}
             onCustomChange={(date) => this.setDate(date)}
           />
-          <Label style={styles.label}>Message*</Label>
+          <Label style={FormStyles.label}>Message*</Label>
           <Item rounded style={styles.textItem}>
             <TextInput
+              selectable
               style={styles.textInput}
               textAlignVertical="top"
               autoCapitalize="sentences"
@@ -198,7 +203,7 @@ class PostScreen extends Component {
               buttonStyle={{
                 ...styles.spinnerButton,
                 marginRight: 20,
-                backgroundColor: '#f6a351',
+                backgroundColor: mainColorButton,
               }}
               onPress={() => this.savePost(DRAFT_ARTICLE_STATUS)}
               indicatorCount={10}
@@ -213,7 +218,7 @@ class PostScreen extends Component {
               // eslint-disable-next-line react-native/no-inline-styles
               buttonStyle={{
                 ...styles.spinnerButton,
-                backgroundColor: '#cb8347',
+                backgroundColor: mainColor2Button,
               }}
               onPress={() => this.savePost(PUBLISHED_ARTICLE_STATUS)}
               indicatorCount={10}

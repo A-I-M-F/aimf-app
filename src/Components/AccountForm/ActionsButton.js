@@ -7,6 +7,7 @@ import {
   CREATE_ACCOUNT_ACTION,
   UPDATE_ACCOUNT_ACTION,
 } from '../../Utils/Constants';
+import FormStyles from '../../css/Form.css';
 
 const ActionsButton = (props) => {
   const spinnerButtonStyle = {
@@ -16,7 +17,7 @@ const ActionsButton = (props) => {
   return (
     <>
       <SpinnerButton
-        buttonStyle={spinnerButtonStyle}
+        buttonStyle={{...spinnerButtonStyle, ...FormStyles.spinnerButton}}
         onPress={() => props.onValidate()}
         indicatorCount={10}
         spinnerType="SkypeIndicator">
@@ -30,7 +31,7 @@ const ActionsButton = (props) => {
           onPress={() => props.navigation.navigate('LoginScreen')}
           activeOpacity={0.6}
           style={styles.loginLink}>
-          <Text>Vous êtes déjà inscrit? Cliquez ici</Text>
+          <Text style={FormStyles.linkedBtn}>Vous êtes déjà inscrit?</Text>
         </TouchableOpacity>
       ) : null}
     </>

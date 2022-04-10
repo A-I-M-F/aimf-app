@@ -21,6 +21,28 @@ export const isoDateToFr = (isoDate: string, withTime = true) => {
   return `${date[2]}/${date[1]}/${date[0]} ${time}`;
 };
 
+export const getLogFrDate = (isoDate: string) => {
+  const fullDate = isoDate.split(' ');
+  const arrayDate = fullDate[0].split('-');
+
+  const monthNames = [
+    'Janvier',
+    'Février',
+    'Mars',
+    'Avril',
+    'Mai',
+    'Juin',
+    'Juillet',
+    'Août',
+    'Septembre',
+    'Octobre',
+    'Novembre',
+    'Décembre',
+  ];
+
+  return `${arrayDate[2]} ${monthNames[arrayDate[1] - 1]} ${arrayDate[0]}`;
+};
+
 export const getIsoDate = (date) => {
   if (date instanceof Date) {
     return `${date.getFullYear()}-${`${
@@ -42,7 +64,7 @@ export const formatDateAsApiDate = (dateMillseconde) => {
 };
 
 export const formatDateWithDayAndMonthName = (apiDate) => {
-  let date = null;
+  let date;
   if (typeof apiDate === 'number' || typeof apiDate === 'object') {
     date = new Date(apiDate);
   } else {
@@ -52,29 +74,4 @@ export const formatDateWithDayAndMonthName = (apiDate) => {
   return `${DAYS[date.getDay()]} ${date.getDate()} ${
     MONTHS[date.getMonth()]
   } ${date.getFullYear()}`;
-};
-
-export const getFullName = ({lastName, firstName}) => {
-  return lastName && firstName
-    ? `${lastName.toUpperCase()} ${firstName
-        .charAt(0)
-        .toUpperCase()}${firstName.slice(1).toLowerCase()}`
-    : '';
-};
-
-export const formatKhatma = (id, beginAt, isOpen, association) => {
-  return {
-    id,
-    beginAt,
-    isOpen,
-    takharoubts: THAKHAROUBTS,
-    association,
-  };
-};
-
-export const replaceElement = (arr, newElement) => {
-  const newArr = Object.values(arr).filter((element) => {
-    return element.id !== newElement.id;
-  });
-  return newArr.concat(newElement);
 };
