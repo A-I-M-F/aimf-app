@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ScrollView, View} from 'react-native';
-import {Button, Icon, Text, Thumbnail} from 'native-base';
+import {Button, Text, Thumbnail} from 'native-base';
 import * as PropTypes from 'prop-types';
 import SpinnerButton from 'react-native-spinner-button';
 import SettingsSwitch from '../../Components/switch';
@@ -232,7 +232,7 @@ class ShowUser extends Component {
     const fields = [
       {field: 'lastName', label: 'Nom'},
       {field: 'firstName', label: 'Prénom'},
-      {field: 'brothe', label: 'Fils de'},
+      {field: 'fatherName', label: 'Fils de'},
       {field: 'birthday', label: 'Date de naissance'},
       {field: 'maritalStatus', label: 'Situation familiale'},
       {field: 'function', label: 'Fonction'},
