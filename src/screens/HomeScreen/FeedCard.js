@@ -7,7 +7,6 @@ import {
   Animated,
   Alert,
   StyleSheet,
-  Linking,
 } from 'react-native';
 import {API_BASE_URL} from 'react-native-dotenv';
 import {Icon} from 'react-native-elements';
@@ -15,7 +14,8 @@ import {connect} from 'react-redux';
 import ParsedText from 'react-native-parsed-text';
 import {deleteArticle} from '../../store/reducers/articlesRedux';
 import {isAdmin} from '../../Utils/Account';
-import {textColor1} from '../../Utils/colors';
+import {textColor1, textColor2} from '../../Utils/colors';
+import RenderHtml from 'react-native-render-html';
 
 const ANIM_INIT_OFFSET = 0;
 const styles = StyleSheet.create({
@@ -114,24 +114,6 @@ const styles = StyleSheet.create({
   header: {flex: 9},
 });
 
-const handleUrlPress = (url) => {
-  Linking.canOpenURL(url).then((supported) => {
-    if (supported) {
-      Linking.openURL(url);
-    } else {
-      Alert.alert('cannot open this link');
-    }
-  });
-};
-
-const handleEmailPress = (email, matchIndex /*: number */) => {
-  Linking.openURL(`mailto:${email}`);
-};
-
-const handlePhonePress = (phone, matchIndex /*: number */) => {
-  Linking.openURL(`tel:${phone}`);
-};
-
 const mapStateToProps = (state) => ({
   user: state.accountStore.user,
 });
@@ -152,7 +134,6 @@ const FeedCard = ({
   description,
 }) => {
   const [menuVisible, setMenuVisible] = useState(false);
-  const [completeText, setCompleteText] = useState(description.length <= 10);
   const [animeY] = useState(new Animated.Value(ANIM_INIT_OFFSET));
   const [animeOpacity] = useState(new Animated.Value(0));
 
@@ -174,33 +155,12 @@ const FeedCard = ({
   const renderDescription = (value) => {
     return (
       <>
-        <ParsedText
-          parse={[
-            {
-              type: 'url',
-              style: styles.url,
-              onPress: (url) => handleUrlPress(url),
-            },
-            {
-              type: 'phone',
-              style: styles.phone,
-              onPress: (phone) => handlePhonePress(phone),
-            },
-            {
-              type: 'email',
-              style: styles.email,
-              onPress: (email) => handleEmailPress(email),
-            },
-          ]}
-          childrenProps={{allowFontScaling: false}}>
-          {completeText ? value : value.slice(0, 500)}
-          {!completeText && '...'}
-        </ParsedText>
-        {!completeText && (
-          <Text onPress={() => setCompleteText(true)} style={styles.readFlow}>
-            Lire la suite
-          </Text>
-        )}
+        <RenderHtml
+          baseStyle={{color: textColor2}}
+          source={{
+            html: value,
+          }}
+        />
       </>
     );
   };
@@ -292,9 +252,7 @@ const FeedCard = ({
           <ParsedText selectable style={styles.aritcleTitle}>
             {title}
           </ParsedText>
-          <Text style={styles.description} selectable>
-            {renderDescription(description)}
-          </Text>
+          {renderDescription(description)}
         </Body>
       </CardItem>
     </Card>
