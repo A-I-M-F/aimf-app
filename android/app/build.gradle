@@ -263,8 +263,8 @@ apply from: file("../../node_modules/@react-native-community/cli-platform-androi
 buildscript {
     ext {
         buildToolsVersion = "28.0.3"
-        minSdkVersion = 16
-        compileSdkVersion = 28
+        minSdkVersion = 21
+        compileSdkVersion = 31
         targetSdkVersion = 28
         supportLibVersion = "28.0.0"
     }
