@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Caraousel from 'react-native-snap-carousel';
-import {API_BASE_URL} from 'react-native-dotenv';
+import {API_BASE_URL} from '@env';
 import PropTypes from 'prop-types';
 
 const getUrlImage = (image) => {

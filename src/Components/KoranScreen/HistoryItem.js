@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import PropTypes from 'prop-types';
-import {API_BASE_URL} from 'react-native-dotenv';
+import {API_BASE_URL} from '@env';
 import {gray, black, white} from '../../Utils/colors';
 
 const styles = StyleSheet.create({

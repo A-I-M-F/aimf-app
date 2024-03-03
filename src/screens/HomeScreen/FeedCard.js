@@ -8,14 +8,14 @@ import {
   Alert,
   StyleSheet,
 } from 'react-native';
-import {API_BASE_URL} from 'react-native-dotenv';
+import {API_BASE_URL} from '@env';
 import {Icon} from 'react-native-elements';
 import {connect} from 'react-redux';
 import ParsedText from 'react-native-parsed-text';
+import RenderHtml from 'react-native-render-html';
 import {deleteArticle} from '../../store/reducers/articlesRedux';
 import {isAdmin} from '../../Utils/Account';
 import {textColor1, textColor2} from '../../Utils/colors';
-import RenderHtml from 'react-native-render-html';
 
 const ANIM_INIT_OFFSET = 0;
 const styles = StyleSheet.create({

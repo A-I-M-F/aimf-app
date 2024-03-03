@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import * as PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {API_BASE_URL} from 'react-native-dotenv';
+import {API_BASE_URL} from '@env';
 import {black, orange2} from '../../Utils/colors';
 
 const {width} = Dimensions.get('window');

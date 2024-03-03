@@ -1,7 +1,7 @@
 import React from 'react';
 import {CardItem, Text, Left, Body, Thumbnail} from 'native-base';
 import PropTypes from 'prop-types';
-import {API_BASE_URL} from 'react-native-dotenv';
+import {API_BASE_URL} from '@env';
 import {View} from 'react-native';
 import {isoDateToFr} from '../../Utils/DateUtils';
 import {OCalendarIcon} from '../../Components/icons/CalendarIcon';

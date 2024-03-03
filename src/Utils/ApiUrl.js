@@ -1,4 +1,4 @@
-import {API_VERSION} from 'react-native-dotenv';
+import {API_VERSION} from '@env';
 
 const API_URL = `/api/${API_VERSION ? `${API_VERSION}/` : ''}`;
 export const POST_LOGIN_URI = `${API_URL}auth/login`;

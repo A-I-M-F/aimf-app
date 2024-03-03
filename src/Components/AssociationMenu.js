@@ -10,7 +10,7 @@ import {
   Animated,
   Alert,
 } from 'react-native';
-import {API_BASE_URL} from 'react-native-dotenv';
+import {API_BASE_URL} from '@env';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {

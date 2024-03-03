@@ -3,7 +3,7 @@ import {Image, StyleSheet} from 'react-native';
 import React, {Component} from 'react';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {API_BASE_URL} from 'react-native-dotenv';
+import {API_BASE_URL} from '@env';
 import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
 import {receiveAssociationData} from '../store/reducers/associationRedux';
 import DropDownPicker from './DropDownPicker';

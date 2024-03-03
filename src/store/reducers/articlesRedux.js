@@ -27,90 +27,66 @@ const DELETE_ARTICLE_REQUEST = 'DELETE_ARTICLE_REQUEST';
 
 const BATCH_ARTICLES_ERROR = 'BATCH_ARTICLES_ERROR';
 
-const getArticlesRequest = (refreshing, handleMore) => {
-  return {
-    type: GET_ARTICLES_REQUEST,
-    data: {
-      loading: true,
-      refreshing,
-      handleMore,
-    },
-  };
-};
+const getArticlesRequest = (refreshing, handleMore) => ({
+  type: GET_ARTICLES_REQUEST,
+  data: {
+    loading: true,
+    refreshing,
+    handleMore,
+  },
+});
 
-const getArticlesSuccess = (data) => {
-  return {
-    type: GET_ARTICLES_SUCCESS,
-    data,
-  };
-};
+const getArticlesSuccess = data => ({
+  type: GET_ARTICLES_SUCCESS,
+  data,
+});
 
-const getArticlesError = () => {
-  return {
-    type: GET_ARTICLES_ERROR,
-  };
-};
+const getArticlesError = () => ({
+  type: GET_ARTICLES_ERROR,
+});
 
-const getDraftArticleRequest = () => {
-  return {
-    type: GET_DRAFT_ARTICLE_REQUEST,
-    data: {
-      loading: true,
-    },
-  };
-};
+const getDraftArticleRequest = () => ({
+  type: GET_DRAFT_ARTICLE_REQUEST,
+  data: {
+    loading: true,
+  },
+});
 
-const getDraftArticleSuccess = (data) => {
-  return {
-    type: GET_DRAFT_ARTICLE_SUCCESS,
-    data,
-  };
-};
+const getDraftArticleSuccess = data => ({
+  type: GET_DRAFT_ARTICLE_SUCCESS,
+  data,
+});
 
-const getDraftArticleError = () => {
-  return {
-    type: GET_DRAFT_ARTICLE_ERROR,
-  };
-};
+const getDraftArticleError = () => ({
+  type: GET_DRAFT_ARTICLE_ERROR,
+});
 
-const saveArticleRequest = () => {
-  return {
-    type: POST_ARTICLES_REQUEST,
-    data: {
-      loading: true,
-    },
-  };
-};
+const saveArticleRequest = () => ({
+  type: POST_ARTICLES_REQUEST,
+  data: {
+    loading: true,
+  },
+});
 
-const postArticleSuccess = (data) => {
-  return {
-    type: POST_ARTICLES_SUCCESS,
-    payload: data,
-  };
-};
+const postArticleSuccess = data => ({
+  type: POST_ARTICLES_SUCCESS,
+  payload: data,
+});
 
-const postArticleError = () => {
-  return {
-    type: POST_ARTICLES_ERROR,
-  };
-};
+const postArticleError = () => ({
+  type: POST_ARTICLES_ERROR,
+});
 
-const deleteArticleRequest = () => {
-  return {
-    type: DELETE_ARTICLE_REQUEST,
-    data: {
-      loading: true,
-    },
-  };
-};
+const deleteArticleRequest = () => ({
+  type: DELETE_ARTICLE_REQUEST,
+  data: {
+    loading: true,
+  },
+});
 
-export const getArticles = (
-  currentArticles,
-  page,
-  refreshing = false,
-  handleMore = false,
-) => {
-  return (dispatch) => {
+export const getArticles =
+  (currentArticles, page, refreshing = false, handleMore = false) =>
+  dispatch => {
     dispatch(getArticlesRequest(refreshing, handleMore));
     getAxiosInstance()
       .get(GET_ARTICLES_URI, {
@@ -119,7 +95,7 @@ export const getArticles = (
           with_association: 1,
         },
       })
-      .then((response) => {
+      .then(response => {
         dispatch(
           getArticlesSuccess({
             articles:
@@ -132,7 +108,7 @@ export const getArticles = (
           }),
         );
       })
-      .catch((error) => {
+      .catch(error => {
         dispatch(
           batchActions(
             [dispatchError(error), getArticlesError()],
@@ -141,67 +117,60 @@ export const getArticles = (
         );
       });
   };
-};
 
-export const savePost = (data) => {
-  return (dispatch) => {
-    dispatch(saveArticleRequest());
-    getAxiosInstance()
-      .post(`${GET_ARTICLES_URI}?with_association=1`, data)
-      .then((response) => {
-        if (response.data.data.status === PUBLISHED_ARTICLE_STATUS) {
-          dispatch(getArticles([], 1, true));
-        }
-        dispatch(postArticleSuccess(response.data.data));
-      })
-      .catch((error) => {
-        dispatch(
-          batchActions(
-            [dispatchError(error), postArticleError()],
-            BATCH_ARTICLES_ERROR,
-          ),
-        );
-      });
-  };
-};
-
-export const getDraftArticle = () => {
-  return (dispatch) => {
-    dispatch(getDraftArticleRequest());
-    getAxiosInstance()
-      .get(GET_DRAFT_ARTICLE_URI, {params: {with_association: 1}})
-      .then((response) => {
-        dispatch(getDraftArticleSuccess(response.data.data));
-      })
-      .catch((error) => {
-        dispatch(
-          batchActions(
-            [dispatchError(error), getDraftArticleError()],
-            BATCH_ARTICLES_ERROR,
-          ),
-        );
-      });
-  };
-};
-
-export const deleteArticle = (id) => {
-  return (dispatch) => {
-    dispatch(deleteArticleRequest());
-    getAxiosInstance()
-      .delete(`${DELETE_ARTICLE_URI}/${id}`)
-      // eslint-disable-next-line no-unused-vars
-      .then((response) => {
+export const savePost = data => dispatch => {
+  dispatch(saveArticleRequest());
+  getAxiosInstance()
+    .post(`${GET_ARTICLES_URI}?with_association=1`, data)
+    .then(response => {
+      if (response.data.data.status === PUBLISHED_ARTICLE_STATUS) {
         dispatch(getArticles([], 1, true));
-      })
-      .catch((error) => {
-        dispatch(
-          batchActions(
-            [dispatchError(error), getDraftArticleError()],
-            BATCH_ARTICLES_ERROR,
-          ),
-        );
-      });
-  };
+      }
+      dispatch(postArticleSuccess(response.data.data));
+    })
+    .catch(error => {
+      dispatch(
+        batchActions(
+          [dispatchError(error), postArticleError()],
+          BATCH_ARTICLES_ERROR,
+        ),
+      );
+    });
+};
+
+export const getDraftArticle = () => dispatch => {
+  dispatch(getDraftArticleRequest());
+  getAxiosInstance()
+    .get(GET_DRAFT_ARTICLE_URI, {params: {with_association: 1}})
+    .then(response => {
+      dispatch(getDraftArticleSuccess(response.data.data));
+    })
+    .catch(error => {
+      dispatch(
+        batchActions(
+          [dispatchError(error), getDraftArticleError()],
+          BATCH_ARTICLES_ERROR,
+        ),
+      );
+    });
+};
+
+export const deleteArticle = id => dispatch => {
+  dispatch(deleteArticleRequest());
+  getAxiosInstance()
+    .delete(`${DELETE_ARTICLE_URI}/${id}`)
+    // eslint-disable-next-line no-unused-vars
+    .then(response => {
+      dispatch(getArticles([], 1, true));
+    })
+    .catch(error => {
+      dispatch(
+        batchActions(
+          [dispatchError(error), getDraftArticleError()],
+          BATCH_ARTICLES_ERROR,
+        ),
+      );
+    });
 };
 
 const initialState = [];

@@ -5,7 +5,7 @@ import {
   API_RESPONSE_TYPE,
   API_REQUEST_TYPE,
   API_REQUEST_DEFAULT_ENCODING,
-} from 'react-native-dotenv';
+} from '@env';
 
 const getAxiosInstance = () => {
   return axios.create({

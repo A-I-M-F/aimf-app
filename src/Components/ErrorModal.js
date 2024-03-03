@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import {dispatchErrorMessage} from '../store/reducers/errorMessageRedux';
 
-const ErrorModal = (props) => {
+function ErrorModal(props) {
   return (
     <Modal animationType="slide" transparent visible={props.visible}>
       <View
@@ -46,14 +46,12 @@ const ErrorModal = (props) => {
       </View>
     </Modal>
   );
-};
+}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatchErrorMessage: (errorMessage) =>
-      dispatch(dispatchErrorMessage(errorMessage)),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  dispatchErrorMessage: errorMessage =>
+    dispatch(dispatchErrorMessage(errorMessage)),
+});
 
 ErrorModal.propTypes = {
   visible: PropTypes.bool,

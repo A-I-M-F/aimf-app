@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
+// import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Item, Label} from 'native-base';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -56,16 +56,16 @@ const DatePicker = ({
           }}>
           {date && moment(date).format('DD/MM/YYYY')}
         </Text>
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          mode="date"
-          onConfirm={handleConfirm}
-          onCancel={hideDatePicker}
-          display="spinner"
-          date={date || new Date()}
-          minimumDate={minimumDate}
-          maximumDate={maximumDate}
-        />
+        {/* <DateTimePickerModal */}
+        {/*  isVisible={isDatePickerVisible} */}
+        {/*  mode="date" */}
+        {/*  onConfirm={handleConfirm} */}
+        {/*  onCancel={hideDatePicker} */}
+        {/*  display="spinner" */}
+        {/*  date={date || new Date()} */}
+        {/*  minimumDate={minimumDate} */}
+        {/*  maximumDate={maximumDate} */}
+        {/* /> */}
       </Item>
     </View>
   );
